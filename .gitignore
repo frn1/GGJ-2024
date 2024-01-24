@@ -3,3 +3,7 @@
 
 # Output folder
 output/
+
+# Mono-specific ignores
+.mono/
+data_*/

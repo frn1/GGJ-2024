@@ -14,11 +14,12 @@ var minigames: Array[Minigame]
 var current_minigame
 var old_camera
 
-func load_minigame(minigame: Minigame, difficulty: float):
-	if current_minigame != null:
-		push_error("Attempted to load a minigame while another was loaded")
-		return
-		
+@onready var initial_left_blind_pos = $"Left blind".position
+@onready var initial_right_blind_pos = $"Right blind".position
+
+func after_blinds_enter(minigame: Minigame, difficulty: float):
+	print("Loading minigame " + minigame.id)
+	
 	var old_viewport = get_viewport()
 	old_camera = old_viewport.get_camera_2d()
 	old_camera.enabled = false
@@ -45,18 +46,36 @@ func load_minigame(minigame: Minigame, difficulty: float):
 		p2_node.global_position = spawn_p2.global_position
 		p2_node.velocity = Vector2.ZERO
 	
-	var viewport = get_node("SubViewport")
-	
-	for child in viewport.get_children():
+	for child in get_children():
 		child.free()
-	viewport.add_child(scene)
+	add_child(scene)
+	
+	var timer: SceneTreeTimer = get_tree().create_timer(0.3)
+	timer.timeout.connect(
+		func ():
+			var tween: Tween = get_tree().create_tween().set_parallel(true)
+			tween.tween_property($"Left blind", "position", initial_left_blind_pos, 0.5)
+			tween.tween_property($"Right blind", "position", initial_right_blind_pos, 0.5)
+	)
+
+func load_minigame(minigame: Minigame, difficulty: float):
+	if current_minigame != null:
+		push_error("Attempted to load a minigame while another was loaded")
+		return
 	
 	current_minigame = minigame
+	
+	var tween: Tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property($"Left blind", "position", Vector2.ZERO, 0.5)
+	tween.tween_property($"Right blind", "position", Vector2.ZERO, 0.5)
+	tween.tween_callback(func (): after_blinds_enter(minigame, difficulty))
 
 func unload_minigame():
 	if current_minigame == null:
 		push_error("Attempted to unload the current minigame without a minigame loaded")
 		return
+	
+	print("Unloading current minigame")
 	
 	in_between_node.process_mode = PROCESS_MODE_INHERIT
 	in_between_node.show()
@@ -76,9 +95,7 @@ func unload_minigame():
 		p2_node.global_position = spawn_p2.global_position
 		p2_node.velocity = Vector2.ZERO
 	
-	
-	var viewport = get_node("SubViewport")
-	for child in viewport.get_children():
+	for child in get_children():
 		child.free()
 	
 	old_camera.enabled = true

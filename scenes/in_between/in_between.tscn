@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://b4vxdc4lt4026"]
+
+[ext_resource type="PackedScene" uid="uid://234w666lbds1" path="res://scenes/common/p1_spawn.tscn" id="1_gpl4p"]
+[ext_resource type="PackedScene" uid="uid://wjkwr8ic5q2k" path="res://scenes/common/p2_spawn.tscn" id="2_wf7ws"]
+[ext_resource type="PackedScene" uid="uid://2sn5kbe7pomi" path="res://scenes/in_between/ui.tscn" id="3_kqqmi"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t6ard"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yd41t"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5abgi"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pmqvo"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_gcugj"]
+size = Vector2(1200, 200)
+center_offset = Vector3(0, 100, 0)
+
+[node name="In-between" type="Node2D"]
+
+[node name="Wall left" type="StaticBody2D" parent="."]
+position = Vector2(-650, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall left"]
+shape = SubResource("WorldBoundaryShape2D_t6ard")
+
+[node name="Wall right" type="StaticBody2D" parent="."]
+position = Vector2(650, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall right"]
+shape = SubResource("WorldBoundaryShape2D_yd41t")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(0, 175)
+collision_layer = 3
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_5abgi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(3, 3)
+shape = SubResource("WorldBoundaryShape2D_pmqvo")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Floor"]
+modulate = Color(0.435294, 0.203922, 0, 1)
+mesh = SubResource("QuadMesh_gcugj")
+
+[node name="P1 Spawn" parent="." instance=ExtResource("1_gpl4p")]
+
+[node name="P2 Spawn" parent="." instance=ExtResource("2_wf7ws")]
+
+[node name="UI" parent="." instance=ExtResource("3_kqqmi")]

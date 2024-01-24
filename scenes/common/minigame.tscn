@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnxdmngub2oru"]
+
+[ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_dnv2f"]
+size = Vector2(800, 900)
+center_offset = Vector3(-400, 0, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3camo"]
+size = Vector2(800, 900)
+center_offset = Vector3(400, 0, 0)
+
+[node name="Minigame" type="Node2D"]
+script = ExtResource("1_2mr3c")
+minigame_folders = Array[String](["res://scenes/minigames/rock_paper_sissors/"])
+
+[node name="Left blind" type="MeshInstance2D" parent="."]
+modulate = Color(0.709804, 0.0156863, 0, 1)
+position = Vector2(-600, 0)
+mesh = SubResource("QuadMesh_dnv2f")
+
+[node name="Right blind" type="MeshInstance2D" parent="."]
+modulate = Color(0.709804, 0.0156863, 0, 1)
+position = Vector2(600, 0)
+mesh = SubResource("QuadMesh_3camo")

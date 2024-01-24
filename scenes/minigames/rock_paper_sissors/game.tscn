@@ -27,24 +27,18 @@ choice = 2
 
 [node name="Won" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-207, 103)
+position = Vector2(388, 586)
 texture = ExtResource("1_f7dv5")
 
 [node name="Tie" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-9, 31)
+position = Vector2(586, 514)
 texture = ExtResource("1_f7dv5")
 
 [node name="Lost" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(201, 109)
+position = Vector2(796, 592)
 texture = ExtResource("1_f7dv5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
-
-[node name="Spawn P1" type="Node2D" parent="."]
-position = Vector2(385, 145)
-
-[node name="Spawn P2" type="Node2D" parent="."]
-position = Vector2(785, 145)

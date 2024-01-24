@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://2sn5kbe7pomi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qp6et"]
+corner_radius_top_left = 3
+corner_radius_bottom_left = 3
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -576.0
+offset_bottom = 128.0
+grow_horizontal = 2
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -11.925
+anchor_top = -6.925
+anchor_right = -1.25
+anchor_bottom = -4.825
+offset_bottom = 1.52588e-05
+theme_override_styles/panel = SubResource("StyleBoxFlat_qp6et")

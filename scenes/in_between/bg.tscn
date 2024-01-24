@@ -48,7 +48,7 @@ reflected_light_source = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12606, 2.57194)
 
 [node name="Stage" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.144258, -1.10856)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
 mesh = SubResource("BoxMesh_5ihca")
 
 [node name="Wall Back" type="MeshInstance3D" parent="."]

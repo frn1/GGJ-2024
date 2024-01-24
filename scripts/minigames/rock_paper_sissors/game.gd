@@ -13,6 +13,7 @@ func choice_made(choice):
 		print("Opponent chose: " + str(opponent))
 		if choice == opponent:
 			get_node(tie).show()
+		
 		match choice:
 			0:
 				match opponent:
@@ -32,3 +33,5 @@ func choice_made(choice):
 						get_node(lost).show()
 					1: 
 						get_node(won).show()
+		
+		
