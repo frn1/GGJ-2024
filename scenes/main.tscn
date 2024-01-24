@@ -12,17 +12,13 @@
 
 [node name="Player 1" parent="." instance=ExtResource("1_s63dt")]
 position = Vector2(-200, 0)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Player 2" parent="." instance=ExtResource("1_s63dt")]
 position = Vector2(200, 0)
-collision_layer = 2
-collision_mask = 2
-floor_stop_on_slope = false
-floor_constant_speed = true
-floor_block_on_wall = false
+collision_layer = 3
+collision_mask = 3
 player_number = 2
 
 [node name="Minigame" parent="." instance=ExtResource("3_sbcpi")]
-in_between = NodePath("../In-between")
-player1 = NodePath("../Player 1")
-player2 = NodePath("../Player 2")

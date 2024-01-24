@@ -14,14 +14,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ovfb4"]
-radius = 100.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5yvn2"]
+size = Vector2(230, 230)
 
 [node name="Player" type="CharacterBody2D"]
+safe_margin = 0.1
 script = ExtResource("1_q6cb8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qehtc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_ovfb4")
+shape = SubResource("RectangleShape2D_5yvn2")

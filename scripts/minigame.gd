@@ -14,10 +14,10 @@ var minigames: Array[Minigame]
 var current_minigame
 var old_camera
 
-@onready var initial_left_blind_pos = $"Left blind".position
-@onready var initial_right_blind_pos = $"Right blind".position
+@onready var initial_left_curtain_pos = $"Left curtain".position
+@onready var initial_right_curtain_pos = $"Right curtain".position
 
-func after_blinds_enter(minigame: Minigame, difficulty: float):
+func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	print("Loading minigame " + minigame.id)
 	
 	var old_viewport = get_viewport()
@@ -46,16 +46,16 @@ func after_blinds_enter(minigame: Minigame, difficulty: float):
 		p2_node.global_position = spawn_p2.global_position
 		p2_node.velocity = Vector2.ZERO
 	
-	for child in get_children():
+	for child in $Contents.get_children():
 		child.free()
-	add_child(scene)
+	$Contents.add_child(scene)
 	
 	var timer: SceneTreeTimer = get_tree().create_timer(0.3)
 	timer.timeout.connect(
 		func ():
 			var tween: Tween = get_tree().create_tween().set_parallel(true)
-			tween.tween_property($"Left blind", "position", initial_left_blind_pos, 0.5)
-			tween.tween_property($"Right blind", "position", initial_right_blind_pos, 0.5)
+			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos, 0.5)
+			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
 	)
 
 func load_minigame(minigame: Minigame, difficulty: float):
@@ -66,26 +66,22 @@ func load_minigame(minigame: Minigame, difficulty: float):
 	current_minigame = minigame
 	
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
-	tween.tween_property($"Left blind", "position", Vector2.ZERO, 0.5)
-	tween.tween_property($"Right blind", "position", Vector2.ZERO, 0.5)
-	tween.tween_callback(func (): after_blinds_enter(minigame, difficulty))
+	tween.tween_property($"Left curtain", "position", Vector2.ZERO, 0.5)
+	tween.tween_property($"Right curtain", "position", Vector2.ZERO, 0.5)
+	tween.finished.connect(func (): after_curtains_enter_load(minigame, difficulty))
 
-func unload_minigame():
-	if current_minigame == null:
-		push_error("Attempted to unload the current minigame without a minigame loaded")
-		return
-	
+func after_curtains_enter_unload():
 	print("Unloading current minigame")
 	
 	in_between_node.process_mode = PROCESS_MODE_INHERIT
 	in_between_node.show()
 	
 	#p2_node.enabled = true
-	p1_node.process_mode = PROCESS_MODE_INHERIT
 	p1_node.show()
+	p1_node.process_mode = PROCESS_MODE_INHERIT
 	#p2_node.enabled = true
-	p2_node.process_mode = PROCESS_MODE_INHERIT
 	p2_node.show()
+	p2_node.process_mode = PROCESS_MODE_INHERIT
 	
 	if current_minigame.include_players == true:
 		var spawn_p1 = in_between_node.get_node("Spawn P1")
@@ -95,12 +91,35 @@ func unload_minigame():
 		p2_node.global_position = spawn_p2.global_position
 		p2_node.velocity = Vector2.ZERO
 	
-	for child in get_children():
+	for child in $Contents.get_children():
 		child.free()
 	
 	old_camera.enabled = true
 	
 	current_minigame = null
+	
+	var timer: SceneTreeTimer = get_tree().create_timer(0.3)
+	timer.timeout.connect(
+		func ():
+			var tween: Tween = get_tree().create_tween().set_parallel(true)
+			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos, 0.5)
+			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
+			#tween.finished.connect(func(): 
+				#p1_node.process_mode = PROCESS_MODE_INHERIT
+				#p2_node.process_mode = PROCESS_MODE_INHERIT
+			#)
+	)
+
+func unload_minigame():
+	if current_minigame == null:
+		push_error("Attempted to unload the current minigame without a minigame loaded")
+		return
+		
+	var tween: Tween = get_tree().create_tween().set_parallel(true)
+	tween.tween_property($"Left curtain", "position", Vector2.ZERO, 0.5)
+	tween.tween_property($"Right curtain", "position", Vector2.ZERO, 0.5)
+	tween.finished.connect(after_curtains_enter_unload)
+	
 
 class Minigame:
 	var name: String

@@ -13,6 +13,7 @@ normal = Vector2(-1, 0)
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5abgi"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pmqvo"]
+distance = 1.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_gcugj"]
 size = Vector2(1200, 200)
@@ -39,7 +40,6 @@ collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_5abgi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(3, 3)
 shape = SubResource("WorldBoundaryShape2D_pmqvo")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="Floor"]

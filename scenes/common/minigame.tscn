@@ -14,12 +14,14 @@ center_offset = Vector3(400, 0, 0)
 script = ExtResource("1_2mr3c")
 minigame_folders = Array[String](["res://scenes/minigames/rock_paper_sissors/"])
 
-[node name="Left blind" type="MeshInstance2D" parent="."]
+[node name="Contents" type="Node2D" parent="."]
+
+[node name="Left curtain" type="MeshInstance2D" parent="."]
 modulate = Color(0.709804, 0.0156863, 0, 1)
 position = Vector2(-600, 0)
 mesh = SubResource("QuadMesh_dnv2f")
 
-[node name="Right blind" type="MeshInstance2D" parent="."]
+[node name="Right curtain" type="MeshInstance2D" parent="."]
 modulate = Color(0.709804, 0.0156863, 0, 1)
 position = Vector2(600, 0)
 mesh = SubResource("QuadMesh_3camo")

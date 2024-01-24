@@ -8,37 +8,36 @@
 script = ExtResource("1_trfk1")
 
 [node name="Rock" type="Sprite2D" parent="."]
-position = Vector2(280, 265)
+position = Vector2(-296, -59)
 texture = ExtResource("1_f7dv5")
 script = ExtResource("2_umiun")
 choice = 0
 
 [node name="Paper" type="Sprite2D" parent="."]
-position = Vector2(597, 267)
+position = Vector2(21, -57)
 texture = ExtResource("1_f7dv5")
 script = ExtResource("2_umiun")
 choice = 1
 
 [node name="Sissors" type="Sprite2D" parent="."]
-position = Vector2(909, 256)
+position = Vector2(333, -68)
 texture = ExtResource("1_f7dv5")
 script = ExtResource("2_umiun")
 choice = 2
 
 [node name="Won" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(388, 586)
+position = Vector2(-176, 180)
 texture = ExtResource("1_f7dv5")
 
 [node name="Tie" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(586, 514)
+position = Vector2(22, 108)
 texture = ExtResource("1_f7dv5")
 
 [node name="Lost" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(796, 592)
+position = Vector2(232, 186)
 texture = ExtResource("1_f7dv5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)

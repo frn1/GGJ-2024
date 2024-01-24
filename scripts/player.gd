@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var player_number = 1
 
 @export var speed = 500.0
-@export var jump_velocity = -810.0
+@export var jump_velocity = -850.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -28,9 +28,6 @@ func _physics_process(delta):
 
 	# Get the input direction and handle the movement/deceleration.
 	var direction: float = Input.get_axis(format_action("left", player_number), format_action("right", player_number))
-	if direction:
-		velocity.x = direction * speed
-	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
+	velocity.x = speed * direction
 
 	move_and_slide()
