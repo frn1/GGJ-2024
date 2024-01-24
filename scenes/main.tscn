@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfumfrwfsko6q"]
+
+[ext_resource type="PackedScene" uid="uid://dmalkcbh0ud3d" path="res://scenes/player.tscn" id="1_s63dt"]
+[ext_resource type="PackedScene" uid="uid://45lg8yic6uw8" path="res://scenes/minigames/rock_paper_sissors/game.tscn" id="1_x7nda"]
+[ext_resource type="PackedScene" uid="uid://b4vxdc4lt4026" path="res://scenes/in_between.tscn" id="2_edkka"]
+[ext_resource type="Script" path="res://scripts/minigame.gd" id="3_do4n6"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kcquw"]
+viewport_path = NodePath("Minigame/SubViewportContainer/SubViewport")
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="In-between" parent="." instance=ExtResource("2_edkka")]
+
+[node name="Player 1" parent="." instance=ExtResource("1_s63dt")]
+position = Vector2(-200, 0)
+
+[node name="Player 2" parent="." instance=ExtResource("1_s63dt")]
+position = Vector2(200, 0)
+collision_layer = 2
+collision_mask = 2
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_block_on_wall = false
+player_number = 2
+
+[node name="Minigame" type="Node2D" parent="."]
+script = ExtResource("3_do4n6")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Minigame"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="Minigame/SubViewportContainer"]
+handle_input_locally = false
+gui_snap_controls_to_pixels = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 0
+
+[node name="Rock paper sissors" parent="Minigame/SubViewportContainer/SubViewport" instance=ExtResource("1_x7nda")]
+
+[node name="Sprite2D" type="Sprite2D" parent="Minigame"]
+texture = SubResource("ViewportTexture_kcquw")

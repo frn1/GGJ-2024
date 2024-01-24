@@ -1,0 +1,102 @@
+[gd_scene load_steps=8 format=3 uid="uid://gmmgte6e2t7m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eloc4"]
+disable_ambient_light = true
+albedo_color = Color(0.32, 0.122667, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ihca"]
+material = SubResource("StandardMaterial3D_eloc4")
+size = Vector3(15, 1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_16jrf"]
+diffuse_mode = 2
+specular_mode = 1
+disable_ambient_light = true
+disable_fog = true
+albedo_color = Color(0.847059, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3jiu4"]
+material = SubResource("StandardMaterial3D_16jrf")
+size = Vector2(18, 15)
+subdivide_width = 15
+subdivide_depth = 4
+
+[sub_resource type="QuadMesh" id="QuadMesh_w56xa"]
+material = SubResource("StandardMaterial3D_16jrf")
+size = Vector2(10, 15)
+subdivide_width = 15
+subdivide_depth = 4
+center_offset = Vector3(0, 0, 5)
+orientation = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_d0vpt"]
+material = SubResource("StandardMaterial3D_16jrf")
+size = Vector2(10, 15)
+subdivide_width = 15
+subdivide_depth = 4
+center_offset = Vector3(0, 0, -5)
+orientation = 0
+
+[sub_resource type="Environment" id="Environment_3pwov"]
+ambient_light_source = 1
+ambient_light_energy = 0.0
+reflected_light_source = 1
+
+[node name="Background" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12606, 2.57194)
+
+[node name="Stage" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.144258, -1.10856)
+mesh = SubResource("BoxMesh_5ihca")
+
+[node name="Wall Back" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -6)
+mesh = SubResource("QuadMesh_3jiu4")
+
+[node name="Wall Left" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3.5, -6)
+mesh = SubResource("QuadMesh_w56xa")
+
+[node name="Wall Right" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 9, 3.5, -6)
+mesh = SubResource("QuadMesh_d0vpt")
+
+[node name="SpotLight3D Left" type="SpotLight3D" parent="."]
+transform = Transform3D(0.866026, 0.17101, -0.469846, 0, 0.939693, 0.34202, 0.5, -0.296198, 0.813798, -7, 6.5, 9)
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 1.107
+shadow_normal_bias = 1.395
+spot_range = 23.0
+spot_attenuation = 0.112656
+spot_angle_attenuation = 0.307787
+
+[node name="SpotLight3D Front" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 8, 7.5)
+light_energy = 0.754
+light_indirect_energy = 0.805
+light_specular = 0.97
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 1.065
+shadow_transmittance_bias = -0.89
+shadow_blur = 1.65
+spot_range = 14.101
+spot_attenuation = 0.81225
+spot_angle = 33.64
+spot_angle_attenuation = 2.82844
+
+[node name="SpotLight3D Right" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 5, 6.5, 7.5)
+shadow_enabled = true
+shadow_bias = 3.953
+shadow_normal_bias = 1.135
+spot_range = 25.0
+spot_attenuation = 0.287175
+spot_angle = 43.62
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3pwov")
