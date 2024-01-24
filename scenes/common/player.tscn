@@ -18,7 +18,8 @@ animations = [{
 size = Vector2(230, 230)
 
 [node name="Player" type="CharacterBody2D"]
-safe_margin = 0.1
+collision_priority = 5.0
+safe_margin = 0.001
 script = ExtResource("1_q6cb8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
