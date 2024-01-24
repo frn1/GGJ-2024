@@ -54,6 +54,7 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	timer.timeout.connect(
 		func ():
 			var tween: Tween = get_tree().create_tween().set_parallel(true)
+			tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos, 0.5)
 			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
 	)
@@ -66,6 +67,7 @@ func load_minigame(minigame: Minigame, difficulty: float):
 	current_minigame = minigame
 	
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($"Left curtain", "position", Vector2.ZERO, 0.5)
 	tween.tween_property($"Right curtain", "position", Vector2.ZERO, 0.5)
 	tween.finished.connect(func (): after_curtains_enter_load(minigame, difficulty))
@@ -102,6 +104,7 @@ func after_curtains_enter_unload():
 	timer.timeout.connect(
 		func ():
 			var tween: Tween = get_tree().create_tween().set_parallel(true)
+			tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos, 0.5)
 			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
 			#tween.finished.connect(func(): 
@@ -116,6 +119,7 @@ func unload_minigame():
 		return
 		
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($"Left curtain", "position", Vector2.ZERO, 0.5)
 	tween.tween_property($"Right curtain", "position", Vector2.ZERO, 0.5)
 	tween.finished.connect(after_curtains_enter_unload)
@@ -145,6 +149,6 @@ func _ready():
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_up"):
-		load_minigame(minigames[0], 0)
+		load_minigame(minigames.pick_random(), 0)
 	elif Input.is_action_just_pressed("ui_down"):
 		unload_minigame()
