@@ -42,3 +42,9 @@ texture = ExtResource("1_f7dv5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
+
+[node name="Spawn P1" type="Node2D" parent="."]
+position = Vector2(385, 145)
+
+[node name="Spawn P2" type="Node2D" parent="."]
+position = Vector2(785, 145)

@@ -40,3 +40,9 @@ size = Vector2i(1152, 648)
 render_target_clear_mode = 1
 
 [node name="Background" parent="SubViewport" instance=ExtResource("1_twn25")]
+
+[node name="Spawn P1" type="Node2D" parent="."]
+position = Vector2(-200, 0)
+
+[node name="Spawn P2" type="Node2D" parent="."]
+position = Vector2(200, 0)

@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+#@export var enabled = true
+
 @export var player_number = 1
 
 @export var speed = 500.0
@@ -13,6 +15,9 @@ func format_action(action: String, player: int) -> String:
 	return "p" + str(player) + " " + action
 
 func _physics_process(delta):
+	#if enabled == false:
+		#return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta

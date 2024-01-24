@@ -1,3 +1,0 @@
-name = "Rock paper sissors" # Nombre del minijuego
-include_players = false # Si se deben transportar a los jugadores a la escena
-difficulties = ["game.tscn"] # Las escenas con las diferentes dificultades de este minijuego, deben estar ordenadas de mas facil a mas dificil
