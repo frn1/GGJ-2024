@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://45lg8yic6uw8"]
+
+[ext_resource type="Script" path="res://scripts/minigames/rock_paper_sissors/game.gd" id="1_57owh"]
+[ext_resource type="Texture2D" uid="uid://c6txnnvraedri" path="res://placeholders/la roca.webp" id="2_vtorn"]
+[ext_resource type="Script" path="res://scripts/minigames/rock_paper_sissors/button.gd" id="3_rhxh0"]
+[ext_resource type="Texture2D" uid="uid://djshulh2ls2l6" path="res://placeholders/papel.jpg" id="4_8gu75"]
+[ext_resource type="Texture2D" uid="uid://bukblc0lnsf73" path="res://placeholders/tijeras.webp" id="5_eqrmv"]
+[ext_resource type="Texture2D" uid="uid://cmit02o615jfs" path="res://placeholders/perder.png" id="6_dx8w0"]
+[ext_resource type="Texture2D" uid="uid://b3fkhsrscahpu" path="res://placeholders/ganaste.png" id="6_hmyy2"]
+[ext_resource type="Texture2D" uid="uid://by8afe5rh78bp" path="res://placeholders/empate.gif" id="7_shaac"]
+
+[node name="Rock paper sissors" type="Node2D"]
+script = ExtResource("1_57owh")
+
+[node name="Rock" type="Sprite2D" parent="."]
+position = Vector2(-296, -59)
+scale = Vector2(1.75, 1.75)
+texture = ExtResource("2_vtorn")
+script = ExtResource("3_rhxh0")
+choice = 0
+
+[node name="Paper" type="Sprite2D" parent="."]
+position = Vector2(21, -57)
+scale = Vector2(2, 2)
+texture = ExtResource("4_8gu75")
+script = ExtResource("3_rhxh0")
+choice = 1
+
+[node name="Sissors" type="Sprite2D" parent="."]
+position = Vector2(333, -68)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("5_eqrmv")
+script = ExtResource("3_rhxh0")
+choice = 2
+
+[node name="Lost" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(232, 186)
+scale = Vector2(2, 2)
+texture = ExtResource("6_dx8w0")
+
+[node name="Tie" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(22, 108)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("7_shaac")
+
+[node name="Won" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-176, 180)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("6_hmyy2")
+
+[node name="Camera2D" type="Camera2D" parent="."]

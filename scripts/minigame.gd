@@ -1,10 +1,22 @@
 extends Node2D
 
+@export_category("Nodes")
 @export_node_path("Node2D") var in_between = NodePath("../In-between")
 @export_node_path("CharacterBody2D") var player1 = NodePath("../Player 1")
 @export_node_path("CharacterBody2D") var player2 = NodePath("../Player 2")
 
+@export_node_path("Node") var p1_laugh_bar = NodePath("../Life bars/Laugh bar P1")
+@export_node_path("Node") var p2_laugh_bar = NodePath("../Life bars/Laugh bar P2")
+
+@export_category("Minigames")
 @export var minigame_folders: Array[String]
+
+@export_category("Points")
+@export_range(-100, 100, 0.01) var points_added_from_winning = 15.0
+@export_range(-100, 100, 0.01) var points_added_from_losing = -2.0
+
+@export_range(0, 100, 0.01) var p1_points = 10.0
+@export_range(0, 100, 0.01) var p2_points = 10.0
 
 @onready var in_between_node = get_node(in_between)
 @onready var p1_node = get_node(player1)
@@ -17,8 +29,20 @@ var old_camera
 @onready var initial_left_curtain_pos = $"Left curtain".position
 @onready var initial_right_curtain_pos = $"Right curtain".position
 
+enum MinigameEndState {
+	P1Won,
+	P2Won,
+	Tie,
+	BothLost,
+	BothWon
+}
+
+signal end_minigame(end_state: MinigameEndState)
+
 func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	print("Loading minigame " + minigame.id)
+	
+	$Announcements.hide()
 	
 	var old_viewport = get_viewport()
 	old_camera = old_viewport.get_camera_2d()
@@ -75,6 +99,8 @@ func load_minigame(minigame: Minigame, difficulty: float):
 func after_curtains_enter_unload():
 	print("Unloading current minigame")
 	
+	$Announcements.show()
+	
 	in_between_node.process_mode = PROCESS_MODE_INHERIT
 	in_between_node.show()
 	
@@ -107,10 +133,15 @@ func after_curtains_enter_unload():
 			tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos, 0.5)
 			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
-			#tween.finished.connect(func(): 
+			tween.finished.connect(func(): 
+				get_tree().create_timer(5.0).timeout.connect(
+					func():
+						$Announcements.hide()
+						$Announcements.text = ""
+				)
 				#p1_node.process_mode = PROCESS_MODE_INHERIT
 				#p2_node.process_mode = PROCESS_MODE_INHERIT
-			#)
+			)
 	)
 
 func unload_minigame():
@@ -123,7 +154,6 @@ func unload_minigame():
 	tween.tween_property($"Left curtain", "position", Vector2.ZERO, 0.5)
 	tween.tween_property($"Right curtain", "position", Vector2.ZERO, 0.5)
 	tween.finished.connect(after_curtains_enter_unload)
-	
 
 class Minigame:
 	var name: String
@@ -131,7 +161,42 @@ class Minigame:
 	var include_players: bool
 	var scenes: Array
 
+func end_minigame_callback(end_state: MinigameEndState):
+	match end_state:
+		MinigameEndState.P1Won:
+			$Announcements.text = "¡Jugador 1 ganó el minijuego!"
+			p1_points += points_added_from_winning
+			p2_points += points_added_from_losing
+		MinigameEndState.P2Won:
+			$Announcements.text = "¡Jugador 2 ganó el minijuego!"
+			p1_points += points_added_from_losing
+			p2_points += points_added_from_winning
+		MinigameEndState.Tie:
+			$Announcements.text = "Bue un empate :P"
+			pass
+		MinigameEndState.BothWon:
+			$Announcements.text = "Los dos ganaron???? >:("
+			p1_points += points_added_from_winning
+			p2_points += points_added_from_winning
+		MinigameEndState.BothLost:
+			$Announcements.text = "Todos perdieron >:)"
+			p1_points += points_added_from_losing
+			p2_points += points_added_from_losing
+	p1_points = clamp(p1_points, 0, 100)
+	p2_points = clamp(p2_points, 0, 100)
+	if p1_points == 100 && p2_points == 100:
+		$Announcements.text = "???? Los dos jugadores ganaron la partida ?????\n(Insertar chistes o algo no se)"
+	elif p1_points == 100:
+		$Announcements.text = "¡Jugador 1 ganó la partida!"
+	elif p2_points == 100:
+		$Announcements.text = "¡Jugador 2 ganó la partida!"
+	get_node(p1_laugh_bar).change_points(p1_points)
+	get_node(p2_laugh_bar).change_points(p2_points)
+
 func _ready():
+	end_minigame.connect(end_minigame_callback)
+	get_node(p1_laugh_bar).change_points(p1_points)
+	get_node(p2_laugh_bar).change_points(p2_points)
 	for folder in minigame_folders:
 		var info_path = folder.path_join("info.ini")
 		var info = ConfigFile.new()

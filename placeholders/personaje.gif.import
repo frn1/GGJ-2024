@@ -1,0 +1,15 @@
+[remap]
+
+importer="import_gif_to_sprite_frames"
+type="SpriteFrames"
+uid="uid://c4mt4yccnchgi"
+path="res://.godot/imported/personaje.gif-151057cf880808e015e55f35e0fe6f71.tres"
+
+[deps]
+
+source_file="res://placeholders/personaje.gif"
+dest_files=["res://.godot/imported/personaje.gif-151057cf880808e015e55f35e0fe6f71.tres"]
+
+[params]
+
+frames_per_second=30
