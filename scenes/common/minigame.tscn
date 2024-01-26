@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnxdmngub2oru"]
+[gd_scene load_steps=9 format=3 uid="uid://bnxdmngub2oru"]
 
 [ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
 [ext_resource type="Script" path="res://scripts/minigame_content.gd" id="2_qbsoi"]
+[ext_resource type="Script" path="res://scripts/minigame_chooser.gd" id="3_m8bwc"]
 [ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/theme.tres" id="3_ok072"]
-[ext_resource type="Script" path="res://scripts/Minigame Chooser.gd" id="4_v80tq"]
+[ext_resource type="Texture2D" uid="uid://bukblc0lnsf73" path="res://placeholders/tijeras.webp" id="5_l2igd"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6btci"]
 font_size = 64
@@ -23,10 +24,7 @@ center_offset = Vector3(400, 0, 0)
 
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_2mr3c")
-minigame_folders = Array[String](["res://minigames/rock_paper_sissors/", "res://minigames/blackjack/", "res://minigames/rock_paper_sissors/", "res://minigames/rock_paper_sissors/", "res://minigames/rock_paper_sissors/", "res://minigames/rock_paper_sissors/"])
-
-[node name="Contents" type="Node2D" parent="."]
-script = ExtResource("2_qbsoi")
+minigame_folders = Array[String](["res://minigames/rock_paper_sissors/", "res://minigames/blackjack/"])
 
 [node name="Announcements" type="Label" parent="."]
 visible = false
@@ -42,22 +40,12 @@ theme = ExtResource("3_ok072")
 text = "Jugador {} gana!"
 label_settings = SubResource("LabelSettings_6btci")
 
-[node name="Left curtain" type="MeshInstance2D" parent="."]
-modulate = Color(0.709804, 0.0156863, 0, 1)
-position = Vector2(-600, 0)
-mesh = SubResource("QuadMesh_dnv2f")
-
-[node name="Right curtain" type="MeshInstance2D" parent="."]
-modulate = Color(0.709804, 0.0156863, 0, 1)
-position = Vector2(600, 0)
-mesh = SubResource("QuadMesh_3camo")
-
 [node name="Minigame chooser" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("4_v80tq")
+script = ExtResource("3_m8bwc")
 
 [node name="Button" type="Button" parent="Minigame chooser"]
 layout_mode = 0
@@ -97,12 +85,38 @@ text = "Minijuego elegido:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TextureRect" type="TextureRect" parent="Minigame chooser/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.867
+anchor_top = 0.575
+anchor_right = 1.0
+anchor_bottom = 0.775
+offset_left = -0.100006
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(36, 75)
+texture = ExtResource("5_l2igd")
+
 [node name="Options" type="Control" parent="Minigame chooser/Panel"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
+anchor_top = 0.35
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -131.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Contents" type="Node2D" parent="."]
+script = ExtResource("2_qbsoi")
+
+[node name="Left curtain" type="MeshInstance2D" parent="."]
+modulate = Color(0.709804, 0.0156863, 0, 1)
+position = Vector2(-600, 0)
+mesh = SubResource("QuadMesh_dnv2f")
+
+[node name="Right curtain" type="MeshInstance2D" parent="."]
+modulate = Color(0.709804, 0.0156863, 0, 1)
+position = Vector2(600, 0)
+mesh = SubResource("QuadMesh_3camo")

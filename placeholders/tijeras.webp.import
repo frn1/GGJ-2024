@@ -17,7 +17,7 @@ dest_files=["res://.godot/imported/tijeras.webp-deb99e2011410e619a854efb85388169
 
 compress/mode=1
 compress/high_quality=false
-compress/lossy_quality=0.0
+compress/lossy_quality=0.5
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0

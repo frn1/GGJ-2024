@@ -14,9 +14,6 @@ extends Node2D
 @export var minigame_folders: Array[String]
 
 @export_category("Points")
-@export_range(-100, 100, 0.01) var points_added_from_winning = 15.0
-@export_range(-100, 100, 0.01) var points_added_from_losing = -2.0
-
 @export_range(0, 100, 0.01) var p1_points = 10.0
 @export_range(0, 100, 0.01) var p2_points = 10.0
 
@@ -25,8 +22,11 @@ extends Node2D
 @onready var p2_node = get_node(player2)
 @onready var options_node = get_node(options)
 
+@onready var p1_laugh_bar_node = get_node(p1_laugh_bar)
+@onready var p2_laugh_bar_node = get_node(p2_laugh_bar)
+
 var minigames: Array[Minigame]
-var current_minigame
+var current_minigame: Minigame
 var old_camera
 
 @onready var initial_left_curtain_pos = $"Left curtain".position
@@ -46,8 +46,9 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	print("Loading minigame " + minigame.id)
 	
 	$Announcements.hide()
-	get_node(p1_laugh_bar).hide()
-	get_node(p2_laugh_bar).hide()
+	p1_laugh_bar_node.hide()
+	p2_laugh_bar_node.hide()
+	$"Minigame chooser".hide()
 	
 	var old_viewport = get_viewport()
 	old_camera = old_viewport.get_camera_2d()
@@ -88,7 +89,7 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
 	)
 
-func load_minigame(minigame: Minigame, difficulty: float):
+func load_minigame(minigame: Minigame, difficulty: float = 0.0):
 	if current_minigame != null:
 		push_error("Attempted to load a minigame while another was loaded")
 		return
@@ -105,8 +106,9 @@ func after_curtains_enter_unload():
 	print("Unloading current minigame")
 	
 	$Announcements.show()
-	get_node(p1_laugh_bar).show()
-	get_node(p2_laugh_bar).show()
+	p1_laugh_bar_node.show()
+	p2_laugh_bar_node.show()
+	$"Minigame chooser".show()
 	
 	in_between_node.process_mode = PROCESS_MODE_INHERIT
 	in_between_node.show()
@@ -141,6 +143,10 @@ func after_curtains_enter_unload():
 			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos, 0.5)
 			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
 			tween.finished.connect(func(): 
+				get_tree().create_timer(0.15).timeout.connect(func():
+					p1_laugh_bar_node.update_bar()
+					p2_laugh_bar_node.update_bar()
+				)
 				get_tree().create_timer(5.0).timeout.connect(
 					func():
 						$Announcements.hide()
@@ -167,28 +173,35 @@ class Minigame:
 	var id: String
 	var include_players: bool
 	var scenes: Array
+	var points: Dictionary = {
+		"win": 10,
+		"tie": -5,
+		"lose": 0
+	}
 
 func end_minigame_callback(end_state: MinigameEndState):
 	match end_state:
 		MinigameEndState.P1Won:
 			$Announcements.text = "¡Jugador 1 ganó el minijuego!"
-			p1_points += points_added_from_winning
-			p2_points += points_added_from_losing
+			p1_points += current_minigame.points.get("win")
+			p2_points += current_minigame.points.get("lose")
 		MinigameEndState.P2Won:
 			$Announcements.text = "¡Jugador 2 ganó el minijuego!"
-			p1_points += points_added_from_losing
-			p2_points += points_added_from_winning
+			p1_points += current_minigame.points.get("lose")
+			p2_points += current_minigame.points.get("win")
 		MinigameEndState.Tie:
 			$Announcements.text = "Bue un empate :P"
+			p1_points += current_minigame.points.get("tie")
+			p2_points += current_minigame.points.get("tie")
 			pass
 		MinigameEndState.BothWon:
 			$Announcements.text = "Los dos ganaron???? >:("
-			p1_points += points_added_from_winning
-			p2_points += points_added_from_winning
+			p1_points += current_minigame.points.get("both_win", current_minigame.points.get("win"))
+			p2_points += current_minigame.points.get("both_win", current_minigame.points.get("win"))
 		MinigameEndState.BothLost:
 			$Announcements.text = "Todos perdieron >:)"
-			p1_points += points_added_from_losing
-			p2_points += points_added_from_losing
+			p1_points += current_minigame.points.get("both_lose", current_minigame.points.get("lose"))
+			p2_points += current_minigame.points.get("both_lose", current_minigame.points.get("lose"))
 	p1_points = clamp(p1_points, 0, 100)
 	p2_points = clamp(p2_points, 0, 100)
 	if p1_points == 100 && p2_points == 100:
@@ -197,14 +210,15 @@ func end_minigame_callback(end_state: MinigameEndState):
 		$Announcements.text = "¡Jugador 1 ganó la partida!"
 	elif p2_points == 100:
 		$Announcements.text = "¡Jugador 2 ganó la partida!"
-	get_node(p1_laugh_bar).change_points(p1_points)
-	get_node(p2_laugh_bar).change_points(p2_points)
+	p1_laugh_bar_node.points = p1_points
+	p2_laugh_bar_node.points = p2_points
 
 func _ready():
 	end_minigame.connect(end_minigame_callback)
-	get_node(p1_laugh_bar).change_points(p1_points)
-	get_node(p2_laugh_bar).change_points(p2_points)
-	var next_option_y_pos = 0
+	p1_laugh_bar_node.points = p1_points
+	p2_laugh_bar_node.points = p2_points
+	p1_laugh_bar_node.update_bar()
+	p2_laugh_bar_node.update_bar()
 	for folder in minigame_folders:
 		var info_path = folder.path_join("info.ini")
 		var info = ConfigFile.new()
@@ -212,7 +226,7 @@ func _ready():
 			# TODO: Add error screen
 			return
 		var minigame = Minigame.new()
-		minigame.name = info.get_value("minigame", "name", "[NO NAME]")
+		minigame.name = info.get_value("minigame", "name", "[SIN NOMBRE]")
 		minigame.id = info.get_value("minigame", "id")
 		minigame.include_players = info.get_value("minigame", "include_players", false)
 		var difficulties: Array = info.get_value("minigame", "difficulties", ["game.tscn"]).map(func(scene_filename): return folder.path_join(scene_filename))
@@ -222,14 +236,23 @@ func _ready():
 		option_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		option_label.anchors_preset = Control.LayoutPreset.PRESET_TOP_WIDE
 		option_label.anchor_right = 1.0
-		option_label.anchor_bottom = 1.0
+		option_label.set_meta("id", minigame.id)
+		#option_label.anchor_bottom = 1.0
 		option_label.position.y = 0
 		#option_label.modulate.a = 0
 		options_node.add_child(option_label)
+		var points_keys = info.get_section_keys("points")
+		for key in points_keys:
+			minigame.points[key] = info.get_value("points", key)
 		minigames.push_back(minigame)
 		print("Loaded " + minigame.id)
+	randomize()
 
-func _input(event):
+func _process(_delta):
+	p1_laugh_bar_node.points = p1_points
+	p2_laugh_bar_node.points = p2_points
+
+func _input(_event):
 	if Input.is_action_just_pressed("ui_up"):
 		load_minigame(minigames.pick_random(), 0)
 	elif Input.is_action_just_pressed("ui_down"):

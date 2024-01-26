@@ -4,10 +4,15 @@ extends Node2D
 @export_node_path("Sprite2D") var tie = NodePath("Tie")
 @export_node_path("Sprite2D") var lost = NodePath("Lost")
 
-var opponent = randi_range(0, 2)
+var opponent
 var choice_processed = false
+var rng = RandomNumberGenerator.new()
 
 const Minigame = preload("res://scripts/minigame.gd")
+
+func _ready():
+	randomize()
+	opponent = int(floor(rng.randi_range(0, 2)))
 
 func choice_made(choice):
 	if choice_processed == false:

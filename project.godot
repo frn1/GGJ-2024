@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.2", "GL Compatibility")
 run/flush_stdout_on_print=true
 config/icon="res://icon.svg"
 
+[audio]
+
+driver/mix_rate.web=44100
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -87,3 +91,4 @@ box_2d/solver/position_iterations=6
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
