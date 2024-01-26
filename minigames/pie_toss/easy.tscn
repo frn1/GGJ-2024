@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://x7iwnyceiftd"]
+
+[ext_resource type="PackedScene" uid="uid://234w666lbds1" path="res://scenes/common/p1_spawn.tscn" id="1_qqaw0"]
+[ext_resource type="PackedScene" uid="uid://wjkwr8ic5q2k" path="res://scenes/common/p2_spawn.tscn" id="2_deu1s"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_f4nup"]
+
+[node name="Easy" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
+
+[node name="P1 Spawn" parent="." instance=ExtResource("1_qqaw0")]
+position = Vector2(-517, -355)
+
+[node name="P2 Spawn" parent="." instance=ExtResource("2_deu1s")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 389)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_f4nup")

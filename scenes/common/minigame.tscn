@@ -15,16 +15,16 @@ shadow_color = Color(0.431373, 0.431373, 0.431373, 0.843137)
 shadow_offset = Vector2(3, 2)
 
 [sub_resource type="QuadMesh" id="QuadMesh_dnv2f"]
-size = Vector2(800, 900)
-center_offset = Vector3(-400, 0, 0)
+size = Vector2(1600, 1800)
+center_offset = Vector3(-800, 0, 0)
 
 [sub_resource type="QuadMesh" id="QuadMesh_3camo"]
-size = Vector2(800, 900)
-center_offset = Vector3(400, 0, 0)
+size = Vector2(1600, 1800)
+center_offset = Vector3(800, 0, 0)
 
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_2mr3c")
-minigame_folders = Array[String](["res://minigames/rock_paper_sissors/", "res://minigames/blackjack/"])
+minigame_folders = Array[String](["res://minigames/rock_paper_sissors/", "res://minigames/build_baloon_animals/", "res://minigames/pie_toss/"])
 
 [node name="Announcements" type="Label" parent="."]
 visible = false

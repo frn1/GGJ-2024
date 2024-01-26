@@ -89,4 +89,3 @@ grow_horizontal = 0
 pivot_offset = Vector2(480, 0)
 
 [node name="Minigame" parent="." instance=ExtResource("3_sbcpi")]
-minigame_folders = Array[String](["res://minigames/rock_paper_sissors/", "res://minigames/blackjack/", "res://minigames/blackjack/"])

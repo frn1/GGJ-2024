@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh2b146dtta4h"]
+
+[ext_resource type="Script" path="res://scripts/minigames/build_baloon_animals/game.gd" id="1_u4xg5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e1de0"]
+font_size = 100
+
+[node name="Easy" type="Node2D"]
+script = ExtResource("1_u4xg5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Pasos" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -121.0
+offset_top = -251.0
+offset_right = 130.0
+offset_bottom = -11.0
+text = "1"
+label_settings = SubResource("LabelSettings_e1de0")
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -18,8 +18,8 @@ extends Node2D
 @export_range(0, 100, 0.01) var p2_points = 10.0
 
 @onready var in_between_node = get_node(in_between)
-@onready var p1_node = get_node(player1)
-@onready var p2_node = get_node(player2)
+@onready var p1_node: CharacterBody2D = get_node(player1)
+@onready var p2_node: CharacterBody2D = get_node(player2)
 @onready var options_node = get_node(options)
 
 @onready var p1_laugh_bar_node = get_node(p1_laugh_bar)
@@ -59,34 +59,39 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	
 	var number_of_difficulties = minigame.scenes.size()
 	var scene_index = clamp(floor(number_of_difficulties * difficulty), 0, number_of_difficulties)
-	var scene = minigame.scenes[scene_index].instantiate()
+	var scene = minigame.scenes[scene_index].instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	
 	if minigame.include_players == false:
 		#p1_node.enabled = false
-		p1_node.process_mode = PROCESS_MODE_DISABLED
 		p1_node.hide()
 		#p2_node.enabled = false
-		p2_node.process_mode = PROCESS_MODE_DISABLED
 		p2_node.hide()
-	else:
-		var spawn_p1 = scene.get_node("Spawn P1")
-		var spawn_p2 = scene.get_node("Spawn P2")
-		p1_node.global_position = spawn_p1.global_position
-		p1_node.velocity = Vector2.ZERO
-		p2_node.global_position = spawn_p2.global_position
-		p2_node.velocity = Vector2.ZERO
 	
 	for child in $Contents.get_children():
 		child.free()
 	$Contents.add_child(scene)
 	
+	p1_node.process_mode = PROCESS_MODE_DISABLED
+	p2_node.process_mode = PROCESS_MODE_DISABLED
+	
 	var timer: SceneTreeTimer = get_tree().create_timer(0.3)
 	timer.timeout.connect(
 		func ():
+			var viewport = get_viewport()
+			var camera = viewport.get_camera_2d()
 			var tween: Tween = get_tree().create_tween().set_parallel(true)
 			tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos, 0.5)
-			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
+			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos / camera.zoom, 0.5)
+			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos / camera.zoom, 0.5)
+			p1_node.process_mode = PROCESS_MODE_ALWAYS
+			p2_node.process_mode = PROCESS_MODE_ALWAYS
+			if minigame.include_players:
+				var p1_spawn: Node2D = scene.get_node("P1 Spawn")
+				var p2_spawn: Node2D = scene.get_node("P2 Spawn")
+				p1_node.position = p1_spawn.position
+				p1_node.velocity = Vector2.ZERO
+				p2_node.position = p2_spawn.position	
+				p2_node.velocity = Vector2.ZERO
 	)
 
 func load_minigame(minigame: Minigame, difficulty: float = 0.0):
@@ -121,11 +126,11 @@ func after_curtains_enter_unload():
 	p2_node.process_mode = PROCESS_MODE_INHERIT
 	
 	if current_minigame.include_players == true:
-		var spawn_p1 = in_between_node.get_node("Spawn P1")
-		var spawn_p2 = in_between_node.get_node("Spawn P2")
-		p1_node.global_position = spawn_p1.global_position
+		var p1_spawn = in_between_node.get_node("P1 Spawn")
+		var p2_spawn = in_between_node.get_node("P2 Spawn")
+		p1_node.position = p1_spawn.position
 		p1_node.velocity = Vector2.ZERO
-		p2_node.global_position = spawn_p2.global_position
+		p2_node.position = p2_spawn.position	
 		p2_node.velocity = Vector2.ZERO
 	
 	for child in $Contents.get_children():
@@ -231,6 +236,16 @@ func _ready():
 		minigame.include_players = info.get_value("minigame", "include_players", false)
 		var difficulties: Array = info.get_value("minigame", "difficulties", ["game.tscn"]).map(func(scene_filename): return folder.path_join(scene_filename))
 		minigame.scenes = difficulties.map(func(scene_path): return load(scene_path))
+		var points_keys = info.get_section_keys("points")
+		for key in points_keys:
+			minigame.points[key] = info.get_value("points", key)
+		minigames.push_back(minigame)
+		print("Loaded " + minigame.id)
+	
+	randomize()
+	
+	var nodes = []
+	for minigame in minigames:
 		var option_label = Label.new()
 		option_label.text = minigame.name
 		option_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -240,13 +255,11 @@ func _ready():
 		#option_label.anchor_bottom = 1.0
 		option_label.position.y = 0
 		#option_label.modulate.a = 0
-		options_node.add_child(option_label)
-		var points_keys = info.get_section_keys("points")
-		for key in points_keys:
-			minigame.points[key] = info.get_value("points", key)
-		minigames.push_back(minigame)
-		print("Loaded " + minigame.id)
-	randomize()
+		nodes.push_back(option_label)
+	nodes.shuffle()
+	
+	for node in nodes:
+		options_node.add_child(node)
 
 func _process(_delta):
 	p1_laugh_bar_node.points = p1_points
@@ -254,6 +267,6 @@ func _process(_delta):
 
 func _input(_event):
 	if Input.is_action_just_pressed("ui_up"):
-		load_minigame(minigames.pick_random(), 0)
+		load_minigame(minigames[1], 0)
 	elif Input.is_action_just_pressed("ui_down"):
 		unload_minigame()
