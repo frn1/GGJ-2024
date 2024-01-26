@@ -8,6 +8,8 @@ extends Node2D
 @export_node_path("Node") var p1_laugh_bar = NodePath("../Life bars/Laugh bar P1")
 @export_node_path("Node") var p2_laugh_bar = NodePath("../Life bars/Laugh bar P2")
 
+@export_node_path("Node") var options = NodePath("Minigame chooser/Panel/Options")
+
 @export_category("Minigames")
 @export var minigame_folders: Array[String]
 
@@ -21,6 +23,7 @@ extends Node2D
 @onready var in_between_node = get_node(in_between)
 @onready var p1_node = get_node(player1)
 @onready var p2_node = get_node(player2)
+@onready var options_node = get_node(options)
 
 var minigames: Array[Minigame]
 var current_minigame
@@ -43,6 +46,8 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	print("Loading minigame " + minigame.id)
 	
 	$Announcements.hide()
+	get_node(p1_laugh_bar).hide()
+	get_node(p2_laugh_bar).hide()
 	
 	var old_viewport = get_viewport()
 	old_camera = old_viewport.get_camera_2d()
@@ -100,6 +105,8 @@ func after_curtains_enter_unload():
 	print("Unloading current minigame")
 	
 	$Announcements.show()
+	get_node(p1_laugh_bar).show()
+	get_node(p2_laugh_bar).show()
 	
 	in_between_node.process_mode = PROCESS_MODE_INHERIT
 	in_between_node.show()
@@ -197,6 +204,7 @@ func _ready():
 	end_minigame.connect(end_minigame_callback)
 	get_node(p1_laugh_bar).change_points(p1_points)
 	get_node(p2_laugh_bar).change_points(p2_points)
+	var next_option_y_pos = 0
 	for folder in minigame_folders:
 		var info_path = folder.path_join("info.ini")
 		var info = ConfigFile.new()
@@ -209,6 +217,15 @@ func _ready():
 		minigame.include_players = info.get_value("minigame", "include_players", false)
 		var difficulties: Array = info.get_value("minigame", "difficulties", ["game.tscn"]).map(func(scene_filename): return folder.path_join(scene_filename))
 		minigame.scenes = difficulties.map(func(scene_path): return load(scene_path))
+		var option_label = Label.new()
+		option_label.text = minigame.name
+		option_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		option_label.anchors_preset = Control.LayoutPreset.PRESET_TOP_WIDE
+		option_label.anchor_right = 1.0
+		option_label.anchor_bottom = 1.0
+		option_label.position.y = 0
+		#option_label.modulate.a = 0
+		options_node.add_child(option_label)
 		minigames.push_back(minigame)
 		print("Loaded " + minigame.id)
 

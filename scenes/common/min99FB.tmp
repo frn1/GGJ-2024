@@ -23,7 +23,17 @@ center_offset = Vector3(400, 0, 0)
 
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_2mr3c")
-minigame_folders = Array[String](["res://minigames/rock_paper_sissors/", "res://minigames/blackjack/", "res://minigames/rock_paper_sissors/", "res://minigames/rock_paper_sissors/", "res://minigames/rock_paper_sissors/", "res://minigames/rock_paper_sissors/"])
+in_between = null
+player1 = null
+player2 = null
+p1_laugh_bar = null
+p2_laugh_bar = null
+options = null
+minigame_folders = Array[String](["res://minigames/rock_paper_sissors/", "res://minigames/rock_paper_sissors/", "res://minigames/rock_paper_sissors/"])
+points_added_from_winning = null
+points_added_from_losing = null
+p1_points = null
+p2_points = null
 
 [node name="Contents" type="Node2D" parent="."]
 script = ExtResource("2_qbsoi")
@@ -60,7 +70,6 @@ offset_bottom = 40.0
 script = ExtResource("4_v80tq")
 
 [node name="Button" type="Button" parent="Minigame chooser"]
-layout_mode = 0
 offset_left = -77.0
 offset_top = 122.0
 offset_right = 78.0
@@ -103,6 +112,11 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -131.0
+offset_top = -120.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Label" type="Label" parent="Minigame chooser/Panel/Options"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 34.0
