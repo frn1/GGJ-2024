@@ -1,9 +1,9 @@
-extends Panel
+extends Node2D
 
 var points: float = 0.0 
 var shown_points: float = 0.0 
 
-@onready var filling = $Filling
+@onready var filling = $Fill
 
 func update_bar():
 	var tween = get_tree().create_tween()

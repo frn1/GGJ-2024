@@ -25,8 +25,7 @@ var minigames: Array[Minigame]
 var current_minigame: Minigame
 var old_camera
 
-@onready var initial_left_curtain_pos = $"Left curtain".position
-@onready var initial_right_curtain_pos = $"Right curtain".position
+@onready var initial_curtain_pos = $"Curtain".position
 
 enum MinigameEndState {
 	P1Won,
@@ -68,8 +67,7 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 			var camera = viewport.get_camera_2d()
 			var tween: Tween = get_tree().create_tween().set_parallel(true)
 			tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos / camera.zoom, 0.5)
-			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos / camera.zoom, 0.5)
+			tween.tween_property($"Curtain", "position", initial_curtain_pos / camera.zoom, 0.5)
 	)
 
 func load_minigame(minigame: Minigame, difficulty: float = 0.0):
@@ -81,8 +79,7 @@ func load_minigame(minigame: Minigame, difficulty: float = 0.0):
 	
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($"Left curtain", "position", Vector2.ZERO, 0.5)
-	tween.tween_property($"Right curtain", "position", Vector2.ZERO, 0.5)
+	tween.tween_property($"Curtain", "position", Vector2(0, -210), 0.5)
 	tween.finished.connect(func (): after_curtains_enter_load(minigame, difficulty))
 
 func after_curtains_enter_unload():
@@ -108,8 +105,7 @@ func after_curtains_enter_unload():
 		func ():
 			var tween: Tween = get_tree().create_tween().set_parallel(true)
 			tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
-			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos, 0.5)
-			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos, 0.5)
+			tween.tween_property($"Curtain", "position", initial_curtain_pos, 0.5)
 			tween.finished.connect(func(): 
 				get_tree().create_timer(0.15).timeout.connect(func():
 					p1_laugh_bar_node.update_bar()
@@ -132,8 +128,7 @@ func unload_minigame():
 		
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property($"Left curtain", "position", Vector2.ZERO, 0.5)
-	tween.tween_property($"Right curtain", "position", Vector2.ZERO, 0.5)
+	tween.tween_property($"Curtain", "position", Vector2(0, -210), 0.5)
 	tween.finished.connect(after_curtains_enter_unload)
 
 class Minigame:
