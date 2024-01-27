@@ -45,17 +45,17 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Windows 64bit
-          path: ${{ GITHUB_WORKSPACE }}/Windows 64bit
+          path: ${{ github.workspace }}/Windows 64bit
       - name: Upload Windows 32bit
         uses: actions/upload-artifact@v4
         with:
           name: Windows 32bit
-          path: ${{ GITHUB_WORKSPACE }}/Windows 64bit
+          path: ${{ github.workspace }}/Windows 64bit
       - name: Upload HTML5
         uses: actions/upload-artifact@v4
         with:
           name: Make Me Laugh!!! HTML5
-          path: ${{ GITHUB_WORKSPACE }}/Web
+          path: ${{ github.workspace }}/Web
       - name: Upload MacOS
         uses: actions/upload-artifact@v4
         with:
@@ -65,22 +65,22 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Make Me Laugh!!! Linux 64bit
-          path: ${{ GITHUB_WORKSPACE }}/Linux 64bit
+          path: ${{ github.workspace }}/Linux 64bit
       - name: Upload Linux 32bit
         uses: actions/upload-artifact@v4
         with:
           name: Make Me Laugh!!! Linux 32bit
-          path: ${{ GITHUB_WORKSPACE }}/Linux 32bit
+          path: ${{ github.workspace }}/Linux 32bit
       - name: Upload Linux arm64
         uses: actions/upload-artifact@v4
         with:
           name: Make Me Laugh!!! Linux arm64
-          path: ${{ GITHUB_WORKSPACE }}/Linux arm64
+          path: ${{ github.workspace }}/Linux arm64
       - name: Upload Linux arm32
         uses: actions/upload-artifact@v4
         with:
           name: Make Me Laugh!!! Linux arm32
-          path: ${{ GITHUB_WORKSPACE }}/Linux arm32
+          path: ${{ github.workspace }}/Linux arm32
 
   # deploy-to-itchio-linux:
   #   runs-on: ubuntu-latest
