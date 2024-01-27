@@ -43,7 +43,7 @@ func _ready():
 				current_modes[device] = "Ouya"
 			elif name.contains("SWITCH") || name.contains("PRO") || name.contains("JOY"):
 				current_modes[device] = "Pro Controller"
-			elif name.contains("WII"):
+			elif name.contains("RVL") || name.contains("CNT"):
 				current_modes[device] = "Wii Horizontal"
 			elif name.contains("STEAM"):
 				if name.contains("DECK"):
