@@ -2,8 +2,6 @@ extends Node2D
 
 @export_category("Nodes")
 @export_node_path("Node2D") var in_between = NodePath("../In-between")
-@export_node_path("CharacterBody2D") var player1 = NodePath("../Player 1")
-@export_node_path("CharacterBody2D") var player2 = NodePath("../Player 2")
 
 @export_node_path("Node") var p1_laugh_bar = NodePath("../Life bars/Laugh bar P1")
 @export_node_path("Node") var p2_laugh_bar = NodePath("../Life bars/Laugh bar P2")
@@ -18,8 +16,6 @@ extends Node2D
 @export_range(0, 100, 0.01) var p2_points = 10.0
 
 @onready var in_between_node = get_node(in_between)
-@onready var p1_node: CharacterBody2D = get_node(player1)
-@onready var p2_node: CharacterBody2D = get_node(player2)
 @onready var options_node = get_node(options)
 
 @onready var p1_laugh_bar_node = get_node(p1_laugh_bar)
@@ -61,18 +57,9 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	var scene_index = clamp(floor(number_of_difficulties * difficulty), 0, number_of_difficulties)
 	var scene = minigame.scenes[scene_index].instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	
-	if minigame.include_players == false:
-		#p1_node.enabled = false
-		p1_node.hide()
-		#p2_node.enabled = false
-		p2_node.hide()
-	
 	for child in $Contents.get_children():
 		child.free()
 	$Contents.add_child(scene)
-	
-	p1_node.process_mode = PROCESS_MODE_DISABLED
-	p2_node.process_mode = PROCESS_MODE_DISABLED
 	
 	var timer: SceneTreeTimer = get_tree().create_timer(0.3)
 	timer.timeout.connect(
@@ -83,15 +70,6 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 			tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property($"Left curtain", "position", initial_left_curtain_pos / camera.zoom, 0.5)
 			tween.tween_property($"Right curtain", "position", initial_right_curtain_pos / camera.zoom, 0.5)
-			p1_node.process_mode = PROCESS_MODE_ALWAYS
-			p2_node.process_mode = PROCESS_MODE_ALWAYS
-			if minigame.include_players:
-				var p1_spawn: Node2D = scene.get_node("P1 Spawn")
-				var p2_spawn: Node2D = scene.get_node("P2 Spawn")
-				p1_node.position = p1_spawn.position
-				p1_node.velocity = Vector2.ZERO
-				p2_node.position = p2_spawn.position	
-				p2_node.velocity = Vector2.ZERO
 	)
 
 func load_minigame(minigame: Minigame, difficulty: float = 0.0):
@@ -117,21 +95,6 @@ func after_curtains_enter_unload():
 	
 	in_between_node.process_mode = PROCESS_MODE_INHERIT
 	in_between_node.show()
-	
-	#p2_node.enabled = true
-	p1_node.show()
-	p1_node.process_mode = PROCESS_MODE_INHERIT
-	#p2_node.enabled = true
-	p2_node.show()
-	p2_node.process_mode = PROCESS_MODE_INHERIT
-	
-	if current_minigame.include_players == true:
-		var p1_spawn = in_between_node.get_node("P1 Spawn")
-		var p2_spawn = in_between_node.get_node("P2 Spawn")
-		p1_node.position = p1_spawn.position
-		p1_node.velocity = Vector2.ZERO
-		p2_node.position = p2_spawn.position	
-		p2_node.velocity = Vector2.ZERO
 	
 	for child in $Contents.get_children():
 		child.free()
@@ -176,7 +139,6 @@ func unload_minigame():
 class Minigame:
 	var name: String
 	var id: String
-	var include_players: bool
 	var scenes: Array
 	var points: Dictionary = {
 		"win": 10,
@@ -233,7 +195,6 @@ func _ready():
 		var minigame = Minigame.new()
 		minigame.name = info.get_value("minigame", "name", "[SIN NOMBRE]")
 		minigame.id = info.get_value("minigame", "id")
-		minigame.include_players = info.get_value("minigame", "include_players", false)
 		var difficulties: Array = info.get_value("minigame", "difficulties", ["game.tscn"]).map(func(scene_filename): return folder.path_join(scene_filename))
 		minigame.scenes = difficulties.map(func(scene_path): return load(scene_path))
 		var points_keys = info.get_section_keys("points")

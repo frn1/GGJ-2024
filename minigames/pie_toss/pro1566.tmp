@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnoyp0ujpjrvh"]
+
+[ext_resource type="Texture2D" uid="uid://boatys6qbauok" path="res://icon.svg" id="1_3y5r2"]
+[ext_resource type="Script" path="res://scripts/minigames/pie_toss/projectile.gd" id="1_hv37d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_trg2d"]
+radius = 8.0
+height = 24.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_hv37d")
+
+[node name="Texture" type="Sprite2D" parent="."]
+scale = Vector2(0.065, 0.1)
+texture = ExtResource("1_3y5r2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_trg2d")

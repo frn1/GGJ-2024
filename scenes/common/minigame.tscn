@@ -24,7 +24,7 @@ center_offset = Vector3(800, 0, 0)
 
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_2mr3c")
-minigame_folders = Array[String](["res://minigames/rock_paper_sissors/", "res://minigames/build_baloon_animals/", "res://minigames/pie_toss/"])
+minigame_folders = Array[String](["res://minigames/build_baloon_animals/", "res://minigames/pie_toss/"])
 
 [node name="Announcements" type="Label" parent="."]
 visible = false
