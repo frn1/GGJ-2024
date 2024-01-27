@@ -24,6 +24,9 @@ func _physics_process(delta):
 	if collision:
 		var collider = collision.get_collider()
 		if collider is Node2D:
-			direction = Vector2(x_dir, deg_to_rad(randf_range(20, 60)) * [-1, 1].pick_random())
 			if collider.has_meta("is_player") && collider.get_meta("is_player"):
+				bounces += 1
+				speed += 40 - log(bounces) * 3
+				speed = min(speed, 2000)
 				x_dir = -x_dir
+			direction = Vector2(x_dir, deg_to_rad(randf_range(30, 70)) * [-1, 1].pick_random()).normalized()
