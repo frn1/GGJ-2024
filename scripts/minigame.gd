@@ -228,7 +228,7 @@ func _process(_delta):
 
 func _input(_event):
 	if OS.is_debug_build():
-		if Input.is_action_just_pressed("ui_up"):
+		if Input.is_key_pressed(KEY_Z):
 			load_minigame(minigames[1], 0)
-		elif Input.is_action_just_pressed("ui_down"):
+		elif Input.is_key_pressed(KEY_X):
 			unload_minigame()

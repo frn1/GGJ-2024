@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnxdmngub2oru"]
+[gd_scene load_steps=14 format=3 uid="uid://bnxdmngub2oru"]
 
 [ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
 [ext_resource type="Script" path="res://scripts/minigame_content.gd" id="2_qbsoi"]
@@ -14,6 +14,26 @@ shadow_size = 3
 shadow_color = Color(0.431373, 0.431373, 0.431373, 0.843137)
 shadow_offset = Vector2(3, 2)
 
+[sub_resource type="InputEventKey" id="InputEventKey_7gd5g"]
+device = -1
+keycode = 69
+unicode = 101
+
+[sub_resource type="InputEventKey" id="InputEventKey_ma3yb"]
+device = -1
+keycode = 79
+unicode = 111
+
+[sub_resource type="InputEventAction" id="InputEventAction_cwc55"]
+action = &"P1 action"
+
+[sub_resource type="InputEventAction" id="InputEventAction_13tdu"]
+device = 1
+action = &"P2 action"
+
+[sub_resource type="Shortcut" id="Shortcut_i1hj1"]
+events = [SubResource("InputEventKey_7gd5g"), SubResource("InputEventKey_ma3yb"), SubResource("InputEventAction_cwc55"), SubResource("InputEventAction_13tdu")]
+
 [sub_resource type="QuadMesh" id="QuadMesh_dnv2f"]
 size = Vector2(1600, 1800)
 center_offset = Vector3(-800, 0, 0)
@@ -24,7 +44,7 @@ center_offset = Vector3(800, 0, 0)
 
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_2mr3c")
-minigame_folders = Array[String](["res://minigames/build_baloon_animals/", "res://minigames/pie_toss/"])
+minigame_folders = Array[String](["res://minigames/build_baloon_animals/", "res://minigames/pie_toss/", "res://minigames/pong/"])
 
 [node name="Announcements" type="Label" parent="."]
 visible = false
@@ -54,6 +74,7 @@ offset_top = 122.0
 offset_right = 78.0
 offset_bottom = 185.0
 theme = ExtResource("3_ok072")
+shortcut = SubResource("Shortcut_i1hj1")
 text = "Empezar"
 
 [node name="Panel" type="Panel" parent="Minigame chooser"]

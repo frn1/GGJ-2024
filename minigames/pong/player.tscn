@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvrtyie6oq5ef"]
+
+[ext_resource type="Script" path="res://scripts/minigames/pong/player.gd" id="1_7ts3y"]
+[ext_resource type="Texture2D" uid="uid://boatys6qbauok" path="res://icon.svg" id="2_sgg2l"]
+[ext_resource type="Texture2D" uid="uid://gsmopmoro6dc" path="res://textures/Controller Icons/Wii Horizontal/up.png" id="3_qxy5w"]
+[ext_resource type="Script" path="res://scripts/dissapear_after_some_seconds.tres.gd" id="4_n685l"]
+[ext_resource type="Texture2D" uid="uid://daja7dvr7km2v" path="res://textures/Controller Icons/Wii Horizontal/down.png" id="4_xechf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_720a2"]
+size = Vector2(34, 149)
+
+[node name="Player" type="StaticBody2D"]
+script = ExtResource("1_7ts3y")
+metadata/is_player = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.65)
+texture = ExtResource("2_sgg2l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_720a2")
+
+[node name="UpPrompt" type="Sprite2D" parent="."]
+position = Vector2(0, -120)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_qxy5w")
+script = ExtResource("4_n685l")
+free_after_dissapearing = true
+
+[node name="DownPrompt" type="Sprite2D" parent="."]
+position = Vector2(0, 120)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("4_xechf")
+script = ExtResource("4_n685l")
+free_after_dissapearing = true

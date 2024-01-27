@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8p2xye5hrbik"
-path="res://.godot/imported/up.png-2f7f8935dbae13954baac30ced855ef7.ctex"
+uid="uid://daja7dvr7km2v"
+path="res://.godot/imported/down.png-b781a3cba0e9592e6106aa591c81cb84.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Controller Icons/Switch/up.png"
-dest_files=["res://.godot/imported/up.png-2f7f8935dbae13954baac30ced855ef7.ctex"]
+source_file="res://textures/Controller Icons/Wii Horizontal/down.png"
+dest_files=["res://.godot/imported/down.png-b781a3cba0e9592e6106aa591c81cb84.ctex"]
 
 [params]
 

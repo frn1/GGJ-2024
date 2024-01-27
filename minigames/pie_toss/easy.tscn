@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://x7iwnyceiftd"]
 
-[ext_resource type="Script" path="res://scripts/minigames/pie_toss/easy.gd" id="1_krf1e"]
+[ext_resource type="Script" path="res://scripts/minigames/pie_toss/game.gd" id="1_krf1e"]
 [ext_resource type="PackedScene" uid="uid://drvumps04cxms" path="res://minigames/pie_toss/shooter.tscn" id="1_xmkbf"]
 [ext_resource type="PackedScene" uid="uid://dsrd3wqccj5ef" path="res://minigames/pie_toss/target_spawner.tscn" id="2_wuv1v"]
 [ext_resource type="PackedScene" uid="uid://bgvr4fs2pd4m6" path="res://minigames/pie_toss/target_eraser.tscn" id="3_0xna8"]

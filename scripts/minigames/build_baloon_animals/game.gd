@@ -151,3 +151,5 @@ func _input(event):
 			next_action_index[1] += 1
 		else:
 			next_action_index[1] = 0
+	next_action_index[0] = clamp(next_action_index[0], 0, 4)
+	next_action_index[1] = clamp(next_action_index[1], 0, 4)

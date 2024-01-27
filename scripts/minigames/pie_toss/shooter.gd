@@ -27,7 +27,7 @@ func update_icons():
 func _ready():
 	update_icons()
 	Controller.controller_changed.connect(
-		func (_new_mode):
+		func (_new_mode, _device):
 			update_icons()
 	)
 

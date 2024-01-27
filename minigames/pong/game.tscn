@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdvfov0xe15ha"]
+
+[ext_resource type="PackedScene" uid="uid://cvrtyie6oq5ef" path="res://minigames/pong/player.tscn" id="1_id8no"]
+[ext_resource type="Texture2D" uid="uid://boatys6qbauok" path="res://icon.svg" id="1_qs3sx"]
+[ext_resource type="Script" path="res://scripts/minigames/pong/ball.gd" id="2_nfbx0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lfakm"]
+radius = 20.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rla13"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ivhfo"]
+normal = Vector2(0, 1)
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player 1" parent="." instance=ExtResource("1_id8no")]
+position = Vector2(-530, 0)
+
+[node name="Player 2" parent="." instance=ExtResource("1_id8no")]
+position = Vector2(530, 0)
+player = 2
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+process_mode = 3
+process_priority = 2
+script = ExtResource("2_nfbx0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_lfakm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_qs3sx")
+
+[node name="World Boundaries" type="StaticBody2D" parent="."]
+
+[node name="Bottom" type="CollisionShape2D" parent="World Boundaries"]
+position = Vector2(0, 324)
+shape = SubResource("WorldBoundaryShape2D_rla13")
+
+[node name="Top" type="CollisionShape2D" parent="World Boundaries"]
+position = Vector2(0, -324)
+shape = SubResource("WorldBoundaryShape2D_ivhfo")

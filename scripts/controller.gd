@@ -2,7 +2,7 @@ extends Node
 
 var current_modes = ["Keyboard", "Keyboard"]
 
-signal controller_changed(new_mode: String)
+signal controller_changed(new_mode: String, player: int)
 
 func find_tex_path_for_action(action: String, player: int) -> String:
 	var path = "res://textures/Controller Icons".path_join(current_modes[player - 1])
@@ -42,11 +42,9 @@ func _ready():
 			elif name.contains("OUYA"):
 				current_modes[device] = "Ouya"
 			elif name.contains("SWITCH") || name.contains("PRO") || name.contains("JOY"):
-				current_modes[device] = "Switch"
-			elif name.contains("WIIU") || name.contains("WII U"):
-				current_modes[device] = "Wii U"
+				current_modes[device] = "Pro Controller"
 			elif name.contains("WII"):
-				current_modes[device] = "Wii"
+				current_modes[device] = "Wii Horizontal"
 			elif name.contains("STEAM"):
 				if name.contains("DECK"):
 					current_modes[device] = "Steam Deck"
@@ -54,5 +52,5 @@ func _ready():
 					current_modes[device] = "Steam"
 			else:
 				current_modes[device] = "Luna"
-			controller_changed.emit(current_modes[device])
+			controller_changed.emit(current_modes[device], device + 1)
 	)
