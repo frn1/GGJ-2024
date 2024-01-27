@@ -16,11 +16,20 @@ extends Node2D
 
 var score = 0
 
+func update_icons():
+	$PromptShoot.texture = ResourceLoader.load(Controller.find_tex_path_for_action("action", player))
+	if $CCWArrow/Prompt:
+		$CCWArrow/Prompt.texture = ResourceLoader.load(Controller.find_tex_path_for_action("left", player))
+	if $CWArrow/Prompt:
+		$CWArrow/Prompt.texture = ResourceLoader.load(Controller.find_tex_path_for_action("right", player))
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$PromptShoot.texture = ResourceLoader.load(Controller.find_tex_path_for_action("action", player))
-	$CCWArrow/Prompt.texture = ResourceLoader.load(Controller.find_tex_path_for_action("left", player))
-	$CWArrow/Prompt.texture = ResourceLoader.load(Controller.find_tex_path_for_action("right", player))
+	update_icons()
+	Controller.controller_changed.connect(
+		func (_new_mode):
+			update_icons()
+	)
 
 @onready var timeout_timer = get_tree().create_timer(cooldown)
 

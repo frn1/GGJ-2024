@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5fj4qablsh48"
-path="res://.godot/imported/action.png-385eeed9a75d25bd966ee3e921635e88.ctex"
+uid="uid://1cmr3ubjlfh2"
+path="res://.godot/imported/right.png-4b831fc1846a874db3421f3874408a53.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Controller Icons/Switch/action.png"
-dest_files=["res://.godot/imported/action.png-385eeed9a75d25bd966ee3e921635e88.ctex"]
+source_file="res://textures/Controller Icons/Luna/right.png"
+dest_files=["res://.godot/imported/right.png-4b831fc1846a874db3421f3874408a53.ctex"]
 
 [params]
 

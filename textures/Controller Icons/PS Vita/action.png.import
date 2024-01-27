@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5fj4qablsh48"
-path="res://.godot/imported/action.png-385eeed9a75d25bd966ee3e921635e88.ctex"
+uid="uid://bm5q4oyp2jdy0"
+path="res://.godot/imported/action.png-6fb9e23af4b9da389adeaddea5e2b2e6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Controller Icons/Switch/action.png"
-dest_files=["res://.godot/imported/action.png-385eeed9a75d25bd966ee3e921635e88.ctex"]
+source_file="res://textures/Controller Icons/PS Vita/action.png"
+dest_files=["res://.godot/imported/action.png-6fb9e23af4b9da389adeaddea5e2b2e6.ctex"]
 
 [params]
 

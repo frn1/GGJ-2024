@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5fj4qablsh48"
-path="res://.godot/imported/action.png-385eeed9a75d25bd966ee3e921635e88.ctex"
+uid="uid://bld5ykxtlljyk"
+path="res://.godot/imported/left.png-f06288bcb610e679cdaec3f0bc8308a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Controller Icons/Switch/action.png"
-dest_files=["res://.godot/imported/action.png-385eeed9a75d25bd966ee3e921635e88.ctex"]
+source_file="res://textures/Controller Icons/Stadia/left.png"
+dest_files=["res://.godot/imported/left.png-f06288bcb610e679cdaec3f0bc8308a9.ctex"]
 
 [params]
 
