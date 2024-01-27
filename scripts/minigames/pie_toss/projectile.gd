@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var speed = 20
 @export var life_time = 1.0
 
+@export var add_score: Callable
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().create_timer(life_time).timeout.connect(
@@ -12,10 +14,13 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	var velocity = Vector2(cos(global_rotation - PI / 2), sin(global_rotation - PI / 2)) * speed
+func _physics_process(_delta):
+	velocity = Vector2(cos(global_rotation - PI / 2), sin(global_rotation - PI / 2)) * speed
 	var collision = move_and_collide(velocity)
 	if collision:
 		var is_bullet = collision.get_collider().get_script() == get_script()
 		if is_bullet:
 			return
+		add_score.call()
+		#collision.get_collider().queue_free()
+		#queue_free()

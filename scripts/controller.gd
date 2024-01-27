@@ -1,6 +1,6 @@
 extends Node
 
-var current_modes = ["Steam Deck", "Ouya"]
+var current_modes = ["Xbox One", "Keyboard"]
 
 func find_tex_path_for_action(action: String, player: int) -> String:
 	var path = "res://textures/Controller Icons".path_join(current_modes[player - 1])

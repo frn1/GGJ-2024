@@ -227,7 +227,8 @@ func _process(_delta):
 	p2_laugh_bar_node.points = p2_points
 
 func _input(_event):
-	if Input.is_action_just_pressed("ui_up"):
-		load_minigame(minigames[1], 0)
-	elif Input.is_action_just_pressed("ui_down"):
-		unload_minigame()
+	if OS.is_debug_build():
+		if Input.is_action_just_pressed("ui_up"):
+			load_minigame(minigames[1], 0)
+		elif Input.is_action_just_pressed("ui_down"):
+			unload_minigame()

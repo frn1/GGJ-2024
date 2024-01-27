@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgvr4fs2pd4m6"]
+
+[ext_resource type="Script" path="res://scripts/minigames/pie_toss/target_eraser.gd" id="1_wn0yg"]
+
+[node name="Target Eraser" type="Area2D"]
+script = ExtResource("1_wn0yg")

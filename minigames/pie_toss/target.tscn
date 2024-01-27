@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn2jtkxsfk0q5"]
+
+[ext_resource type="Script" path="res://scripts/minigames/pie_toss/target.gd" id="1_vhntx"]
+[ext_resource type="Texture2D" uid="uid://boatys6qbauok" path="res://icon.svg" id="2_7pqxw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewalt"]
+size = Vector2(68, 68)
+
+[node name="Target" type="Area2D"]
+script = ExtResource("1_vhntx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_7pqxw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ewalt")

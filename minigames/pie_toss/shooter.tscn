@@ -10,28 +10,29 @@
 [ext_resource type="Texture2D" uid="uid://boatys6qbauok" path="res://icon.svg" id="6_5hxdm"]
 
 [node name="Shooter" type="Node2D"]
-position = Vector2(-324, 230)
 script = ExtResource("1_litlf")
 projectile = ExtResource("2_wmxtn")
 
 [node name="CCWArrow" type="Sprite2D" parent="."]
-position = Vector2(-95, 20)
-scale = Vector2(0.8, 0.8)
+position = Vector2(-70, 20)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_fw5af")
 flip_h = true
 flip_v = true
 script = ExtResource("3_a6gej")
+free_after_dissapearing = true
 
 [node name="Prompt" type="Sprite2D" parent="CCWArrow"]
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_m82rk")
 
 [node name="CWArrow" type="Sprite2D" parent="."]
-position = Vector2(95, 20)
-scale = Vector2(0.8, 0.8)
+position = Vector2(70, 20)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_fw5af")
 flip_v = true
 script = ExtResource("3_a6gej")
+free_after_dissapearing = true
 
 [node name="Prompt" type="Sprite2D" parent="CWArrow"]
 scale = Vector2(0.8, 0.8)
