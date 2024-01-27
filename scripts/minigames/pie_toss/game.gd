@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var play_time = 30.75
+@export var play_time = 20.5
 
 var start_time
 

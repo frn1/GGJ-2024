@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var minigame_duration = 35.0
+@export var minigame_duration = 25.5
 
 enum Buttons {
 	Left,
@@ -151,5 +151,5 @@ func _input(event):
 			next_action_index[1] += 1
 		else:
 			next_action_index[1] = 0
-	next_action_index[0] = clamp(next_action_index[0], 0, 4)
-	next_action_index[1] = clamp(next_action_index[1], 0, 4)
+	next_action_index[0] = clamp(next_action_index[0], 0, 5)
+	next_action_index[1] = clamp(next_action_index[1], 0, 5)
