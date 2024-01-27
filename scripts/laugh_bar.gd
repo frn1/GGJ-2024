@@ -5,6 +5,9 @@ var shown_points: float = 0.0
 
 @onready var filling = $Fill
 
+@export var start_x: float = 195
+@export var end_x: float = 500 + 195
+
 func update_bar():
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
@@ -14,5 +17,5 @@ func update_bar():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	filling.scale.x = remap(shown_points, 0, 100, 0, 1)
+	filling.region_rect.size.x = (shown_points / 100) * (end_x - start_x) + start_x
 	pass

@@ -21,7 +21,8 @@ position = Vector2(-576, -324)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_7jvn2")
 centered = false
-region_rect = Rect2(1152, 0, 100, 1080)
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 1080)
 region_filter_clip_enabled = true
 
 [node name="Bar" type="Sprite2D" parent="Life bars/Laugh bar P1"]
@@ -33,7 +34,25 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("4_um4l8")
 
 [node name="Laugh bar P2" type="Node2D" parent="Life bars"]
+visible = false
 script = ExtResource("5_ns83b")
+
+[node name="Fill" type="Sprite2D" parent="Life bars/Laugh bar P2"]
+position = Vector2(-576, -324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_7jvn2")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 192, 1080)
+region_filter_clip_enabled = true
+
+[node name="Bar2" type="Sprite2D" parent="Life bars/Laugh bar P2"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_n5k56")
+
+[node name="Icon2" type="Sprite2D" parent="Life bars/Laugh bar P2"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_um4l8")
 
 [node name="Minigame" parent="." instance=ExtResource("3_sbcpi")]
 
