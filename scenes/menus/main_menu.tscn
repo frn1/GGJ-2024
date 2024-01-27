@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8mq6bydhm3pg"]
+
+[ext_resource type="Texture2D" uid="uid://48bfic2666ci" path="res://textures/Menus/Main menu/Buttons/Credits.png" id="1_0tsmy"]
+[ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/theme.tres" id="1_41hpj"]
+[ext_resource type="Texture2D" uid="uid://dll44ysulo570" path="res://textures/Menus/Main menu/Buttons/Exit.png" id="2_krsf6"]
+[ext_resource type="Texture2D" uid="uid://c8e1xxe112pqk" path="res://textures/Menus/Main menu/Buttons/Options.png" id="3_5notc"]
+[ext_resource type="Texture2D" uid="uid://cmdeq03lpc3qg" path="res://textures/Menus/Main menu/Buttons/Start.png" id="4_62glr"]
+[ext_resource type="Script" path="res://scripts/menus/main_menu/start.gd" id="5_i0smd"]
+[ext_resource type="Texture2D" uid="uid://bqyb57yq7orxy" path="res://textures/Menus/Main menu/Logo.png" id="5_mm2uk"]
+[ext_resource type="Texture2D" uid="uid://c8ru00b7eeov5" path="res://textures/Menus/Main menu/BG.PNG" id="6_ddcc2"]
+
+[sub_resource type="GDScript" id="GDScript_jsv13"]
+resource_name = "Animation Thingy"
+script/source = "extends Control
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var viewport_rect = get_viewport_rect()
+	var tween = create_tween()
+	tween.set_parallel(true).chain()
+	tween.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CIRC)
+	var delay = 0.0
+	for child in get_children():
+		var original_pos = child.position
+		child.position.x += viewport_rect.size.x
+		tween.tween_property(child, \"position\", original_pos, 0.5).set_delay(delay)
+		delay += 0.1
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="Main menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_41hpj")
+
+[node name="BG" type="TextureRect" parent="."]
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_ddcc2")
+stretch_mode = 2
+
+[node name="Animation thingy" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_jsv13")
+
+[node name="Logo" type="TextureRect" parent="Animation thingy"]
+layout_mode = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_mm2uk")
+stretch_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Animation thingy"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -148.0
+offset_right = 768.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+alignment = 1
+
+[node name="Start" type="Button" parent="Animation thingy/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../Exit")
+focus_neighbor_right = NodePath("../Options")
+focus_next = NodePath("../Options")
+focus_previous = NodePath("../Exit")
+icon = ExtResource("4_62glr")
+flat = true
+script = ExtResource("5_i0smd")
+
+[node name="Options" type="Button" parent="Animation thingy/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../Start")
+focus_neighbor_right = NodePath("../Credits")
+focus_previous = NodePath("../Exit")
+icon = ExtResource("3_5notc")
+flat = true
+
+[node name="Credits" type="Button" parent="Animation thingy/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../Options")
+focus_neighbor_right = NodePath("../Exit")
+focus_previous = NodePath("../Exit")
+icon = ExtResource("1_0tsmy")
+flat = true
+
+[node name="Exit" type="Button" parent="Animation thingy/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../Credits")
+focus_neighbor_right = NodePath("../Start")
+icon = ExtResource("2_krsf6")
+flat = true

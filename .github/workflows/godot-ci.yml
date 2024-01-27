@@ -45,42 +45,42 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: HTML5
-          path: /home/runner/.local/share/godot/archives/Web.zip
+          path: /home/runner/.local/share/godot/archives/Make Me Laugh!!! HTML5.zip
       - name: Upload Linux x86_32
         uses: actions/upload-artifact@v4
         with:
           name: LinuxX11_x86_32
-          path: /home/runner/.local/share/godot/archives/LinuxX11 x86_32.zip
+          path: /home/runner/.local/share/godot/archives/Make Me Laugh!!! Linux x86_32.zip
       - name: Upload Linux x86_64
         uses: actions/upload-artifact@v4
         with:
           name: LinuxX11_x86_64
-          path: /home/runner/.local/share/godot/archives/LinuxX11 x86_64.zip
+          path: /home/runner/.local/share/godot/archives/Make Me Laugh!!! Linux x86_64.zip
       - name: Upload Linux arm64
         uses: actions/upload-artifact@v4
         with:
           name: LinuxX11_arm32
-          path: /home/runner/.local/share/godot/archives/LinuxX11 arm32.zip
+          path: /home/runner/.local/share/godot/archives/Make Me Laugh!!! Linux arm32.zip
       - name: Upload Linux
         uses: actions/upload-artifact@v4
         with:
           name: LinuxX11_arm64
-          path: /home/runner/.local/share/godot/archives/LinuxX11 arm64.zip
+          path: /home/runner/.local/share/godot/archives/Make Me Laugh!!! Linux arm64.zip
       - name: Upload Windows x86_32
         uses: actions/upload-artifact@v4
         with:
           name: Windows_x86_32
-          path: /home/runner/.local/share/godot/archives/Windows x86_32.zip
+          path: /home/runner/.local/share/godot/archives/Make Me Laugh!!! Win32.zip
       - name: Upload Windows x86_64
         uses: actions/upload-artifact@v4
         with:
           name: Windows_x86_64
-          path: /home/runner/.local/share/godot/archives/Windows x86_64.zip
+          path: /home/runner/.local/share/godot/archives/Make Me Laugh!!! Win64.zip
       - name: Upload MacOS
         uses: actions/upload-artifact@v4
         with:
           name: macOS
-          path: /home/runner/.local/share/godot/archives/macOS.zip
+          path: /home/runner/.local/share/godot/archives/Make Me Laugh!!! macOS.zip
 
   deploy-to-itchio-linux:
     runs-on: ubuntu-latest
@@ -97,7 +97,7 @@ jobs:
           CHANNEL: linux
           ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
-          PACKAGE: LinuxX11 x86_64.zip
+          PACKAGE: Make Me Laugh!!! Linux x86_64.zip
 
   deploy-to-itchio-windows:
     runs-on: ubuntu-latest
@@ -107,14 +107,25 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: Windows_x86_64
+      - uses: actions/download-artifact@v4
+        with:
+          name: Windows_x86_32
       - name: Deploy to Itch.io (Windows x86_64)
         uses: manleydev/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
-          CHANNEL: windows
+          CHANNEL: win64
           ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
-          PACKAGE: Windows x86_64.zip
+          PACKAGE: Make Me Laugh!!! Win64.zip
+      - name: Deploy to Itch.io (Windows x86_64)
+        uses: manleydev/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_API_KEY }}
+          CHANNEL: win32
+          ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
+          ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
+          PACKAGE: Make Me Laugh!!! Win32.zip
 
   deploy-to-itchio-mac:
     runs-on: ubuntu-latest
@@ -131,7 +142,7 @@ jobs:
           CHANNEL: mac
           ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
-          PACKAGE: macOS.zip
+          PACKAGE: Make Me Laugh!!! macOS.zip
 
   deploy-to-itchio-web:
     runs-on: ubuntu-latest
@@ -148,4 +159,4 @@ jobs:
           CHANNEL: web
           ITCH_GAME: ${{ secrets.ITCHIO_GAME }}
           ITCH_USER: ${{ secrets.ITCHIO_USERNAME }}
-          PACKAGE: Web.zip
+          PACKAGE: Make Me Laugh!!! HTML5.zip
