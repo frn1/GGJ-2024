@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 400.0
 
-var x_dir = -1
+var x_dir = 0
 var direction: Vector2 = Vector2.ZERO
 
 var bounces = 0
@@ -10,12 +10,13 @@ var bounces = 0
 func _ready():
 	get_tree().create_timer(1).timeout.connect(
 		func():
-			seed(round(Time.get_unix_time_from_system() * 10))
-			direction = Vector2.RIGHT
-			if randf() < 0.5:
+			seed(round(Time.get_unix_time_from_system() * 154))
+			if randi() % 2 == 0:
 				x_dir = 1
 			else:
 				x_dir = -1
+			direction = Vector2(x_dir, deg_to_rad(randf_range(30, 70)) * [-1, 1].pick_random()).normalized()
+
 	)
 
 func _process(delta):

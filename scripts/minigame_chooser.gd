@@ -24,7 +24,7 @@ func load_minigames(minigame_list: Array[Minigame.Minigame]):
 	# Duplicate everything to make it seem more full
 	for i in range(0, minigame_list.size()):
 		minigames.push_back(minigame_list[i])
-	seed(round(Time.get_unix_time_from_system() * 23.56))
+	seed(Time.get_unix_time_from_system() * 874)
 	minigames.shuffle()
 
 func generate_nodes():
