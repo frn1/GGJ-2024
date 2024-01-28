@@ -29,6 +29,7 @@ position = Vector2(-10, 0)
 shape = SubResource("SegmentShape2D_3ou6t")
 
 [node name="UpPrompt" type="Sprite2D" parent="."]
+texture_filter = 2
 position = Vector2(0, -120)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("3_qxy5w")
@@ -36,6 +37,7 @@ script = ExtResource("4_n685l")
 free_after_dissapearing = true
 
 [node name="DownPrompt" type="Sprite2D" parent="."]
+texture_filter = 2
 position = Vector2(0, 120)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_xechf")

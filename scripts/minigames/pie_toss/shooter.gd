@@ -30,6 +30,9 @@ func _ready():
 		func (_new_mode, _device):
 			update_icons()
 	)
+	var gun_pos = $Gun.position
+	$Gun.replace_by(load("res://minigames/pie_toss/p%d_gun.tscn" % player).instantiate())
+	$Gun.position = gun_pos
 
 @onready var timeout_timer = get_tree().create_timer(cooldown)
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d25ymr0c5hp8s"]
+[gd_scene load_steps=8 format=3 uid="uid://d25ymr0c5hp8s"]
 
 [ext_resource type="Script" path="res://scripts/minigames/pie_toss/game.gd" id="1_84ow2"]
 [ext_resource type="PackedScene" uid="uid://drvumps04cxms" path="res://minigames/pie_toss/shooter.tscn" id="2_iu7kf"]
+[ext_resource type="Texture2D" uid="uid://dw40pv4knldwp" path="res://textures/Minigames/pie_toss/bg.png" id="2_qj3vy"]
 [ext_resource type="PackedScene" uid="uid://dsrd3wqccj5ef" path="res://minigames/pie_toss/target_spawner.tscn" id="3_gqa1v"]
 [ext_resource type="PackedScene" uid="uid://bgvr4fs2pd4m6" path="res://minigames/pie_toss/target_eraser.tscn" id="4_i7bwi"]
 
@@ -12,13 +13,21 @@ font_size = 64
 size = Vector2(100, 100)
 
 [node name="Easy" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_84ow2")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-ignore_rotation = false
+[node name="BG" type="Sprite2D" parent="."]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_qj3vy")
 
 [node name="P1 Shooter" parent="." instance=ExtResource("2_iu7kf")]
 position = Vector2(-325, 230)
+player = 1
+rotation_speed = 260.0
+minimum_rotation_angle = -35
+maximum_rotation_angle = 90
+cooldown = 0.2
+projectile_speed = 25.0
 score_label = NodePath("../P1 Label")
 
 [node name="P1 Label" type="Label" parent="."]
@@ -32,8 +41,11 @@ label_settings = SubResource("LabelSettings_1tx1x")
 [node name="P2 Shooter" parent="." instance=ExtResource("2_iu7kf")]
 position = Vector2(325, 230)
 player = 2
+rotation_speed = 260.0
 minimum_rotation_angle = -90
 maximum_rotation_angle = 35
+cooldown = 0.2
+projectile_speed = 25.0
 score_label = NodePath("../P2 Label")
 
 [node name="P2 Label" type="Label" parent="."]
@@ -58,8 +70,7 @@ horizontal_alignment = 1
 
 [node name="Target Spawner" parent="." instance=ExtResource("3_gqa1v")]
 position = Vector2(-736, -193)
-speed = 625.0
-chance = 8.0
+chance = 6.0
 
 [node name="Target Eraser" parent="." instance=ExtResource("4_i7bwi")]
 position = Vector2(696, -185)
@@ -76,9 +87,9 @@ shape = SubResource("RectangleShape2D_rghqp")
 [node name="Target Spawner2" parent="." instance=ExtResource("3_gqa1v")]
 position = Vector2(693, -94)
 rate = 0.15
-speed = 610.0
+speed = 580.0
 direction = Vector2(-1, 0)
-chance = 9.5
+chance = 5.0
 
 [node name="Target Eraser3" parent="." instance=ExtResource("4_i7bwi")]
 position = Vector2(-738, -287)
@@ -89,6 +100,9 @@ shape = SubResource("RectangleShape2D_rghqp")
 [node name="Target Spawner3" parent="." instance=ExtResource("3_gqa1v")]
 position = Vector2(693, -281)
 rate = 0.275
-speed = 590.0
+speed = 550.0
 direction = Vector2(-1, 0)
-chance = 5.5
+chance = 4.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false

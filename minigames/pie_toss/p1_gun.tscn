@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfau5lab531ul"]
+
+[ext_resource type="Texture2D" uid="uid://wjvoht62rhi8" path="res://textures/Minigames/pie_toss/P1/gun.png" id="1_uslnj"]
+
+[node name="Gun" type="Sprite2D"]
+texture = ExtResource("1_uslnj")
+region_enabled = true
+region_rect = Rect2(601, 618, 36, 39)

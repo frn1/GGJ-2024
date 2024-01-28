@@ -9,6 +9,7 @@ func _ready():
 		body.queue_free()
 		queue_free()
 	)
+	$Sprite2D.flip_h = direction.x > 0
 
 func _process(delta):
 	position += direction * speed * delta
