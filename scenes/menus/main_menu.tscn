@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://c8mq6bydhm3pg"]
+[gd_scene load_steps=17 format=3 uid="uid://c8mq6bydhm3pg"]
 
 [ext_resource type="Texture2D" uid="uid://48bfic2666ci" path="res://textures/Menus/Main menu/Buttons/Credits.png" id="1_0tsmy"]
-[ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/normal.tres" id="1_41hpj"]
+[ext_resource type="Theme" path="res://themes/theme.tres" id="1_41hpj"]
 [ext_resource type="Texture2D" uid="uid://dll44ysulo570" path="res://textures/Menus/Main menu/Buttons/Exit.png" id="2_krsf6"]
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="2_mtsju"]
 [ext_resource type="Texture2D" uid="uid://c8e1xxe112pqk" path="res://textures/Menus/Main menu/Buttons/Options.png" id="3_5notc"]
@@ -9,7 +9,9 @@
 [ext_resource type="Script" path="res://scripts/menus/main_menu/start.gd" id="5_i0smd"]
 [ext_resource type="Texture2D" uid="uid://bqyb57yq7orxy" path="res://textures/Menus/Main menu/Logo.png" id="5_mm2uk"]
 [ext_resource type="Texture2D" uid="uid://c8ru00b7eeov5" path="res://textures/Menus/Main menu/BG.PNG" id="6_ddcc2"]
+[ext_resource type="AudioStream" uid="uid://fpxedoirjdv6" path="res://sfx/Sound Effects/Menu/Menu Select Option _ Sound when selecting a option (mp3cut.net).wav" id="7_6p5m8"]
 [ext_resource type="Script" path="res://scripts/menus/main_menu/exit.gd" id="10_rlakn"]
+[ext_resource type="AudioStream" uid="uid://bhl024m5y5l04" path="res://sfx/Sound Effects/Menu/Menu-Pass-option-_-Sound-passing-the-option-to-another.wav" id="12_3mun4"]
 
 [sub_resource type="GDScript" id="GDScript_1abjt"]
 resource_name = "Curtain thingy"
@@ -59,6 +61,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+func _on_start_mouse_entered():
+	pass # Replace with function body.
 "
 
 [sub_resource type="GDScript" id="GDScript_jsv13"]
@@ -96,8 +102,38 @@ script/source = "extends Button
 
 var scene = preload(\"res://scenes/menus/options.tscn\")
 
+func _on_mouse_entered():
+	$HitSound.play()
+func _on_focus_entered():
+	$HitSound.play()
+
 func _pressed():
+	$AudioStreamPlayer2D.play()
+	await $AudioStreamPlayer2D.finished
 	get_node(\"/root/Main menu\").to_scene(scene)
+
+
+
+
+"
+
+[sub_resource type="GDScript" id="GDScript_c4xc0"]
+script/source = "extends Button
+
+
+func _on_mouse_entered():
+	$HitSound.play()
+	
+func _on_focus_entered():
+	$HitSound.play()
+
+func _pressed():
+	$AudioStreamPlayer2D.play()
+	await $AudioStreamPlayer2D.finished
+
+
+
+
 "
 
 [node name="Main menu" type="Control"]
@@ -176,6 +212,15 @@ icon = ExtResource("4_62glr")
 flat = true
 script = ExtResource("5_i0smd")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Animation thingy/HBoxContainer/Start"]
+position = Vector2(-50, -837.333)
+scale = Vector2(1.66667, 1.66667)
+stream = ExtResource("7_6p5m8")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Animation thingy/HBoxContainer/Start"]
+position = Vector2(-50, -4)
+stream = ExtResource("12_3mun4")
+
 [node name="Options" type="Button" parent="Animation thingy/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
@@ -187,6 +232,15 @@ icon = ExtResource("3_5notc")
 flat = true
 script = SubResource("GDScript_cgv56")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Animation thingy/HBoxContainer/Options"]
+position = Vector2(-50, -837.333)
+scale = Vector2(1.66667, 1.66667)
+stream = ExtResource("7_6p5m8")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Animation thingy/HBoxContainer/Options"]
+position = Vector2(-50, -4)
+stream = ExtResource("12_3mun4")
+
 [node name="Credits" type="Button" parent="Animation thingy/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
@@ -196,6 +250,16 @@ focus_neighbor_right = NodePath("../Exit")
 focus_previous = NodePath("../Exit")
 icon = ExtResource("1_0tsmy")
 flat = true
+script = SubResource("GDScript_c4xc0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Animation thingy/HBoxContainer/Credits"]
+position = Vector2(-50, -837.333)
+scale = Vector2(1.66667, 1.66667)
+stream = ExtResource("7_6p5m8")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Animation thingy/HBoxContainer/Credits"]
+position = Vector2(-50, -4)
+stream = ExtResource("12_3mun4")
 
 [node name="Exit" type="Button" parent="Animation thingy/HBoxContainer"]
 layout_mode = 2
@@ -206,3 +270,16 @@ focus_neighbor_right = NodePath("../Start")
 icon = ExtResource("2_krsf6")
 flat = true
 script = ExtResource("10_rlakn")
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="Animation thingy/HBoxContainer/Exit"]
+position = Vector2(-50, -4)
+stream = ExtResource("12_3mun4")
+
+[connection signal="focus_entered" from="Animation thingy/HBoxContainer/Start" to="Animation thingy/HBoxContainer/Start" method="_on_focus_entered"]
+[connection signal="mouse_entered" from="Animation thingy/HBoxContainer/Start" to="Animation thingy/HBoxContainer/Start" method="_on_mouse_entered"]
+[connection signal="focus_entered" from="Animation thingy/HBoxContainer/Options" to="Animation thingy/HBoxContainer/Options" method="_on_focus_entered"]
+[connection signal="mouse_entered" from="Animation thingy/HBoxContainer/Options" to="Animation thingy/HBoxContainer/Options" method="_on_mouse_entered"]
+[connection signal="focus_entered" from="Animation thingy/HBoxContainer/Credits" to="Animation thingy/HBoxContainer/Credits" method="_on_focus_entered"]
+[connection signal="mouse_entered" from="Animation thingy/HBoxContainer/Credits" to="Animation thingy/HBoxContainer/Credits" method="_on_mouse_entered"]
+[connection signal="focus_entered" from="Animation thingy/HBoxContainer/Exit" to="Animation thingy/HBoxContainer/Exit" method="_on_focus_entered"]
+[connection signal="mouse_entered" from="Animation thingy/HBoxContainer/Exit" to="Animation thingy/HBoxContainer/Exit" method="_on_mouse_entered"]
