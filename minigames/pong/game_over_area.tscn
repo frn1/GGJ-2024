@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bh0bo3lqkxbe1"]
+
+[ext_resource type="Script" path="res://scripts/minigames/pong/game_over_area.gd" id="1_c85m7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0omux"]
+size = Vector2(100, 648)
+
+[node name="Game Over Area" type="Area2D"]
+position = Vector2(-650, 0)
+script = ExtResource("1_c85m7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0omux")

@@ -21,7 +21,7 @@ var player = 1
 func generate_keys_for_player(player: int):
 	for node in get_node("Steps P" + str(player)).get_children():
 		node.free()
-	rng.randomize()
+	rng.seed = round(Time.get_unix_time_from_system() * 10)
 	next_action_index.resize(2)
 	next_action_index[player - 1] = 0
 	actions.resize(2)
@@ -30,7 +30,7 @@ func generate_keys_for_player(player: int):
 		# Gives A/Space a slightly higher chance
 		var button_chosen = Buttons.values().pick_random()
 		if button_chosen == Buttons.Action:
-			rng.randomize()
+			rng.seed = round(Time.get_unix_time_from_system() * 10)
 		actions[player - 1].push_back(button_chosen)
 	var next_x_pos = 0
 	for i in range(0, actions[player - 1].size()):

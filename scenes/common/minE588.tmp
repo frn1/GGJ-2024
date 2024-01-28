@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnxdmngub2oru"]
+[gd_scene load_steps=9 format=3 uid="uid://bnxdmngub2oru"]
 
 [ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
 [ext_resource type="Script" path="res://scripts/minigame_content.gd" id="2_qbsoi"]
@@ -6,7 +6,6 @@
 [ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/theme.tres" id="3_ok072"]
 [ext_resource type="Texture2D" uid="uid://b8ye40ywyr04c" path="res://textures/In-between/Minigame chooser/screen.png" id="4_1hw2o"]
 [ext_resource type="Texture2D" uid="uid://b3saxst5bud7w" path="res://textures/In-between/Minigame chooser/body.png" id="5_n1rli"]
-[ext_resource type="Texture2D" uid="uid://dhyan8yk1t522" path="res://textures/Minigames/tv.png" id="6_4uio0"]
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="6_aky51"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6btci"]
@@ -16,10 +15,6 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
 shadow_color = Color(0.431373, 0.431373, 0.431373, 0.843137)
 shadow_offset = Vector2(3, 2)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_k7a66"]
-a = Vector2(-240, -6)
-b = Vector2(240, -6)
 
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_2mr3c")
@@ -41,6 +36,8 @@ label_settings = SubResource("LabelSettings_6btci")
 
 [node name="Minigame chooser" type="Node2D" parent="."]
 script = ExtResource("3_m8bwc")
+spin_speed = null
+spin_time = null
 
 [node name="Screen" type="Sprite2D" parent="Minigame chooser"]
 position = Vector2(-17, 7)
@@ -53,36 +50,7 @@ region_rect = Rect2(571, 180, 721, 740)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_n1rli")
 
-[node name="Area2D" type="Area2D" parent="Minigame chooser"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Minigame chooser/Area2D"]
-shape = SubResource("SegmentShape2D_k7a66")
-
-[node name="TV" type="Sprite2D" parent="."]
-visible = false
-z_index = 1
-scale = Vector2(0.66, 0.6)
-texture = ExtResource("6_4uio0")
-
-[node name="Contents" type="SubViewportContainer" parent="TV"]
-z_as_relative = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1705.0
-offset_top = -948.0
-offset_right = -553.0
-offset_bottom = -300.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.106, 1.217)
-
-[node name="Viewport" type="SubViewport" parent="TV/Contents"]
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 0
+[node name="Contents" type="Node2D" parent="."]
 script = ExtResource("2_qbsoi")
 
 [node name="Curtain" type="Sprite2D" parent="."]

@@ -10,7 +10,7 @@ var bounces = 0
 func _ready():
 	get_tree().create_timer(1).timeout.connect(
 		func():
-			randomize()
+			seed(round(Time.get_unix_time_from_system() * 10))
 			direction = Vector2.RIGHT
 			if randf() < 0.5:
 				x_dir = 1

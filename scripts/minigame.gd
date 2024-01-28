@@ -6,8 +6,6 @@ extends Node2D
 @export_node_path("Node") var p1_laugh_bar = NodePath("../Life bars/Laugh bar P1")
 @export_node_path("Node") var p2_laugh_bar = NodePath("../Life bars/Laugh bar P2")
 
-@export_node_path("Node") var options = NodePath("Minigame chooser/Panel/Options")
-
 @export_category("Minigames")
 @export var minigame_folders: Array[String]
 
@@ -16,7 +14,6 @@ extends Node2D
 @export_range(0, 100, 0.01) var p2_points = 10.0
 
 @onready var in_between_node = get_node(in_between)
-@onready var options_node = get_node(options)
 
 @onready var p1_laugh_bar_node = get_node(p1_laugh_bar)
 @onready var p2_laugh_bar_node = get_node(p2_laugh_bar)
@@ -45,10 +42,6 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	p2_laugh_bar_node.hide()
 	$"Minigame chooser".hide()
 	
-	var old_viewport = get_viewport()
-	old_camera = old_viewport.get_camera_2d()
-	old_camera.enabled = false
-	
 	in_between_node.process_mode = PROCESS_MODE_DISABLED
 	in_between_node.hide()
 	
@@ -56,9 +49,11 @@ func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	var scene_index = clamp(floor(number_of_difficulties * difficulty), 0, number_of_difficulties)
 	var scene = minigame.scenes[scene_index].instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	
-	for child in $Contents.get_children():
+	for child in $TV/Contents/Viewport.get_children():
 		child.free()
-	$Contents.add_child(scene)
+	$TV/Contents/Viewport.add_child(scene)
+	
+	$TV.show()
 	
 	var timer: SceneTreeTimer = get_tree().create_timer(0.3)
 	timer.timeout.connect(
@@ -85,6 +80,8 @@ func load_minigame(minigame: Minigame, difficulty: float = 0.0):
 func after_curtains_enter_unload():
 	print("Unloading current minigame")
 	
+	$"Minigame chooser".generate_nodes()
+	
 	$Announcements.show()
 	p1_laugh_bar_node.show()
 	p2_laugh_bar_node.show()
@@ -93,12 +90,12 @@ func after_curtains_enter_unload():
 	in_between_node.process_mode = PROCESS_MODE_INHERIT
 	in_between_node.show()
 	
-	for child in $Contents.get_children():
+	for child in $TV/Contents/Viewport.get_children():
 		child.free()
 	
-	old_camera.enabled = true
-	
 	current_minigame = null
+	
+	$TV.hide()
 	
 	var timer: SceneTreeTimer = get_tree().create_timer(0.3)
 	timer.timeout.connect(
@@ -176,6 +173,13 @@ func end_minigame_callback(end_state: MinigameEndState):
 	p2_laugh_bar_node.points = p2_points
 
 func _ready():
+	var viewport_rect = get_viewport_rect()
+	var root_curtain = get_node("/root/Curtain")
+	root_curtain.position -= viewport_rect.size / 2 
+	var curtain_tween = create_tween()
+	curtain_tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
+	curtain_tween.tween_property(root_curtain, "position", initial_curtain_pos, 0.8)
+	curtain_tween.finished.connect(root_curtain.hide)
 	end_minigame.connect(end_minigame_callback)
 	p1_laugh_bar_node.points = p1_points
 	p2_laugh_bar_node.points = p2_points
@@ -198,24 +202,10 @@ func _ready():
 		minigames.push_back(minigame)
 		print("Loaded " + minigame.id)
 	
-	randomize()
+	seed(round(Time.get_unix_time_from_system() * 10))
 	
-	var nodes = []
-	for minigame in minigames:
-		var option_label = Label.new()
-		option_label.text = minigame.name
-		option_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		option_label.anchors_preset = Control.LayoutPreset.PRESET_TOP_WIDE
-		option_label.anchor_right = 1.0
-		option_label.set_meta("id", minigame.id)
-		#option_label.anchor_bottom = 1.0
-		option_label.position.y = 0
-		#option_label.modulate.a = 0
-		nodes.push_back(option_label)
-	nodes.shuffle()
-	
-	for node in nodes:
-		options_node.add_child(node)
+	$"Minigame chooser".load_minigames(minigames)
+	$"Minigame chooser".generate_nodes()
 
 func _process(_delta):
 	p1_laugh_bar_node.points = p1_points
@@ -223,7 +213,11 @@ func _process(_delta):
 
 func _input(_event):
 	if OS.is_debug_build():
-		if Input.is_key_pressed(KEY_Z):
+		if Input.is_key_pressed(KEY_1):
+			load_minigame(minigames[0], 0)
+		elif Input.is_key_pressed(KEY_2):
+			load_minigame(minigames[1], 0)
+		elif Input.is_key_pressed(KEY_3):
 			load_minigame(minigames[2], 0)
 		elif Input.is_key_pressed(KEY_X):
 			unload_minigame()

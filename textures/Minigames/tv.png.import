@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbxpch1wt50ci"
-path="res://.godot/imported/icon.png-94372f2c48f7bc596b6799161daedf73.ctex"
+uid="uid://dhyan8yk1t522"
+path="res://.godot/imported/tv.png-fd453afd39e7aa783cf42c3b53b616f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/In-between/Laugh bar/Left/icon.png"
-dest_files=["res://.godot/imported/icon.png-94372f2c48f7bc596b6799161daedf73.ctex"]
+source_file="res://textures/Minigames/tv.png"
+dest_files=["res://.godot/imported/tv.png-fd453afd39e7aa783cf42c3b53b616f5.ctex"]
 
 [params]
 

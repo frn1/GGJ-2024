@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdvfov0xe15ha"]
+[gd_scene load_steps=8 format=3 uid="uid://bdvfov0xe15ha"]
 
 [ext_resource type="PackedScene" uid="uid://cvrtyie6oq5ef" path="res://minigames/pong/player.tscn" id="1_id8no"]
 [ext_resource type="Texture2D" uid="uid://boatys6qbauok" path="res://icon.svg" id="1_qs3sx"]
 [ext_resource type="Script" path="res://scripts/minigames/pong/ball.gd" id="2_nfbx0"]
+[ext_resource type="PackedScene" uid="uid://bh0bo3lqkxbe1" path="res://minigames/pong/game_over_area.tscn" id="4_55rmh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lfakm"]
 radius = 20.0
@@ -44,3 +45,9 @@ shape = SubResource("WorldBoundaryShape2D_rla13")
 [node name="Top" type="CollisionShape2D" parent="World Boundaries"]
 position = Vector2(0, -324)
 shape = SubResource("WorldBoundaryShape2D_ivhfo")
+
+[node name="Game Over Area P1" parent="." instance=ExtResource("4_55rmh")]
+
+[node name="Game Over Area P2" parent="." instance=ExtResource("4_55rmh")]
+position = Vector2(650, 0)
+player_that_loses = 2

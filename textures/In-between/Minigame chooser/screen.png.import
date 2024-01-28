@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbxpch1wt50ci"
-path="res://.godot/imported/icon.png-94372f2c48f7bc596b6799161daedf73.ctex"
+uid="uid://b8ye40ywyr04c"
+path="res://.godot/imported/screen.png-8b2834ad34773cde15697b22c45a3dd7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/In-between/Laugh bar/Left/icon.png"
-dest_files=["res://.godot/imported/icon.png-94372f2c48f7bc596b6799161daedf73.ctex"]
+source_file="res://textures/In-between/Minigame chooser/screen.png"
+dest_files=["res://.godot/imported/screen.png-8b2834ad34773cde15697b22c45a3dd7.ctex"]
 
 [params]
 

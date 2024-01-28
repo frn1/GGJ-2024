@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cwdxwegsrbbu4"
-path="res://.godot/imported/icon.PNG-90df5b318aa264939ea5923690b76290.ctex"
+path="res://.godot/imported/icon.PNG-a3f36ca066d3fe9dc344852fad61de18.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/In-between/Laugh Bar/Right/icon.PNG"
-dest_files=["res://.godot/imported/icon.PNG-90df5b318aa264939ea5923690b76290.ctex"]
+source_file="res://textures/In-between/Laugh bar/Right/icon.PNG"
+dest_files=["res://.godot/imported/icon.PNG-a3f36ca066d3fe9dc344852fad61de18.ctex"]
 
 [params]
 

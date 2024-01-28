@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://x7iwnyceiftd"]
+[gd_scene load_steps=7 format=3 uid="uid://d25ymr0c5hp8s"]
 
 [ext_resource type="Script" path="res://scripts/minigames/pie_toss/game.gd" id="1_84ow2"]
 [ext_resource type="PackedScene" uid="uid://drvumps04cxms" path="res://minigames/pie_toss/shooter.tscn" id="2_iu7kf"]
@@ -15,6 +15,7 @@ size = Vector2(100, 100)
 script = ExtResource("1_84ow2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+ignore_rotation = false
 
 [node name="P1 Shooter" parent="." instance=ExtResource("2_iu7kf")]
 position = Vector2(-325, 230)

@@ -1,25 +1,25 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfumfrwfsko6q"]
 
-[ext_resource type="PackedScene" uid="uid://b4vxdc4lt4026" path="res://scenes/in_between/in_between.tscn" id="2_edkka"]
-[ext_resource type="Texture2D" uid="uid://ciqkar7f3byq0" path="res://textures/In-between/Laugh Bar/Left/fill.png" id="3_7jvn2"]
-[ext_resource type="Texture2D" uid="uid://eqlt8yhy8l67" path="res://textures/In-between/Laugh Bar/Left/bar.png" id="3_n5k56"]
-[ext_resource type="PackedScene" uid="uid://bnxdmngub2oru" path="res://scenes/common/minigame.tscn" id="3_sbcpi"]
-[ext_resource type="Texture2D" uid="uid://dbxpch1wt50ci" path="res://textures/In-between/Laugh Bar/Left/icon.png" id="4_um4l8"]
-[ext_resource type="Script" path="res://scripts/laugh_bar.gd" id="5_ns83b"]
+[ext_resource type="PackedScene" uid="uid://b4vxdc4lt4026" path="res://scenes/in_between/in_between.tscn" id="1_bec7x"]
+[ext_resource type="Script" path="res://scripts/laugh_bar.gd" id="2_v2k6b"]
+[ext_resource type="Texture2D" uid="uid://ciqkar7f3byq0" path="res://textures/In-between/Laugh bar/Left/fill.png" id="3_dqahk"]
+[ext_resource type="Texture2D" uid="uid://eqlt8yhy8l67" path="res://textures/In-between/Laugh bar/Left/bar.png" id="4_uxopw"]
+[ext_resource type="Texture2D" uid="uid://dbxpch1wt50ci" path="res://textures/In-between/Laugh bar/Left/icon.png" id="5_qlvsp"]
+[ext_resource type="PackedScene" uid="uid://bnxdmngub2oru" path="res://scenes/common/minigame.tscn" id="6_gjwou"]
 
 [node name="Game" type="Node2D"]
 
-[node name="In-between" parent="." instance=ExtResource("2_edkka")]
+[node name="In-between" parent="." instance=ExtResource("1_bec7x")]
 
 [node name="Life bars" type="Node2D" parent="."]
 
 [node name="Laugh bar P1" type="Node2D" parent="Life bars"]
-script = ExtResource("5_ns83b")
+script = ExtResource("2_v2k6b")
 
 [node name="Fill" type="Sprite2D" parent="Life bars/Laugh bar P1"]
 position = Vector2(-576, -324)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("3_7jvn2")
+texture = ExtResource("3_dqahk")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 192, 1080)
@@ -27,20 +27,20 @@ region_filter_clip_enabled = true
 
 [node name="Bar" type="Sprite2D" parent="Life bars/Laugh bar P1"]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("3_n5k56")
+texture = ExtResource("4_uxopw")
 
 [node name="Icon" type="Sprite2D" parent="Life bars/Laugh bar P1"]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("4_um4l8")
+texture = ExtResource("5_qlvsp")
 
 [node name="Laugh bar P2" type="Node2D" parent="Life bars"]
 visible = false
-script = ExtResource("5_ns83b")
+script = ExtResource("2_v2k6b")
 
 [node name="Fill" type="Sprite2D" parent="Life bars/Laugh bar P2"]
 position = Vector2(-576, -324)
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("3_7jvn2")
+texture = ExtResource("3_dqahk")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 192, 1080)
@@ -48,12 +48,12 @@ region_filter_clip_enabled = true
 
 [node name="Bar2" type="Sprite2D" parent="Life bars/Laugh bar P2"]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("3_n5k56")
+texture = ExtResource("4_uxopw")
 
 [node name="Icon2" type="Sprite2D" parent="Life bars/Laugh bar P2"]
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("4_um4l8")
+texture = ExtResource("5_qlvsp")
 
-[node name="Minigame" parent="." instance=ExtResource("3_sbcpi")]
+[node name="Minigame" parent="." instance=ExtResource("6_gjwou")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
