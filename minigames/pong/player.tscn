@@ -1,33 +1,31 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvrtyie6oq5ef"]
+[gd_scene load_steps=7 format=3 uid="uid://cvrtyie6oq5ef"]
 
 [ext_resource type="Script" path="res://scripts/minigames/pong/player.gd" id="1_7ts3y"]
-[ext_resource type="Texture2D" uid="uid://boatys6qbauok" path="res://icon.svg" id="2_sgg2l"]
+[ext_resource type="Texture2D" uid="uid://cwc48xnag1a72" path="res://textures/Minigames/pong/player.png" id="2_82yq8"]
 [ext_resource type="Texture2D" uid="uid://gsmopmoro6dc" path="res://textures/Controller Icons/Wii Horizontal/up.png" id="3_qxy5w"]
 [ext_resource type="Script" path="res://scripts/dissapear_after_some_seconds.tres.gd" id="4_n685l"]
 [ext_resource type="Texture2D" uid="uid://daja7dvr7km2v" path="res://textures/Controller Icons/Wii Horizontal/down.png" id="4_xechf"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_ecv4x"]
-a = Vector2(-16, -75)
-b = Vector2(-16, 75)
-
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3ou6t"]
-a = Vector2(16, -75)
-b = Vector2(16, 75)
+a = Vector2(0, -72)
+b = Vector2(0, 72)
 
 [node name="Player" type="StaticBody2D"]
 script = ExtResource("1_7ts3y")
 metadata/is_player = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.65)
-texture = ExtResource("2_sgg2l")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_82yq8")
+region_enabled = true
+region_rect = Rect2(337, 336, 40, 293)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
-shape = SubResource("SegmentShape2D_ecv4x")
+[node name="Right collider" type="CollisionShape2D" parent="."]
+position = Vector2(10, 0)
+shape = SubResource("SegmentShape2D_3ou6t")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.5)
+[node name="Left Collider" type="CollisionShape2D" parent="."]
+position = Vector2(-10, 0)
 shape = SubResource("SegmentShape2D_3ou6t")
 
 [node name="UpPrompt" type="Sprite2D" parent="."]

@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdvfov0xe15ha"]
+[gd_scene load_steps=9 format=3 uid="uid://bdvfov0xe15ha"]
 
+[ext_resource type="Texture2D" uid="uid://bfmxooffo3g00" path="res://textures/Minigames/pong/bg.png" id="1_8pbq8"]
 [ext_resource type="PackedScene" uid="uid://cvrtyie6oq5ef" path="res://minigames/pong/player.tscn" id="1_id8no"]
-[ext_resource type="Texture2D" uid="uid://boatys6qbauok" path="res://icon.svg" id="1_qs3sx"]
 [ext_resource type="Script" path="res://scripts/minigames/pong/ball.gd" id="2_nfbx0"]
+[ext_resource type="Texture2D" uid="uid://dlki3pgjmheek" path="res://textures/Minigames/pong/ball.png" id="3_hdoxh"]
 [ext_resource type="PackedScene" uid="uid://bh0bo3lqkxbe1" path="res://minigames/pong/game_over_area.tscn" id="4_55rmh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lfakm"]
-radius = 20.0
+radius = 43.0465
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rla13"]
 
@@ -15,7 +16,11 @@ normal = Vector2(0, 1)
 
 [node name="Game" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="BG" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_8pbq8")
+region_enabled = true
+region_rect = Rect2(174, 88, 1349, 902)
 
 [node name="Player 1" parent="." instance=ExtResource("1_id8no")]
 position = Vector2(-530, 0)
@@ -26,15 +31,17 @@ player = 2
 
 [node name="Ball" type="CharacterBody2D" parent="."]
 process_mode = 3
-process_priority = 2
+scale = Vector2(0.5, 0.5)
 script = ExtResource("2_nfbx0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
 shape = SubResource("CircleShape2D_lfakm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ball"]
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("1_qs3sx")
+texture = ExtResource("3_hdoxh")
+offset = Vector2(15, -4)
+region_enabled = true
+region_rect = Rect2(46, 42, 115, 94)
 
 [node name="World Boundaries" type="StaticBody2D" parent="."]
 
@@ -51,3 +58,5 @@ shape = SubResource("WorldBoundaryShape2D_ivhfo")
 [node name="Game Over Area P2" parent="." instance=ExtResource("4_55rmh")]
 position = Vector2(650, 0)
 player_that_loses = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]

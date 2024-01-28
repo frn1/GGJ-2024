@@ -18,6 +18,9 @@ func _ready():
 				x_dir = -1
 	)
 
+func _process(delta):
+	rotation += deg_to_rad(130) * delta * x_dir * -1 * ((speed - 400) / 50 + 1)
+
 func _physics_process(delta):
 	var motion = direction * speed * delta
 	var collision = move_and_collide(motion)
