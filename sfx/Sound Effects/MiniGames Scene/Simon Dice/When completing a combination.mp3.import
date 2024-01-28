@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dejamcfc3syn3"
+path="res://.godot/imported/When completing a combination.mp3-7c9cda051c7b6576c106f1bc976600b8.mp3str"
+
+[deps]
+
+source_file="res://sfx/Sound Effects/MiniGames Scene/Simon Dice/When completing a combination.mp3"
+dest_files=["res://.godot/imported/When completing a combination.mp3-7c9cda051c7b6576c106f1bc976600b8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

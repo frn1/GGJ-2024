@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b7vin1f6lp1qi"
+path="res://.godot/imported/Old Film Sound _ For the panel explaining the minigames.mp3-1e952ae35801a74127a56007fd74e460.mp3str"
+
+[deps]
+
+source_file="res://sfx/Sound Effects/MiniGames Scene/Tutoriales/Old Film Sound _ For the panel explaining the minigames.mp3"
+dest_files=["res://.godot/imported/Old Film Sound _ For the panel explaining the minigames.mp3-1e952ae35801a74127a56007fd74e460.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

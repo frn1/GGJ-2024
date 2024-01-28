@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bdd57rstm6oa7"
+path="res://.godot/imported/Button Click _ Plantarse.mp3-16742e5e7e123b4bfa3712d6e90cddd4.mp3str"
+
+[deps]
+
+source_file="res://sfx/Sound Effects/MiniGames Scene/BlackJack/Button Click _ Plantarse.mp3"
+dest_files=["res://.godot/imported/Button Click _ Plantarse.mp3-16742e5e7e123b4bfa3712d6e90cddd4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

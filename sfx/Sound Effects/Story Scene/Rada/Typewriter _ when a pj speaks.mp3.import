@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://buiyffajjh0uo"
+path="res://.godot/imported/Typewriter _ when a pj speaks.mp3-09c6be3f8d62209042ceaefa56647360.mp3str"
+
+[deps]
+
+source_file="res://sfx/Sound Effects/Story Scene/Rada/Typewriter _ when a pj speaks.mp3"
+dest_files=["res://.godot/imported/Typewriter _ when a pj speaks.mp3-09c6be3f8d62209042ceaefa56647360.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

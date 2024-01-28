@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://drhrou4a0pg7b"
+path="res://.godot/imported/Sound when hitting the Bomb.mp3-12d712958acea72509789bb7b5c70d50.mp3str"
+
+[deps]
+
+source_file="res://sfx/Sound Effects/MiniGames Scene/Ping Pong Bomba/Sound when hitting the Bomb.mp3"
+dest_files=["res://.godot/imported/Sound when hitting the Bomb.mp3-12d712958acea72509789bb7b5c70d50.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

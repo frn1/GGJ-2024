@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://owd3c08ele06"
+path="res://.godot/imported/Draw a card.mp3-64490e4004bf87018d5ec991530dae20.mp3str"
+
+[deps]
+
+source_file="res://sfx/Sound Effects/MiniGames Scene/BlackJack/Draw a card.mp3"
+dest_files=["res://.godot/imported/Draw a card.mp3-64490e4004bf87018d5ec991530dae20.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
