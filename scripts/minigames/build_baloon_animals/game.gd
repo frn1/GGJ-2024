@@ -33,6 +33,8 @@ func generate_keys_for_player(player: int):
 			rng.seed = round(Time.get_unix_time_from_system() * 10)
 		actions[player - 1].push_back(button_chosen)
 	var next_x_pos = 0
+	if player == 2:
+		next_x_pos = -(ResourceLoader.load(Controller.find_tex_path_for_action("action", player)) as Texture2D).get_width() * 4
 	for i in range(0, actions[player - 1].size()):
 		var action = actions[player - 1][i]
 		var path = ""
@@ -51,12 +53,14 @@ func generate_keys_for_player(player: int):
 		sprite.name = str(i)
 		sprite.texture = ResourceLoader.load(path)
 		sprite.position.x += next_x_pos
-		next_x_pos += sprite.get_rect().size.x
+		next_x_pos += sprite.texture.get_width()
 		get_node("Steps P" + str(player)).add_child(sprite)
 
 var start_time: float
 
 func _ready():
+	$"P1 Face".hide()
+	$"P2 Face".hide()
 	rng = RandomNumberGenerator.new()
 	generate_keys_for_player(1)
 	generate_keys_for_player(2)
@@ -67,7 +71,7 @@ var minigame_ended = false
 
 func _process(_delta):
 	var remaining_time = maxf(minigame_duration - (Time.get_ticks_usec() / 1e+6 - start_time), 0.0)
-	$Time.text = "%.2f s" % remaining_time
+	$Timer/Time.text = "%04.1fs" % remaining_time
 	if is_zero_approx(remaining_time):
 		if minigame_ended:
 			return
@@ -94,10 +98,14 @@ func _process(_delta):
 		scores[0] += 1
 		$"Points P1".text = str(scores[0])
 		generate_keys_for_player(1)
+		$"P1 Face".show()
+		get_tree().create_timer(0.5).timeout.connect($"P1 Face".hide)
 	if next_action_index[1] == 5:
 		scores[1] += 1
 		$"Points P2".text = str(scores[1])
 		generate_keys_for_player(2)
+		$"P2 Face".show()
+		get_tree().create_timer(0.5).timeout.connect($"P2 Face".hide)
 
 func _input(event):
 	if event.is_action_pressed(Controller.format_action_id("action", 1)):

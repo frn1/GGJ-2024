@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://wwo304pa8hp2"]
+
+[ext_resource type="FontFile" uid="uid://b1hs271m2ly5k" path="res://themes/fonts/Amita/Amita-Regular.ttf" id="1_doied"]
+[ext_resource type="StyleBox" uid="uid://swfqk6wliweq" path="res://themes/focused.tres" id="2_ws77v"]
+[ext_resource type="FontFile" uid="uid://dfb83cds5dchv" path="res://themes/fonts/Amita/Amita-Bold.ttf" id="3_lgarb"]
+
+[resource]
+default_font_size = 24
+Button/fonts/font = ExtResource("1_doied")
+Button/styles/focus = ExtResource("2_ws77v")
+Label/fonts/font = ExtResource("1_doied")
+LineEdit/fonts/font = ExtResource("1_doied")
+MenuBar/fonts/font = ExtResource("1_doied")
+MenuButton/fonts/font = ExtResource("1_doied")
+PopupMenu/fonts/font = ExtResource("1_doied")
+ProgressBar/fonts/font = ExtResource("1_doied")
+TabBar/fonts/font = ExtResource("1_doied")
+TabContainer/fonts/font = ExtResource("1_doied")
+TextEdit/fonts/font = ExtResource("1_doied")
+Tree/fonts/font = ExtResource("1_doied")
+Tree/fonts/title_button_font = ExtResource("3_lgarb")

@@ -5,6 +5,7 @@ extends Area2D
 const Minigame = preload("res://scripts/minigame.gd")
 
 func on_body_entered(body: Node2D):
+	await get_tree().create_timer(0.5).timeout
 	if body is CharacterBody2D:
 		match player_that_loses:
 			1:

@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://wwo304pa8hp2"]
-
-[ext_resource type="StyleBox" uid="uid://swfqk6wliweq" path="res://themes/focused.tres" id="1_smllr"]
-
-[resource]
-default_font_size = 24
-Button/styles/focus = ExtResource("1_smllr")

@@ -39,6 +39,11 @@ project/assembly_name="GGJ 2024"
 
 movie_writer/movie_file="C:/Users/torre/Documents/Godot Games/GGJ 2024/output/clip.avi"
 
+[gui]
+
+theme/custom="res://themes/normal.tres"
+theme/default_font_antialiasing=2
+
 [input]
 
 ui_accept={

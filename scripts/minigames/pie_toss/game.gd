@@ -25,4 +25,4 @@ func _process(_delta):
 			get_parent().end_minigame(Minigame.MinigameEndState.Tie)
 		minigame_ended = true
 		return
-	$Timer.text = "%.2f" % remaining_time
+	$Timer/Timer.text = "%04.1fs" % remaining_time

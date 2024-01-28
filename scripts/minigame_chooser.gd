@@ -13,6 +13,9 @@ func get_time_secs() -> float:
 @onready var screen: Sprite2D = $Screen
 @onready var size = screen.get_rect().size
 
+@export var button_texture: Texture = preload("res://textures/In-between/Minigame chooser/button.png")
+@export var button_pressed_texture: Texture = preload("res://textures/In-between/Minigame chooser/button pressed.png")
+
 const Minigame = preload("res://scripts/minigame.gd")
 
 var minigames: Array[Minigame.Minigame]
@@ -28,14 +31,22 @@ func load_minigames(minigame_list: Array[Minigame.Minigame]):
 	minigames.shuffle()
 
 func generate_nodes():
+	for connection in $Area2D.area_entered.get_connections():
+		$Area2D.area_entered.disconnect(connection["callable"])
+	$Area2D.area_entered.connect(
+		func(area: Area2D):
+			if area.has_meta("id"):
+				selected_id = area.get_meta("id")
+				print(selected_id)
+	)
+	$Button.texture = button_texture
 	for child in $Screen.get_children(true):
-		child.remove_meta("id")
 		$Screen.remove_child(child)
 		child.queue_free()
 	var nodes = []
 	var label_settings = LabelSettings.new()
 	label_settings.font_color = Color.BLACK
-	label_settings.font_size = 32
+	label_settings.font_size = 40
 	var minigame_height = size.y / minigames.size()
 	for i in range(0, minigames.size()):
 		var minigame = minigames[i]
@@ -89,14 +100,18 @@ func generate_nodes():
 	for node in nodes:
 		$Screen.add_child(node)
 
+var enabled = true
+
 func start_spin():
 	if spinning == true:
 		push_error("Attempted to start spin animation while still spinning")
 		return
 	spinning = true
+	enabled = false
+	$Button.texture = button_pressed_texture
 	speed_mul = 1.0
 	seed(round(Time.get_ticks_usec() * 100))
-	get_tree().create_timer(4.5 + randf_range(0, 2)).timeout.connect(
+	get_tree().create_timer(4.5).timeout.connect(
 		func():
 			var tween = create_tween()
 			tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
@@ -125,19 +140,18 @@ func start_spin():
 var selected_id
 
 func _ready():
-	$Area2D.area_entered.connect(
-		func(area: Area2D):
-			var parent = area
-			if parent.has_meta("id"):
-				selected_id = parent.get_meta("id")
-				print(selected_id)
-	)
-	#$Button.pressed.connect()
+	$Button.texture = button_pressed_texture
+	await get_tree().create_timer(2.0).timeout
+	$Button.texture = button_texture
 	pass # Replace with function body.
 
 func _input(event):
-	if Input.is_key_pressed(KEY_C):
-		start_spin()
+	if Input.is_action_pressed(Controller.format_action_id("action", 1)) || Input.is_action_pressed(Controller.format_action_id("action", 2)):
+		$Button.texture = button_pressed_texture
+		if enabled == true:
+			start_spin()
+	else:
+		$Button.texture = button_texture
 
 func _process(delta):
 	var height = size.y

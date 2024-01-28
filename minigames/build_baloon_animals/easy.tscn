@@ -1,71 +1,84 @@
-[gd_scene load_steps=7 format=3 uid="uid://dh2b146dtta4h"]
+[gd_scene load_steps=11 format=3 uid="uid://dh2b146dtta4h"]
 
 [ext_resource type="Script" path="res://scripts/minigames/build_baloon_animals/game.gd" id="1_u4xg5"]
+[ext_resource type="Texture2D" uid="uid://bn27bgc4cva5" path="res://textures/Minigames/build_baloon_animals/bg.png" id="2_7mihe"]
 [ext_resource type="Texture2D" uid="uid://bmlpthqx6mjso" path="res://textures/Minigames/build_baloon_animals/face.png" id="2_l7ny2"]
+[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="2_sqk51"]
 [ext_resource type="Texture2D" uid="uid://coafie6eub0mb" path="res://textures/Minigames/build_baloon_animals/left.png" id="3_145cb"]
 [ext_resource type="Texture2D" uid="uid://b1s6r5uhlvlov" path="res://textures/Minigames/build_baloon_animals/right.png" id="4_kqti5"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_qcek1"]
-font_size = 64
+[ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="7_4lrbi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e1de0"]
 font_size = 100
+outline_size = 15
+outline_color = Color(0.0980392, 0.207843, 0.180392, 1)
+
+[sub_resource type="GDScript" id="GDScript_otpv1"]
+resource_name = "Hand animation"
+script/source = "extends Sprite2D
+
+
+var original_pos: Vector2 = position
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Time.get_ticks_msec() % 130 < 130 / 2:
+		position = original_pos
+	else:
+		var new_pos = original_pos
+		new_pos.y -= 20
+		position = new_pos
+	pass
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_2v0r5"]
+font_size = 50
+outline_size = 8
+outline_color = Color(0.211765, 0.388235, 0.588235, 1)
 
 [node name="Easy" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_u4xg5")
 
-[node name="Time" type="Label" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -150.0
-offset_top = -320.0
-offset_right = 150.0
-offset_bottom = -183.0
-grow_horizontal = 2
-text = "tiempo"
-label_settings = SubResource("LabelSettings_qcek1")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("2_7mihe")
+offset = Vector2(100.5, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Steps P1" type="Node2D" parent="."]
 texture_filter = 2
-position = Vector2(-510, 150)
+position = Vector2(-480, 150)
 
 [node name="Steps P2" type="Node2D" parent="."]
 texture_filter = 2
-position = Vector2(115, 150)
+position = Vector2(480, 150)
 
 [node name="Points P1" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -240.0
-offset_right = -25.0
-grow_horizontal = 2
-grow_vertical = 2
+texture_filter = 1
+offset_left = -550.0
+offset_top = -324.0
+offset_right = -370.0
+offset_bottom = -204.0
+theme = ExtResource("2_sqk51")
 text = "0"
 label_settings = SubResource("LabelSettings_e1de0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Points P2" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 37.0
-offset_top = -240.0
-offset_right = 162.0
-grow_horizontal = 2
-grow_vertical = 2
+texture_filter = 1
+offset_left = 370.0
+offset_top = -324.0
+offset_right = 550.0
+offset_bottom = -204.0
+pivot_offset = Vector2(180, 0)
+theme = ExtResource("2_sqk51")
 text = "0"
 label_settings = SubResource("LabelSettings_e1de0")
 horizontal_alignment = 1
@@ -78,18 +91,20 @@ region_enabled = true
 region_rect = Rect2(458, 258, 187, 277)
 
 [node name="Left" type="Sprite2D" parent="P1 Face"]
-position = Vector2(-100, 100)
+position = Vector2(-115, 100)
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("3_145cb")
 region_enabled = true
 region_rect = Rect2(382, 417, 85, 121)
+script = SubResource("GDScript_otpv1")
 
 [node name="Right" type="Sprite2D" parent="P1 Face"]
-position = Vector2(100, 100)
+position = Vector2(115, 100)
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("4_kqti5")
 region_enabled = true
 region_rect = Rect2(642, 417, 85, 121)
+script = SubResource("GDScript_otpv1")
 
 [node name="P2 Face" type="Sprite2D" parent="."]
 position = Vector2(300, -140)
@@ -98,15 +113,43 @@ region_enabled = true
 region_rect = Rect2(458, 258, 187, 277)
 
 [node name="Left" type="Sprite2D" parent="P2 Face"]
-position = Vector2(-100, 100)
+position = Vector2(-115, 100)
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("3_145cb")
 region_enabled = true
 region_rect = Rect2(382, 417, 85, 121)
+script = SubResource("GDScript_otpv1")
 
 [node name="Right" type="Sprite2D" parent="P2 Face"]
-position = Vector2(100, 100)
+position = Vector2(115, 100)
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("4_kqti5")
 region_enabled = true
 region_rect = Rect2(642, 417, 85, 121)
+script = SubResource("GDScript_otpv1")
+
+[node name="Timer" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -224)
+texture = ExtResource("7_4lrbi")
+region_enabled = true
+region_rect = Rect2(791, 763, 189, 112)
+
+[node name="Time" type="Label" parent="Timer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.5
+offset_top = -100.0
+offset_right = -19.5
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(180, 0)
+theme = ExtResource("2_sqk51")
+text = "0"
+label_settings = SubResource("LabelSettings_2v0r5")
+horizontal_alignment = 1
+vertical_alignment = 1

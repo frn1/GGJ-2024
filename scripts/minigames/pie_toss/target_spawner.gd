@@ -23,6 +23,7 @@ func timer_timeout():
 	target_node.direction = direction
 	target_node.global_position = global_position
 	target_node.speed = speed
+	target_node.texture_filter = TEXTURE_FILTER_NEAREST
 	get_parent().add_child.call_deferred(target_node)
 
 func _ready():

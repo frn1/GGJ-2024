@@ -1,51 +1,61 @@
-[gd_scene load_steps=9 format=3 uid="uid://drvumps04cxms"]
+[gd_scene load_steps=10 format=3 uid="uid://drvumps04cxms"]
 
 [ext_resource type="Script" path="res://scripts/minigames/pie_toss/shooter.gd" id="1_litlf"]
-[ext_resource type="Texture2D" uid="uid://cpvnu45craxw" path="res://textures/Controller Icons/_Arrows/Directional_Arrow_Full_Circle.png" id="2_fw5af"]
-[ext_resource type="PackedScene" uid="uid://cnoyp0ujpjrvh" path="res://minigames/pie_toss/projectile.tscn" id="2_wmxtn"]
 [ext_resource type="Script" path="res://scripts/dissapear_after_some_seconds.tres.gd" id="3_a6gej"]
+[ext_resource type="Texture2D" uid="uid://cd4gwte3horur" path="res://textures/Minigames/pie_toss/ccw arrow.png" id="3_m7mm3"]
 [ext_resource type="Texture2D" uid="uid://ck73dccxe6mbt" path="res://textures/Controller Icons/Keyboard/P1/left.png" id="3_m82rk"]
 [ext_resource type="Texture2D" uid="uid://ft3gona433xd" path="res://textures/Controller Icons/Keyboard/P1/right.png" id="4_kvomd"]
 [ext_resource type="Texture2D" uid="uid://dxwosej8vw4kg" path="res://textures/Controller Icons/Keyboard/P1/action.png" id="5_qfm3v"]
+[ext_resource type="Texture2D" uid="uid://bp74di50w4rqh" path="res://textures/Minigames/pie_toss/cw arrow.png" id="6_legmq"]
 [ext_resource type="PackedScene" uid="uid://dfau5lab531ul" path="res://minigames/pie_toss/p1_gun.tscn" id="8_4d67i"]
+[ext_resource type="Texture2D" uid="uid://8yo1a6t2w8be" path="res://textures/Minigames/pie_toss/body.png" id="9_hjn5l"]
 
 [node name="Shooter" type="Node2D"]
 script = ExtResource("1_litlf")
-projectile = ExtResource("2_wmxtn")
 
 [node name="CCWArrow" type="Sprite2D" parent="."]
-texture_filter = 2
-position = Vector2(-70, 20)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_fw5af")
+texture_filter = 1
+position = Vector2(-90, -60)
+rotation = -0.698132
+texture = ExtResource("3_m7mm3")
 flip_h = true
 flip_v = true
+region_enabled = true
+region_rect = Rect2(45, 46, 73, 68)
 script = ExtResource("3_a6gej")
 free_after_dissapearing = true
 
 [node name="Prompt" type="Sprite2D" parent="CCWArrow"]
 texture_filter = 2
-scale = Vector2(0.8, 0.8)
+position = Vector2(16, -5)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("3_m82rk")
 
 [node name="CWArrow" type="Sprite2D" parent="."]
-texture_filter = 2
-position = Vector2(70, 20)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_fw5af")
+texture_filter = 1
+position = Vector2(90, -60)
+rotation = 0.698132
+texture = ExtResource("6_legmq")
+flip_h = true
 flip_v = true
 script = ExtResource("3_a6gej")
 free_after_dissapearing = true
 
 [node name="Prompt" type="Sprite2D" parent="CWArrow"]
 texture_filter = 2
-scale = Vector2(0.8, 0.8)
+position = Vector2(-15, -11)
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("4_kvomd")
+
+[node name="Body" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("9_hjn5l")
+
+[node name="Gun" parent="." instance=ExtResource("8_4d67i")]
 
 [node name="PromptShoot" type="Sprite2D" parent="."]
 texture_filter = 2
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_qfm3v")
-
-[node name="Gun" parent="." instance=ExtResource("8_4d67i")]
-position = Vector2(0, -60)
+script = ExtResource("3_a6gej")
+free_after_dissapearing = true

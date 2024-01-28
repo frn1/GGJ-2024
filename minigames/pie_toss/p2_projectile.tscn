@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://wrhwyqg7q1fo"]
+
+[ext_resource type="Script" path="res://scripts/minigames/pie_toss/projectile.gd" id="1_1jktq"]
+[ext_resource type="Texture2D" uid="uid://cuw4s78hm8hhu" path="res://textures/Minigames/pie_toss/P2/bullet.png" id="2_y2pjs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8e3iq"]
+size = Vector2(36, 40)
+
+[node name="Projectile" type="CharacterBody2D"]
+process_priority = 15
+process_physics_priority = 15
+texture_filter = 1
+script = ExtResource("1_1jktq")
+
+[node name="Texture" type="Sprite2D" parent="."]
+texture = ExtResource("2_y2pjs")
+region_enabled = true
+region_rect = Rect2(1070, 617, 36, 39)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8e3iq")

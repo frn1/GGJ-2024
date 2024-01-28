@@ -85,7 +85,7 @@ func after_curtains_enter_unload():
 	$Announcements.show()
 	p1_laugh_bar_node.show()
 	p2_laugh_bar_node.show()
-	$"Minigame chooser".show()
+	$"Minigame chooser".enabled = false
 	
 	in_between_node.process_mode = PROCESS_MODE_INHERIT
 	in_between_node.show()
@@ -113,10 +113,27 @@ func after_curtains_enter_unload():
 						$Announcements.hide()
 						$Announcements.text = ""
 				)
+				if p1_laugh_bar_node.points == 100 || p2_laugh_bar_node.points == 100:
+					await get_tree().create_timer(3.0).timeout
+					go_to_main_menu()
+				else:
+					get_tree().create_timer(3.0).timeout.connect(slide_minigame_chooser_up)
 				#p1_node.process_mode = PROCESS_MODE_INHERIT
 				#p2_node.process_mode = PROCESS_MODE_INHERIT
 			)
 	)
+
+	
+func slide_minigame_chooser_up():
+	var original_pos = $"Minigame chooser".position
+	$"Minigame chooser".position.y += $"Minigame chooser/Body".get_rect().size.y * $"Minigame chooser/Body".scale.y
+	$"Minigame chooser".show()
+	var minigame_chooser_tween = create_tween()
+	minigame_chooser_tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	minigame_chooser_tween .tween_property($"Minigame chooser", "position", original_pos, 0.7)
+	await minigame_chooser_tween.finished
+	await get_tree().create_timer(0.2).timeout
+	$"Minigame chooser".enabled = true
 
 func unload_minigame():
 	if current_minigame == null:
@@ -202,14 +219,36 @@ func _ready():
 		minigames.push_back(minigame)
 		print("Loaded " + minigame.id)
 	
-	seed(round(Time.get_unix_time_from_system() * 10))
+	seed(round(Time.get_unix_time_from_system() * 497))
 	
+	$"Minigame chooser".enabled = false
 	$"Minigame chooser".load_minigames(minigames)
 	$"Minigame chooser".generate_nodes()
+	$"Minigame chooser".hide()
+	await get_tree().create_timer(2.0).timeout
+	slide_minigame_chooser_up()
+	
+	seed(round(Time.get_unix_time_from_system() * 169))
 
 func _process(_delta):
 	p1_laugh_bar_node.points = p1_points
 	p2_laugh_bar_node.points = p2_points
+
+func go_to_main_menu():
+	var viewport_rect = get_viewport_rect()
+	var root_curtain = get_node("/root/Curtain")
+	root_curtain.show()
+	root_curtain.position.x = 0
+	root_curtain.position.y = -root_curtain.texture.get_height() * root_curtain.scale.y * 0.5 
+	root_curtain.position.y -= viewport_rect.size.y / 2
+	var curtain_tween = create_tween()
+	curtain_tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	curtain_tween.tween_property(root_curtain, "position", Vector2(0, -viewport_rect.size.y / 2 + 100), 1.0)
+	curtain_tween.finished.connect(
+		func():
+			await get_tree().create_timer(0.5).timeout
+			get_tree().change_scene_to_packed(load("res://scenes/menus/main_menu.tscn"))
+	)
 
 func _input(_event):
 	if OS.is_debug_build():
@@ -219,5 +258,15 @@ func _input(_event):
 			load_minigame(minigames[1], 0)
 		elif Input.is_key_pressed(KEY_3):
 			load_minigame(minigames[2], 0)
+		elif Input.is_key_pressed(KEY_Z):
+			p1_points = 95
+			p1_laugh_bar_node.update_bar()
+			p2_laugh_bar_node.update_bar()
+		elif Input.is_key_pressed(KEY_C):
+			p2_points = 95
+			p1_laugh_bar_node.update_bar()
+			p2_laugh_bar_node.update_bar()
 		elif Input.is_key_pressed(KEY_X):
 			unload_minigame()
+		elif Input.is_key_pressed(KEY_V):
+			go_to_main_menu()

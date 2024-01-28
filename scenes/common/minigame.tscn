@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnxdmngub2oru"]
+[gd_scene load_steps=13 format=3 uid="uid://bnxdmngub2oru"]
 
 [ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
 [ext_resource type="Script" path="res://scripts/minigame_content.gd" id="2_qbsoi"]
 [ext_resource type="Script" path="res://scripts/minigame_chooser.gd" id="3_m8bwc"]
-[ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/theme.tres" id="3_ok072"]
+[ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/normal.tres" id="3_ok072"]
 [ext_resource type="Texture2D" uid="uid://b8ye40ywyr04c" path="res://textures/In-between/Minigame chooser/screen.png" id="4_1hw2o"]
 [ext_resource type="Texture2D" uid="uid://b3saxst5bud7w" path="res://textures/In-between/Minigame chooser/body.png" id="5_n1rli"]
 [ext_resource type="Texture2D" uid="uid://dhyan8yk1t522" path="res://textures/Minigames/tv.png" id="6_4uio0"]
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="6_aky51"]
+[ext_resource type="Texture2D" uid="uid://cyqp325bs1gda" path="res://textures/In-between/Minigame chooser/button.png" id="6_kd1is"]
+[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_okckx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6btci"]
 font_size = 64
@@ -54,9 +56,15 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_n1rli")
 
 [node name="Area2D" type="Area2D" parent="Minigame chooser"]
+process_mode = 3
+priority = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Minigame chooser/Area2D"]
 shape = SubResource("SegmentShape2D_k7a66")
+
+[node name="Button" type="Sprite2D" parent="Minigame chooser"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_kd1is")
 
 [node name="TV" type="Sprite2D" parent="."]
 visible = false
@@ -81,6 +89,7 @@ offset_bottom = -300.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.106, 1.217)
+theme = ExtResource("7_okckx")
 
 [node name="Viewport" type="SubViewport" parent="TV/Contents"]
 handle_input_locally = false

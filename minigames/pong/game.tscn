@@ -18,8 +18,9 @@ normal = Vector2(0, 1)
 texture_filter = 1
 
 [node name="BG" type="Sprite2D" parent="."]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("1_8pbq8")
+offset = Vector2(34.5, 0)
 region_enabled = true
 region_rect = Rect2(174, 88, 1349, 902)
 

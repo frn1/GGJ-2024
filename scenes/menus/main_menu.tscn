@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://c8mq6bydhm3pg"]
+[gd_scene load_steps=14 format=3 uid="uid://c8mq6bydhm3pg"]
 
 [ext_resource type="Texture2D" uid="uid://48bfic2666ci" path="res://textures/Menus/Main menu/Buttons/Credits.png" id="1_0tsmy"]
-[ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/theme.tres" id="1_41hpj"]
+[ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/normal.tres" id="1_41hpj"]
 [ext_resource type="Texture2D" uid="uid://dll44ysulo570" path="res://textures/Menus/Main menu/Buttons/Exit.png" id="2_krsf6"]
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="2_mtsju"]
 [ext_resource type="Texture2D" uid="uid://c8e1xxe112pqk" path="res://textures/Menus/Main menu/Buttons/Options.png" id="3_5notc"]
@@ -9,6 +9,57 @@
 [ext_resource type="Script" path="res://scripts/menus/main_menu/start.gd" id="5_i0smd"]
 [ext_resource type="Texture2D" uid="uid://bqyb57yq7orxy" path="res://textures/Menus/Main menu/Logo.png" id="5_mm2uk"]
 [ext_resource type="Texture2D" uid="uid://c8ru00b7eeov5" path="res://textures/Menus/Main menu/BG.PNG" id="6_ddcc2"]
+[ext_resource type="Script" path="res://scripts/menus/main_menu/exit.gd" id="10_rlakn"]
+
+[sub_resource type="GDScript" id="GDScript_1abjt"]
+resource_name = "Curtain thingy"
+script/source = "extends Control
+
+
+func to_scene(scene: PackedScene):
+	var viewport_rect = get_viewport_rect()
+	var curtain = %Curtain
+	if get_node_or_null(\"/root/Curtain\") == null:
+		curtain.reparent(get_node(\"/root\"))
+	else:
+		curtain = get_node(\"/root/Curtain\")
+	var new_pos = curtain.global_position
+	new_pos.y = 100
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	tween.tween_property(curtain, \"position\", new_pos, 0.8)
+	tween.finished.connect(
+		func():
+			await get_tree().create_timer(0.1).timeout
+			get_tree().change_scene_to_packed(scene)
+	)
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	if get_node_or_null(\"/root/Curtain\") != null:
+		$\"Animation thingy\".process_mode = Node.PROCESS_MODE_DISABLED
+		var viewport_rect = get_viewport_rect()
+		var curtain = get_node(\"/root/Curtain\")
+		curtain.position.x += viewport_rect.size.x / 2
+		curtain.position.y += viewport_rect.size.y / 2
+		var tween = create_tween()
+		var new_pos = curtain.global_position
+		new_pos.y = -900
+		tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(curtain, \"global_position\", new_pos, 0.5)
+		tween.finished.connect(
+			func():
+				await get_tree().create_timer(0.1).timeout
+				$\"Animation thingy\".process_mode = Node.PROCESS_MODE_INHERIT
+		)
+
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="GDScript" id="GDScript_jsv13"]
 resource_name = "Animation Thingy"
@@ -39,6 +90,16 @@ func _process(delta):
 	pass
 "
 
+[sub_resource type="GDScript" id="GDScript_cgv56"]
+resource_name = "Options button"
+script/source = "extends Button
+
+var scene = preload(\"res://scenes/menus/options.tscn\")
+
+func _pressed():
+	get_node(\"/root/Main menu\").to_scene(scene)
+"
+
 [node name="Main menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -47,6 +108,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_41hpj")
+script = SubResource("GDScript_1abjt")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
@@ -123,6 +185,7 @@ focus_neighbor_right = NodePath("../Credits")
 focus_previous = NodePath("../Exit")
 icon = ExtResource("3_5notc")
 flat = true
+script = SubResource("GDScript_cgv56")
 
 [node name="Credits" type="Button" parent="Animation thingy/HBoxContainer"]
 layout_mode = 2
@@ -142,3 +205,4 @@ focus_neighbor_left = NodePath("../Credits")
 focus_neighbor_right = NodePath("../Start")
 icon = ExtResource("2_krsf6")
 flat = true
+script = ExtResource("10_rlakn")

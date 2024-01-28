@@ -1,90 +1,71 @@
-[gd_scene load_steps=8 format=3 uid="uid://d25ymr0c5hp8s"]
+[gd_scene load_steps=13 format=3 uid="uid://d25ymr0c5hp8s"]
 
 [ext_resource type="Script" path="res://scripts/minigames/pie_toss/game.gd" id="1_84ow2"]
 [ext_resource type="PackedScene" uid="uid://drvumps04cxms" path="res://minigames/pie_toss/shooter.tscn" id="2_iu7kf"]
 [ext_resource type="Texture2D" uid="uid://dw40pv4knldwp" path="res://textures/Minigames/pie_toss/bg.png" id="2_qj3vy"]
 [ext_resource type="PackedScene" uid="uid://dsrd3wqccj5ef" path="res://minigames/pie_toss/target_spawner.tscn" id="3_gqa1v"]
 [ext_resource type="PackedScene" uid="uid://bgvr4fs2pd4m6" path="res://minigames/pie_toss/target_eraser.tscn" id="4_i7bwi"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_1tx1x"]
-font_size = 64
+[ext_resource type="Texture2D" uid="uid://cf1dckxk7j5ik" path="res://textures/Minigames/pie_toss/P1/counter.png" id="6_0fghl"]
+[ext_resource type="Texture2D" uid="uid://w875gneka3k1" path="res://textures/Minigames/pie_toss/P2/counter.png" id="6_ru06p"]
+[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_bnepa"]
+[ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="8_hcyv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rghqp"]
 size = Vector2(100, 100)
 
+[sub_resource type="LabelSettings" id="LabelSettings_1tx1x"]
+font_size = 70
+font_color = Color(0, 0, 0, 1)
+outline_size = 10
+outline_color = Color(0.560784, 0.427451, 0.211765, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_u02ho"]
+font_size = 50
+outline_size = 8
+outline_color = Color(0.211765, 0.388235, 0.588235, 1)
+
 [node name="Easy" type="Node2D"]
-texture_filter = 1
 script = ExtResource("1_84ow2")
 
 [node name="BG" type="Sprite2D" parent="."]
+texture_filter = 1
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_qj3vy")
 
 [node name="P1 Shooter" parent="." instance=ExtResource("2_iu7kf")]
+texture_filter = 1
 position = Vector2(-325, 230)
-player = 1
-rotation_speed = 260.0
-minimum_rotation_angle = -35
-maximum_rotation_angle = 90
-cooldown = 0.2
-projectile_speed = 25.0
-score_label = NodePath("../P1 Label")
-
-[node name="P1 Label" type="Label" parent="."]
-offset_left = -190.0
-offset_top = 225.0
-offset_right = -36.0
-offset_bottom = 270.0
-text = "0"
-label_settings = SubResource("LabelSettings_1tx1x")
+score_label = NodePath("../P1 Counter/P1 Label")
 
 [node name="P2 Shooter" parent="." instance=ExtResource("2_iu7kf")]
+texture_filter = 1
 position = Vector2(325, 230)
 player = 2
-rotation_speed = 260.0
 minimum_rotation_angle = -90
 maximum_rotation_angle = 35
-cooldown = 0.2
-projectile_speed = 25.0
-score_label = NodePath("../P2 Label")
-
-[node name="P2 Label" type="Label" parent="."]
-offset_left = 40.0
-offset_top = 225.0
-offset_right = 194.0
-offset_bottom = 270.0
-pivot_offset = Vector2(154, 0)
-text = "0"
-label_settings = SubResource("LabelSettings_1tx1x")
-horizontal_alignment = 2
-
-[node name="Timer" type="Label" parent="."]
-offset_left = -90.0
-offset_top = 121.0
-offset_right = 90.0
-offset_bottom = 209.0
-pivot_offset = Vector2(180, 0)
-text = "0"
-label_settings = SubResource("LabelSettings_1tx1x")
-horizontal_alignment = 1
+score_label = NodePath("../P2 Counter/P2 Label")
 
 [node name="Target Spawner" parent="." instance=ExtResource("3_gqa1v")]
+texture_filter = 1
 position = Vector2(-736, -193)
 chance = 6.0
 
 [node name="Target Eraser" parent="." instance=ExtResource("4_i7bwi")]
+texture_filter = 1
 position = Vector2(696, -185)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target Eraser"]
 shape = SubResource("RectangleShape2D_rghqp")
 
 [node name="Target Eraser2" parent="." instance=ExtResource("4_i7bwi")]
+texture_filter = 1
 position = Vector2(-738, -100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target Eraser2"]
 shape = SubResource("RectangleShape2D_rghqp")
 
 [node name="Target Spawner2" parent="." instance=ExtResource("3_gqa1v")]
+texture_filter = 1
 position = Vector2(693, -94)
 rate = 0.15
 speed = 580.0
@@ -92,12 +73,14 @@ direction = Vector2(-1, 0)
 chance = 5.0
 
 [node name="Target Eraser3" parent="." instance=ExtResource("4_i7bwi")]
+texture_filter = 1
 position = Vector2(-738, -287)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Target Eraser3"]
 shape = SubResource("RectangleShape2D_rghqp")
 
 [node name="Target Spawner3" parent="." instance=ExtResource("3_gqa1v")]
+texture_filter = 1
 position = Vector2(693, -281)
 rate = 0.275
 speed = 550.0
@@ -106,3 +89,67 @@ chance = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
+
+[node name="P1 Counter" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-515, 210)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_0fghl")
+region_enabled = true
+region_rect = Rect2(257, 555, 123, 281)
+
+[node name="P1 Label" type="Label" parent="P1 Counter"]
+offset_left = -50.0
+offset_top = -15.0
+offset_right = 50.0
+offset_bottom = 105.0
+theme = ExtResource("7_bnepa")
+text = "0"
+label_settings = SubResource("LabelSettings_1tx1x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2 Counter" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(515, 210)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_ru06p")
+region_enabled = true
+region_rect = Rect2(1322, 579, 123, 281)
+
+[node name="P2 Label" type="Label" parent="P2 Counter"]
+offset_left = -50.0
+offset_top = -15.0
+offset_right = 50.0
+offset_bottom = 105.0
+theme = ExtResource("7_bnepa")
+text = "0"
+label_settings = SubResource("LabelSettings_1tx1x")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 224)
+texture = ExtResource("8_hcyv0")
+region_enabled = true
+region_rect = Rect2(791, 763, 189, 112)
+
+[node name="Timer" type="Label" parent="Timer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -169.5
+offset_top = -100.0
+offset_right = -19.5
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(180, 0)
+theme = ExtResource("7_bnepa")
+text = "0"
+label_settings = SubResource("LabelSettings_u02ho")
+horizontal_alignment = 1
+vertical_alignment = 1

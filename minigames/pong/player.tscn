@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" path="res://scripts/minigames/pong/player.gd" id="1_7ts3y"]
 [ext_resource type="Texture2D" uid="uid://cwc48xnag1a72" path="res://textures/Minigames/pong/player.png" id="2_82yq8"]
-[ext_resource type="Texture2D" uid="uid://gsmopmoro6dc" path="res://textures/Controller Icons/Wii Horizontal/up.png" id="3_qxy5w"]
+[ext_resource type="Texture2D" uid="uid://gsmopmoro6dc" path="res://textures/Controller Icons/Wii/up.png" id="3_qxy5w"]
 [ext_resource type="Script" path="res://scripts/dissapear_after_some_seconds.tres.gd" id="4_n685l"]
-[ext_resource type="Texture2D" uid="uid://daja7dvr7km2v" path="res://textures/Controller Icons/Wii Horizontal/down.png" id="4_xechf"]
+[ext_resource type="Texture2D" uid="uid://daja7dvr7km2v" path="res://textures/Controller Icons/Wii/down.png" id="4_xechf"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_3ou6t"]
-a = Vector2(0, -72)
-b = Vector2(0, 72)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkqtf"]
+size = Vector2(20, 146)
 
 [node name="Player" type="StaticBody2D"]
 script = ExtResource("1_7ts3y")
@@ -19,14 +18,6 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_82yq8")
 region_enabled = true
 region_rect = Rect2(337, 336, 40, 293)
-
-[node name="Right collider" type="CollisionShape2D" parent="."]
-position = Vector2(10, 0)
-shape = SubResource("SegmentShape2D_3ou6t")
-
-[node name="Left Collider" type="CollisionShape2D" parent="."]
-position = Vector2(-10, 0)
-shape = SubResource("SegmentShape2D_3ou6t")
 
 [node name="UpPrompt" type="Sprite2D" parent="."]
 texture_filter = 2
@@ -43,3 +34,6 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("4_xechf")
 script = ExtResource("4_n685l")
 free_after_dissapearing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mkqtf")

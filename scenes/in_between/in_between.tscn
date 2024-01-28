@@ -1,8 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b4vxdc4lt4026"]
+[gd_scene load_steps=11 format=3 uid="uid://b4vxdc4lt4026"]
 
 [ext_resource type="Texture2D" uid="uid://blra2frh4k3k5" path="res://textures/In-between/BG/Stage.png" id="1_qt3qy"]
 [ext_resource type="Texture2D" uid="uid://d03ibmhjk862q" path="res://textures/In-between/BG/Background curtains.png" id="2_5rira"]
 [ext_resource type="Texture2D" uid="uid://xytw3s428isa" path="res://textures/In-between/BG/Viewers.png" id="3_gg5uy"]
+[ext_resource type="Texture2D" uid="uid://bbnqp3ijihef8" path="res://textures/In-between/Player 1.png" id="4_ib6u4"]
+[ext_resource type="Texture2D" uid="uid://bgs2m75tj4ho0" path="res://textures/In-between/Player 2.png" id="5_frewb"]
+[ext_resource type="Texture2D" uid="uid://dh7xjj21og42p" path="res://textures/In-between/Shadow.png" id="6_e0fdl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t6ard"]
 normal = Vector2(1, 0)
@@ -49,6 +52,27 @@ texture = ExtResource("1_qt3qy")
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_5rira")
 
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(0.0745098, 0.0823529, 0.0705882, 1)
+position = Vector2(17, 394)
+scale = Vector2(0.41, 0.41)
+texture = ExtResource("6_e0fdl")
+offset = Vector2(0, -397)
+
 [node name="Viewers" type="Sprite2D" parent="."]
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_gg5uy")
+
+[node name="Player1" type="Sprite2D" parent="."]
+position = Vector2(-360, -65)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_ib6u4")
+region_enabled = true
+region_rect = Rect2(283, 191, 416, 818)
+
+[node name="Player2" type="Sprite2D" parent="."]
+position = Vector2(330, -65)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_frewb")
+region_enabled = true
+region_rect = Rect2(1059, 285, 792, 695)
