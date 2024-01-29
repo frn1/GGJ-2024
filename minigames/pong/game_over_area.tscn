@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bh0bo3lqkxbe1"]
+[gd_scene load_steps=4 format=3 uid="uid://bh0bo3lqkxbe1"]
 
 [ext_resource type="Script" path="res://scripts/minigames/pong/game_over_area.gd" id="1_c85m7"]
+[ext_resource type="AudioStream" uid="uid://8nr2oeox0nps" path="res://sounds/Sound Effects/MiniGames Scene/Ping Pong Bomba/When making a goal (mp3cut.net).wav" id="2_ygxdn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0omux"]
 size = Vector2(100, 648)
@@ -11,3 +12,7 @@ script = ExtResource("1_c85m7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0omux")
+
+[node name="win" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ygxdn")
+volume_db = -10.0

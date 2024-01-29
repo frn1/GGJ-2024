@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdvfov0xe15ha"]
+[gd_scene load_steps=11 format=3 uid="uid://bdvfov0xe15ha"]
 
 [ext_resource type="Texture2D" uid="uid://bfmxooffo3g00" path="res://textures/Minigames/pong/bg.png" id="1_8pbq8"]
 [ext_resource type="PackedScene" uid="uid://cvrtyie6oq5ef" path="res://minigames/pong/player.tscn" id="1_id8no"]
 [ext_resource type="Script" path="res://scripts/minigames/pong/ball.gd" id="2_nfbx0"]
 [ext_resource type="Texture2D" uid="uid://dlki3pgjmheek" path="res://textures/Minigames/pong/ball.png" id="3_hdoxh"]
 [ext_resource type="PackedScene" uid="uid://bh0bo3lqkxbe1" path="res://minigames/pong/game_over_area.tscn" id="4_55rmh"]
+[ext_resource type="AudioStream" uid="uid://drhrou4a0pg7b" path="res://sounds/Sound Effects/MiniGames Scene/Ping Pong Bomba/Sound when hitting the Bomb.mp3" id="6_tchks"]
+[ext_resource type="AudioStream" uid="uid://caqjioto5adj" path="res://sounds/Music/mini_juego_rapido.wav" id="7_i3gde"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lfakm"]
 radius = 43.0465
@@ -45,6 +47,11 @@ offset = Vector2(15, -4)
 region_enabled = true
 region_rect = Rect2(46, 42, 115, 94)
 
+[node name="golpe" type="AudioStreamPlayer" parent="Ball"]
+stream = ExtResource("6_tchks")
+volume_db = -15.0
+max_polyphony = 2
+
 [node name="World Boundaries" type="StaticBody2D" parent="."]
 
 [node name="Bottom" type="CollisionShape2D" parent="World Boundaries"]
@@ -62,3 +69,8 @@ position = Vector2(650, 0)
 player_that_loses = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="fondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_i3gde")
+volume_db = -6.0
+autoplay = true

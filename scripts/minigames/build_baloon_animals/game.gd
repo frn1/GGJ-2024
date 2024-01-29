@@ -68,13 +68,17 @@ func _ready():
 
 var Minigame = preload("res://scripts/minigame.gd")
 var minigame_ended = false
-
+var played_alarm = false
 func _process(_delta):
 	var remaining_time = maxf(minigame_duration - (Time.get_ticks_usec() / 1e+6 - start_time), 0.0)
+	if played_alarm == false && remaining_time <= 5:
+		$sec.play()
+		played_alarm = true
 	$Timer/Time.text = "%04.1fs" % remaining_time
 	if is_zero_approx(remaining_time):
 		if minigame_ended:
 			return
+		$timeup.play()
 		if scores[0] > scores[1]:
 			get_parent().end_minigame(Minigame.MinigameEndState.P1Won)
 		elif scores[1] > scores[0]:
@@ -96,12 +100,14 @@ func _process(_delta):
 			sprite.hide()
 	if next_action_index[0] == 5:
 		scores[0] += 1
+		$correcto.play()
 		$"Points P1".text = str(scores[0])
 		generate_keys_for_player(1)
 		$"P1 Face".show()
 		get_tree().create_timer(0.5).timeout.connect($"P1 Face".hide)
 	if next_action_index[1] == 5:
 		scores[1] += 1
+		$correcto.play()
 		$"Points P2".text = str(scores[1])
 		generate_keys_for_player(2)
 		$"P2 Face".show()
@@ -112,52 +118,62 @@ func _input(event):
 		if actions[0][next_action_index[0]] == Buttons.Action:
 			next_action_index[0] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[0] = 0
 	if event.is_action_pressed(Controller.format_action_id("up", 1)):
 		if actions[0][next_action_index[0]] == Buttons.Up:
 			next_action_index[0] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[0] = 0
 	if event.is_action_pressed(Controller.format_action_id("down", 1)):
 		if actions[0][next_action_index[0]] == Buttons.Down:
 			next_action_index[0] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[0] = 0
 	if event.is_action_pressed(Controller.format_action_id("left", 1)):
 		if actions[0][next_action_index[0]] == Buttons.Left:
 			next_action_index[0] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[0] = 0
 	if event.is_action_pressed(Controller.format_action_id("right", 1)):
 		if actions[0][next_action_index[0]] == Buttons.Right:
 			next_action_index[0] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[0] = 0
 			
 	if event.is_action_pressed(Controller.format_action_id("action", 2)):
 		if actions[1][next_action_index[1]] == Buttons.Action:
 			next_action_index[1] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[1] = 0
 	if event.is_action_pressed(Controller.format_action_id("up", 2)):
 		if actions[1][next_action_index[1]] == Buttons.Up:
 			next_action_index[1] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[1] = 0
 	if event.is_action_pressed(Controller.format_action_id("down", 2)):
 		if actions[1][next_action_index[1]] == Buttons.Down:
 			next_action_index[1] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[1] = 0
 	if event.is_action_pressed(Controller.format_action_id("left", 2)):
 		if actions[1][next_action_index[1]] == Buttons.Left:
 			next_action_index[1] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[1] = 0
 	if event.is_action_pressed(Controller.format_action_id("right", 2)):
 		if actions[1][next_action_index[1]] == Buttons.Right:
 			next_action_index[1] += 1
 		else:
+			$incorrecto.play()
 			next_action_index[1] = 0
 	next_action_index[0] = clamp(next_action_index[0], 0, 5)
 	next_action_index[1] = clamp(next_action_index[1], 0, 5)

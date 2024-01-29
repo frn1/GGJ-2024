@@ -1,12 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://dh2b146dtta4h"]
+[gd_scene load_steps=16 format=3 uid="uid://dh2b146dtta4h"]
 
 [ext_resource type="Script" path="res://scripts/minigames/build_baloon_animals/game.gd" id="1_u4xg5"]
 [ext_resource type="Texture2D" uid="uid://bn27bgc4cva5" path="res://textures/Minigames/build_baloon_animals/bg.png" id="2_7mihe"]
 [ext_resource type="Texture2D" uid="uid://bmlpthqx6mjso" path="res://textures/Minigames/build_baloon_animals/face.png" id="2_l7ny2"]
-[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="2_sqk51"]
+[ext_resource type="Theme" path="res://themes/pixel.tres" id="2_sqk51"]
 [ext_resource type="Texture2D" uid="uid://coafie6eub0mb" path="res://textures/Minigames/build_baloon_animals/left.png" id="3_145cb"]
 [ext_resource type="Texture2D" uid="uid://b1s6r5uhlvlov" path="res://textures/Minigames/build_baloon_animals/right.png" id="4_kqti5"]
 [ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="7_4lrbi"]
+[ext_resource type="AudioStream" uid="uid://dejamcfc3syn3" path="res://sounds/Sound Effects/MiniGames Scene/Simon Dice/When completing a combination.mp3" id="8_nrhy6"]
+[ext_resource type="AudioStream" uid="uid://xalnde2mlcga" path="res://sounds/Sound Effects/MiniGames Scene/Simon Dice/When making a mistake (mp3cut.net).wav" id="9_b8ogj"]
+[ext_resource type="AudioStream" uid="uid://bbp0nybordnr1" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock Sound (7 seconds).mp3" id="10_ngwf2"]
+[ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="11_gm3ka"]
+[ext_resource type="AudioStream" uid="uid://caqjioto5adj" path="res://sounds/Music/mini_juego_rapido.wav" id="12_o35ax"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e1de0"]
 font_size = 100
@@ -153,3 +158,24 @@ text = "0"
 label_settings = SubResource("LabelSettings_2v0r5")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="correcto" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_nrhy6")
+volume_db = -15.0
+max_polyphony = 2
+
+[node name="incorrecto" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_b8ogj")
+volume_db = -15.0
+max_polyphony = 2
+
+[node name="sec" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_ngwf2")
+
+[node name="timeup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_gm3ka")
+
+[node name="fondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_o35ax")
+volume_db = -6.0
+autoplay = true
