@@ -6,10 +6,10 @@ func _ready():
 	grab_focus()
 	focus_entered.connect(%"Tick sound".play)
 
-var game = load("res://scenes/game.tscn")
+var game = preload("res://scenes/game.tscn")
 
 func _pressed():
-	if changing == false:
+	if changing == true:
 		return
 	changing = true
 	var tween = create_tween()

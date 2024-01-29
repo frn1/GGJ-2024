@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://wjkwr8ic5q2k"]
-
-[node name="P2 Spawn" type="Node2D"]
-position = Vector2(200, 0)
