@@ -151,8 +151,8 @@ func _ready():
 func _input(event):
 	if Input.is_action_pressed(Controller.format_action_id("action", 1)) || Input.is_action_pressed(Controller.format_action_id("action", 2)):
 		$Button.texture = button_pressed_texture
-		$boton.play()
 		if enabled == true:
+			$boton.play()
 			start_spin()
 	else:
 		$Button.texture = button_texture

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/minigames/build_baloon_animals/game.gd" id="1_u4xg5"]
 [ext_resource type="Texture2D" uid="uid://bn27bgc4cva5" path="res://textures/Minigames/build_baloon_animals/bg.png" id="2_7mihe"]
 [ext_resource type="Texture2D" uid="uid://bmlpthqx6mjso" path="res://textures/Minigames/build_baloon_animals/face.png" id="2_l7ny2"]
-[ext_resource type="Theme" path="res://themes/pixel.tres" id="2_sqk51"]
+[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="2_sqk51"]
 [ext_resource type="Texture2D" uid="uid://coafie6eub0mb" path="res://textures/Minigames/build_baloon_animals/left.png" id="3_145cb"]
 [ext_resource type="Texture2D" uid="uid://b1s6r5uhlvlov" path="res://textures/Minigames/build_baloon_animals/right.png" id="4_kqti5"]
 [ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="7_4lrbi"]
@@ -177,5 +177,5 @@ stream = ExtResource("11_gm3ka")
 
 [node name="fondo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_o35ax")
-volume_db = -6.0
+volume_db = -10.0
 autoplay = true

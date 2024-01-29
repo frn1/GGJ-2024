@@ -72,5 +72,5 @@ player_that_loses = 2
 
 [node name="fondo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_i3gde")
-volume_db = -6.0
+volume_db = -10.0
 autoplay = true

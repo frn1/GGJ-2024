@@ -1,15 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://bnxdmngub2oru"]
+[gd_scene load_steps=24 format=3 uid="uid://bnxdmngub2oru"]
 
 [ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
 [ext_resource type="Script" path="res://scripts/minigame_content.gd" id="2_qbsoi"]
 [ext_resource type="Script" path="res://scripts/minigame_chooser.gd" id="3_m8bwc"]
-[ext_resource type="Theme" path="res://themes/normal.tres" id="3_ok072"]
 [ext_resource type="Texture2D" uid="uid://b8ye40ywyr04c" path="res://textures/In-between/Minigame chooser/screen.png" id="4_1hw2o"]
 [ext_resource type="Texture2D" uid="uid://b3saxst5bud7w" path="res://textures/In-between/Minigame chooser/body.png" id="5_n1rli"]
 [ext_resource type="Texture2D" uid="uid://dhyan8yk1t522" path="res://textures/Minigames/tv.png" id="6_4uio0"]
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="6_aky51"]
 [ext_resource type="Texture2D" uid="uid://cyqp325bs1gda" path="res://textures/In-between/Minigame chooser/button.png" id="6_kd1is"]
-[ext_resource type="Theme" path="res://themes/pixel.tres" id="7_okckx"]
+[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_okckx"]
 [ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="7_qol6i"]
 [ext_resource type="AudioStream" uid="uid://bepuamns7ea3a" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Slot Machine Spinning.mp3" id="8_urolh"]
 [ext_resource type="AudioStream" uid="uid://be2h46ho54kh5" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Slot Machine Finish Spinning.wav" id="9_tgc5s"]
@@ -21,14 +20,6 @@
 [ext_resource type="AudioStream" uid="uid://tb6xdvnw7c52" path="res://sounds/Sound Effects/Story Scene/Bar of Laugh/Wining points Version 1.wav" id="19_1qb30"]
 [ext_resource type="AudioStream" uid="uid://buiyffajjh0uo" path="res://sounds/Sound Effects/Story Scene/Rada/Typewriter _ when a pj speaks.mp3" id="19_5opb7"]
 [ext_resource type="AudioStream" uid="uid://btkb8jtpyikt1" path="res://sounds/Sound Effects/Story Scene/Bar of Laugh/barra-de-risa-reducir-puntos.wav" id="20_2r3bn"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_6btci"]
-font_size = 64
-outline_size = 7
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 3
-shadow_color = Color(0.431373, 0.431373, 0.431373, 0.843137)
-shadow_offset = Vector2(3, 2)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k7a66"]
 a = Vector2(-240, -6)
@@ -54,20 +45,6 @@ func _process(_delta):
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_2mr3c")
 minigame_folders = Array[String](["res://minigames/build_baloon_animals/", "res://minigames/pie_toss/", "res://minigames/pong/"])
-
-[node name="Announcements" type="Label" parent="."]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -246.0
-offset_top = -215.0
-offset_right = 246.0
-offset_bottom = -127.0
-grow_horizontal = 2
-theme = ExtResource("3_ok072")
-text = "Jugador {} gana!"
-label_settings = SubResource("LabelSettings_6btci")
 
 [node name="Minigame chooser" type="Node2D" parent="."]
 script = ExtResource("3_m8bwc")

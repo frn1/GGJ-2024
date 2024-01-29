@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bgvr4fs2pd4m6" path="res://minigames/pie_toss/target_eraser.tscn" id="4_i7bwi"]
 [ext_resource type="Texture2D" uid="uid://cf1dckxk7j5ik" path="res://textures/Minigames/pie_toss/P1/counter.png" id="6_0fghl"]
 [ext_resource type="Texture2D" uid="uid://w875gneka3k1" path="res://textures/Minigames/pie_toss/P2/counter.png" id="6_ru06p"]
-[ext_resource type="Theme" path="res://themes/pixel.tres" id="7_bnepa"]
+[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_bnepa"]
 [ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="8_hcyv0"]
 [ext_resource type="AudioStream" uid="uid://pbuw2tpar7rn" path="res://sounds/Music/Mini_juego_2.wav" id="12_477le"]
 [ext_resource type="AudioStream" uid="uid://bbp0nybordnr1" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock Sound (7 seconds).mp3" id="15_rrs6y"]
@@ -165,5 +165,5 @@ stream = ExtResource("16_xe4k5")
 
 [node name="fondo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_477le")
-volume_db = -15.0
+volume_db = -10.0
 autoplay = true
