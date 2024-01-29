@@ -1,15 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://bnxdmngub2oru"]
+[gd_scene load_steps=23 format=3 uid="uid://bnxdmngub2oru"]
 
 [ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
 [ext_resource type="Script" path="res://scripts/minigame_content.gd" id="2_qbsoi"]
 [ext_resource type="Script" path="res://scripts/minigame_chooser.gd" id="3_m8bwc"]
-[ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/normal.tres" id="3_ok072"]
+[ext_resource type="Theme" path="res://themes/normal.tres" id="3_ok072"]
 [ext_resource type="Texture2D" uid="uid://b8ye40ywyr04c" path="res://textures/In-between/Minigame chooser/screen.png" id="4_1hw2o"]
 [ext_resource type="Texture2D" uid="uid://b3saxst5bud7w" path="res://textures/In-between/Minigame chooser/body.png" id="5_n1rli"]
 [ext_resource type="Texture2D" uid="uid://dhyan8yk1t522" path="res://textures/Minigames/tv.png" id="6_4uio0"]
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="6_aky51"]
 [ext_resource type="Texture2D" uid="uid://cyqp325bs1gda" path="res://textures/In-between/Minigame chooser/button.png" id="6_kd1is"]
-[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_okckx"]
+[ext_resource type="Theme" path="res://themes/pixel.tres" id="7_okckx"]
+[ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="7_qol6i"]
+[ext_resource type="AudioStream" uid="uid://bepuamns7ea3a" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Slot Machine Spinning.mp3" id="8_urolh"]
+[ext_resource type="AudioStream" uid="uid://be2h46ho54kh5" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Slot Machine Finish Spinning.wav" id="9_tgc5s"]
 [ext_resource type="Script" path="res://scripts/dialog.gd" id="11_xvcsi"]
 [ext_resource type="Texture2D" uid="uid://5kjf6kjkbonr" path="res://textures/Dialog/happy2.png" id="12_nf3x1"]
 [ext_resource type="Texture2D" uid="uid://dxwosej8vw4kg" path="res://textures/Controller Icons/Keyboard/P1/action.png" id="13_arjxa"]
@@ -87,6 +90,15 @@ shape = SubResource("SegmentShape2D_k7a66")
 [node name="Button" type="Sprite2D" parent="Minigame chooser"]
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_kd1is")
+
+[node name="boton" type="AudioStreamPlayer" parent="Minigame chooser"]
+stream = ExtResource("7_qol6i")
+
+[node name="jackpot arrancando" type="AudioStreamPlayer" parent="Minigame chooser"]
+stream = ExtResource("8_urolh")
+
+[node name="jackpot terminando" type="AudioStreamPlayer" parent="Minigame chooser"]
+stream = ExtResource("9_tgc5s")
 
 [node name="TV" type="Sprite2D" parent="."]
 visible = false

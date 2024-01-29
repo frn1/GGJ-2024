@@ -107,12 +107,15 @@ func start_spin():
 		push_error("Attempted to start spin animation while still spinning")
 		return
 	spinning = true
+	$"jackpot arrancando".play()
 	enabled = false
 	$Button.texture = button_pressed_texture
 	speed_mul = 1.0
 	seed(round(Time.get_ticks_usec() * 100))
 	get_tree().create_timer(4.5).timeout.connect(
 		func():
+			$"jackpot terminando".play()
+			$"jackpot arrancando".stop()
 			var tween = create_tween()
 			tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 			tween.tween_property(self, "speed_mul", 0.0, 1.0)
@@ -148,6 +151,7 @@ func _ready():
 func _input(event):
 	if Input.is_action_pressed(Controller.format_action_id("action", 1)) || Input.is_action_pressed(Controller.format_action_id("action", 2)):
 		$Button.texture = button_pressed_texture
+		$boton.play()
 		if enabled == true:
 			start_spin()
 	else:
