@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bnxdmngub2oru"]
+[gd_scene load_steps=25 format=3 uid="uid://bnxdmngub2oru"]
 
 [ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
 [ext_resource type="Script" path="res://scripts/minigame_content.gd" id="2_qbsoi"]
@@ -19,8 +19,6 @@
 [ext_resource type="Texture2D" uid="uid://dxwosej8vw4kg" path="res://textures/Controller Icons/Keyboard/P1/action.png" id="13_arjxa"]
 [ext_resource type="Script" path="res://scripts/controller_prompts.gd" id="14_f2qsy"]
 [ext_resource type="Texture2D" uid="uid://cf26bgpe57gik" path="res://textures/Controller Icons/Keyboard/P2/action.png" id="15_v3p74"]
-[ext_resource type="AudioStream" path="res://sounds/Sound Effects/Story Scene/Laugh bar/Wining points Version 1.wav" id="19_0pmh8"]
-[ext_resource type="AudioStream" path="res://sounds/Sound Effects/Story Scene/Rada/Typewriter _ when a pj speaks.mp3" id="19_5opb7"]
 [ext_resource type="AudioStream" uid="uid://btkb8jtpyikt1" path="res://sounds/Sound Effects/Story Scene/Laugh bar/barra-de-risa-reducir-puntos.wav" id="20_2aekn"]
 [ext_resource type="AudioStream" uid="uid://bekuxaph07djq" path="res://sounds/Music/In_Game.wav" id="23_p3nwk"]
 
@@ -203,11 +201,9 @@ script = ExtResource("14_f2qsy")
 player = 2
 
 [node name="maquinaescribir" type="AudioStreamPlayer" parent="Dialog"]
-stream = ExtResource("19_5opb7")
 volume_db = -8.0
 
 [node name="subirbarra" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("19_0pmh8")
 volume_db = -12.0
 
 [node name="bajarbarra" type="AudioStreamPlayer" parent="."]
