@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bg8wyumvlp8j2"
+path="res://.godot/imported/Sound when Click the Button.mp3-89d0ef1d2415c1aa48e26fbad1ff9277.mp3str"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/MiniGames Scene/Repetición de Clicks/Sound when Click the Button.mp3"
+dest_files=["res://.godot/imported/Sound when Click the Button.mp3-89d0ef1d2415c1aa48e26fbad1ff9277.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
