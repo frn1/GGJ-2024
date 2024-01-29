@@ -14,6 +14,7 @@ func write_message(name: String, text: String, time_per_char = 0.025):
 	matches = regex.search_all(text)
 	$maquinaescribir.play()
 	$Text.text = ""
+	offset_chars = 0
 	start = Time.get_ticks_msec() / 1000.0
 	writing_message = true
 	message = text
@@ -57,6 +58,21 @@ func run_line(record: Array):
 			await get_tree().create_timer(float(record[1])).timeout
 		"cambiar":
 			$Expression.texture = load("res://textures/Dialog/%s.png" % record[1])
+		"musica":
+			%BGM.stream = load(record[1])
+			%BGM.play()
+		"sonido":
+			var player = AudioStreamPlayer.new()
+			get_tree().root.add_child(player)
+			player.stream = load("res://sounds/Sound Effects/Story Scene/%s" % record[1])
+			player.volume_db = -15
+			player.play()
+			player.finished.connect(player.queue_free)
+			if record.size() >= 3:
+				if int(record[2]) != 1:
+					await player.finished
+			else:
+				await player.finished
 	
 # Called when the node enters the scene tree for the first time.
 func play(data):
@@ -92,10 +108,10 @@ func _process(delta):
 		var time = Time.get_ticks_msec() / 1000.0 - start
 		if wait_until > Time.get_ticks_msec() / 1000.0:
 			return
-		var char = min(time / time_per_character, message.length())
+		var char = floor(min(time / time_per_character, message.length()))
 		for reg_match in matches:
 			if char + offset_chars > reg_match.get_start() && char + offset_chars < reg_match.get_end():
-				offset_chars += reg_match.get_end() - reg_match.get_start() + 1
+				offset_chars += reg_match.get_end() - reg_match.get_start()
 				var splits = reg_match.strings[1].split(" ")
 				match splits[0]:
 					"esperar":
@@ -108,10 +124,28 @@ func _process(delta):
 						$Expression.texture = load("res://textures/Dialog/%s.png" % splits[1])
 					"sonido":
 						var player = AudioStreamPlayer.new()
+						get_tree().root.add_child(player)
 						player.stream = load("res://sounds/Sound Effects/Story Scene/%s" % splits[1])
+						player.finished.connect(player.queue_free)
+						player.volume_db = -15
+						player.play()
 						if splits.size() >= 3:
 							if int(splits[2]) != 1:
+								$maquinaescribir.stop()
+								var play_start = Time.get_ticks_msec() / 1000.0
+								wait_until = INF
 								await player.finished
+								wait_until = Time.get_ticks_msec() / 1000.0
+								start += wait_until - play_start
+								$maquinaescribir.play()
+						else:
+							$maquinaescribir.stop()
+							var play_start = Time.get_ticks_msec() / 1000.0
+							wait_until = INF
+							await player.finished
+							wait_until = Time.get_ticks_msec() / 1000.0
+							start += wait_until - play_start
+							$maquinaescribir.play()
 		for index in range(last_char, min(char, message.length() - offset_chars)):
 			$Text.text += message[min(index + offset_chars, message.length())]
 		if min(char, message.length() - offset_chars) == message.length() - offset_chars:

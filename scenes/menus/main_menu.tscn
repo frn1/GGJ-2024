@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8mq6bydhm3pg"]
+[gd_scene load_steps=19 format=3 uid="uid://c8mq6bydhm3pg"]
 
 [ext_resource type="Texture2D" uid="uid://48bfic2666ci" path="res://textures/Menus/Main menu/Buttons/Credits.png" id="1_0tsmy"]
 [ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/normal.tres" id="1_41hpj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c8ru00b7eeov5" path="res://textures/Menus/Main menu/BG.PNG" id="6_ddcc2"]
 [ext_resource type="AudioStream" uid="uid://fpxedoirjdv6" path="res://sounds/Sound Effects/Menu/Menu Select Option _ Sound when selecting a option (mp3cut.net).wav" id="7_6p5m8"]
 [ext_resource type="Script" path="res://scripts/menus/main_menu/exit.gd" id="10_rlakn"]
+[ext_resource type="PackedScene" uid="uid://qkrbwugwurq8" path="res://scenes/menus/credits.tscn" id="11_56u2s"]
 [ext_resource type="AudioStream" uid="uid://bhl024m5y5l04" path="res://sounds/Sound Effects/Menu/Menu-Pass-option-_-Sound-passing-the-option-to-another.wav" id="12_3mun4"]
 [ext_resource type="AudioStream" uid="uid://qqpub6sdlmwy" path="res://sounds/Music/fondo.wav" id="13_44hct"]
 
@@ -120,6 +121,23 @@ func _pressed():
 	get_node(\"/root/Main menu\").to_scene(scene)
 "
 
+[sub_resource type="GDScript" id="GDScript_aq85s"]
+script/source = "extends HSlider
+
+
+@export var audio_bus_name := \"Master\"
+
+@onready var _bus := AudioServer.get_bus_index(audio_bus_name)
+
+func _ready() -> void:
+	AudioServer.set_bus_volume_db(_bus, linear_to_db(0.8))
+	value = db_to_linear(AudioServer.get_bus_volume_db(_bus))
+
+
+func _on_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(_bus, linear_to_db(value))
+"
+
 [node name="Main menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -187,6 +205,7 @@ alignment = 1
 [node name="Tick sound" type="AudioStreamPlayer" parent="Animation thingy/HBoxContainer"]
 unique_name_in_owner = true
 stream = ExtResource("12_3mun4")
+volume_db = -10.0
 
 [node name="Start" type="Button" parent="Animation thingy/HBoxContainer"]
 layout_mode = 2
@@ -202,6 +221,7 @@ script = ExtResource("5_i0smd")
 
 [node name="Start sound" type="AudioStreamPlayer" parent="Animation thingy/HBoxContainer/Start"]
 stream = ExtResource("7_6p5m8")
+volume_db = -10.0
 
 [node name="Options" type="Button" parent="Animation thingy/HBoxContainer"]
 visible = false
@@ -225,6 +245,7 @@ focus_previous = NodePath("../Exit")
 icon = ExtResource("1_0tsmy")
 flat = true
 script = SubResource("GDScript_cgv56")
+scene = ExtResource("11_56u2s")
 
 [node name="Exit" type="Button" parent="Animation thingy/HBoxContainer"]
 layout_mode = 2
@@ -235,6 +256,28 @@ focus_neighbor_right = NodePath("../Start")
 icon = ExtResource("2_krsf6")
 flat = true
 script = ExtResource("10_rlakn")
+
+[node name="HSlider" type="HSlider" parent="Animation thingy"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 51.0
+offset_right = 365.0
+offset_bottom = 87.0
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = SubResource("GDScript_aq85s")
+
+[node name="Label" type="Label" parent="Animation thingy/HSlider"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00626959
+anchor_top = -1.13889
+anchor_right = 0.297806
+anchor_bottom = 0.194444
+grow_vertical = 0
+text = "Volumen"
+metadata/_edit_use_anchors_ = true
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_44hct")
@@ -249,3 +292,4 @@ autoplay = true
 [connection signal="mouse_entered" from="Animation thingy/HBoxContainer/Credits" to="Animation thingy/HBoxContainer/Credits" method="_on_mouse_entered"]
 [connection signal="focus_entered" from="Animation thingy/HBoxContainer/Exit" to="Animation thingy/HBoxContainer/Exit" method="_on_focus_entered"]
 [connection signal="mouse_entered" from="Animation thingy/HBoxContainer/Exit" to="Animation thingy/HBoxContainer/Exit" method="_on_mouse_entered"]
+[connection signal="value_changed" from="Animation thingy/HSlider" to="Animation thingy/HSlider" method="_on_value_changed"]

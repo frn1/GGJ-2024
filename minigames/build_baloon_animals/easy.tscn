@@ -161,12 +161,10 @@ vertical_alignment = 1
 
 [node name="correcto" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_nrhy6")
-volume_db = -6.0
 max_polyphony = 2
 
 [node name="incorrecto" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_b8ogj")
-volume_db = -6.0
 max_polyphony = 2
 
 [node name="sec" type="AudioStreamPlayer" parent="."]
@@ -174,6 +172,7 @@ stream = ExtResource("10_ngwf2")
 
 [node name="timeup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_gm3ka")
+volume_db = -3.0
 
 [node name="fondo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_o35ax")

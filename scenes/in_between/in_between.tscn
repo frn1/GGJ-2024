@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4vxdc4lt4026"]
+[gd_scene load_steps=11 format=3 uid="uid://b4vxdc4lt4026"]
 
 [ext_resource type="Texture2D" uid="uid://blra2frh4k3k5" path="res://textures/In-between/BG/Stage.png" id="1_qt3qy"]
 [ext_resource type="Texture2D" uid="uid://d03ibmhjk862q" path="res://textures/In-between/BG/Background curtains.png" id="2_5rira"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bbnqp3ijihef8" path="res://textures/In-between/Player 1.png" id="4_ib6u4"]
 [ext_resource type="Texture2D" uid="uid://bgs2m75tj4ho0" path="res://textures/In-between/Player 2.png" id="5_frewb"]
 [ext_resource type="Texture2D" uid="uid://dh7xjj21og42p" path="res://textures/In-between/Shadow.png" id="6_e0fdl"]
-[ext_resource type="AudioStream" uid="uid://bekuxaph07djq" path="res://sounds/Music/In_Game.wav" id="7_su7m3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_t6ard"]
 normal = Vector2(1, 0)
@@ -77,7 +76,3 @@ scale = Vector2(0.35, 0.35)
 texture = ExtResource("5_frewb")
 region_enabled = true
 region_rect = Rect2(1059, 285, 792, 695)
-
-[node name="fondo main" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_su7m3")
-autoplay = true

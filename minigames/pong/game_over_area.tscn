@@ -15,4 +15,4 @@ shape = SubResource("RectangleShape2D_0omux")
 
 [node name="win" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ygxdn")
-volume_db = -10.0
+volume_db = -12.0

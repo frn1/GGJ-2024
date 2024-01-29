@@ -76,7 +76,11 @@ func load_minigame(minigame: Minigame, difficulty: float = 0.0):
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($"Curtain", "position", Vector2(0, -210), 0.5)
-	tween.finished.connect(func (): after_curtains_enter_load(minigame, difficulty))
+	tween.tween_property(%BGM, "volume_db", -100, 1.5)
+	tween.finished.connect(func (): 
+		after_curtains_enter_load(minigame, difficulty)
+		%BGM.volume_db = -INF
+	)
 
 var tie_counter = 0
 var random_dialogs_remaining = range(1,6)
@@ -104,10 +108,19 @@ func after_curtains_enter_unload():
 			var tween: Tween = get_tree().create_tween().set_parallel(true)
 			tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 			tween.tween_property($"Curtain", "position", initial_curtain_pos, 0.5)
+			%BGM.volume_db = -60
+			tween.tween_property(%BGM, "volume_db", -10, 0.7)
 			tween.finished.connect(func(): 
 				get_tree().create_timer(0.15).timeout.connect(func():
 					p1_laugh_bar_node.update_bar()
 					p2_laugh_bar_node.update_bar()
+					
+					
+					match minigame_end_state:
+						MinigameEndState.P1Won, MinigameEndState.P2Won: 
+							$subirbarra.play()
+						MinigameEndState.Tie:
+							$bajarbarra.play()
 					
 					var pick_path = func () -> String:
 						if randf() < 0.75 && random_dialogs_remaining.size() != 0:
@@ -140,7 +153,7 @@ func after_curtains_enter_unload():
 						await %Dialog.appear().finished
 						await %Dialog.play(load(path))
 						if p1_points == 100 || p2_points == 100 || (p1_points == 0 && p2_points == 0):
-							await %Dialog.play(preload("res://dialogs/game_end.csv"))
+							await %Dialog.play(load("res://dialogs/game_end.csv"))
 						await %Dialog.dissapear().finished
 						if finished_game:
 							await get_tree().create_timer(1.0).timeout
@@ -171,7 +184,7 @@ func unload_minigame():
 	if current_minigame == null:
 		push_error("Attempted to unload the current minigame without a minigame loaded")
 		return
-		
+	
 	var tween: Tween = get_tree().create_tween().set_parallel(true)
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property($"Curtain", "position", Vector2(0, -210), 0.5)
@@ -201,7 +214,6 @@ func end_minigame_callback(end_state: MinigameEndState):
 		MinigameEndState.Tie:
 			p1_points += current_minigame.points.get("tie")
 			p2_points += current_minigame.points.get("tie")
-			pass
 		MinigameEndState.BothWon:
 			p1_points += current_minigame.points.get("both_win", current_minigame.points.get("win"))
 			p2_points += current_minigame.points.get("both_win", current_minigame.points.get("win"))
@@ -262,7 +274,7 @@ func _ready():
 	await get_tree().create_timer(2.0).timeout
 	
 	await %Dialog.appear().finished
-	await %Dialog.play(preload("res://dialogs/start.csv"))
+	await %Dialog.play(load("res://dialogs/test.csv"))
 	await %Dialog.dissapear().finished
 	
 	slide_minigame_chooser_up()

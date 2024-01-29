@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfumfrwfsko6q"]
+[gd_scene load_steps=11 format=3 uid="uid://bfumfrwfsko6q"]
 
 [ext_resource type="PackedScene" uid="uid://b4vxdc4lt4026" path="res://scenes/in_between/in_between.tscn" id="1_bec7x"]
 [ext_resource type="Script" path="res://scripts/laugh_bar.gd" id="2_v2k6b"]
-[ext_resource type="Texture2D" uid="uid://dgqbtyb2h5l1t" path="res://textures/In-between/Laugh bar/P1/fill.png" id="3_0deok"]
-[ext_resource type="Texture2D" uid="uid://iywdgxs0xxr5" path="res://textures/In-between/Laugh bar/P1/bar.png" id="4_qvsbg"]
-[ext_resource type="Texture2D" uid="uid://c30ydfkkana5v" path="res://textures/In-between/Laugh bar/P1/icon.png" id="5_4ddwa"]
+[ext_resource type="Texture2D" uid="uid://ciqkar7f3byq0" path="res://textures/In-between/Laugh bar/P1/fill.png" id="3_0deok"]
+[ext_resource type="Texture2D" uid="uid://eqlt8yhy8l67" path="res://textures/In-between/Laugh bar/P1/bar.png" id="4_qvsbg"]
+[ext_resource type="Texture2D" uid="uid://dbxpch1wt50ci" path="res://textures/In-between/Laugh bar/P1/icon.png" id="5_4ddwa"]
 [ext_resource type="PackedScene" uid="uid://bnxdmngub2oru" path="res://scenes/common/minigame.tscn" id="6_gjwou"]
 [ext_resource type="Texture2D" uid="uid://csafx5owapna7" path="res://textures/In-between/Laugh bar/P2/fill.png" id="6_uycnv"]
-[ext_resource type="Texture2D" uid="uid://bhgplvq0tm8rr" path="res://textures/In-between/Laugh bar/P2/bar.png" id="7_m5x74"]
-[ext_resource type="Texture2D" uid="uid://bb1pjt4jxlkpb" path="res://textures/In-between/Laugh bar/P2/icon.png" id="8_v2njp"]
+[ext_resource type="Texture2D" uid="uid://b0vhf1orcoi4u" path="res://textures/In-between/Laugh bar/P2/bar.png" id="7_m5x74"]
+[ext_resource type="Texture2D" uid="uid://cwdxwegsrbbu4" path="res://textures/In-between/Laugh bar/P2/icon.png" id="8_v2njp"]
+[ext_resource type="AudioStream" uid="uid://bekuxaph07djq" path="res://sounds/Music/In_Game.wav" id="10_ny5ha"]
 
 [node name="Game" type="Node2D"]
 
@@ -66,3 +67,8 @@ unique_name_in_owner = true
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_ny5ha")
+autoplay = true
