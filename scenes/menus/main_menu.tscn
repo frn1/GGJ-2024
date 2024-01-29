@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8mq6bydhm3pg"]
+[gd_scene load_steps=18 format=3 uid="uid://c8mq6bydhm3pg"]
 
 [ext_resource type="Texture2D" uid="uid://48bfic2666ci" path="res://textures/Menus/Main menu/Buttons/Credits.png" id="1_0tsmy"]
-[ext_resource type="Theme" path="res://themes/theme.tres" id="1_41hpj"]
+[ext_resource type="Theme" path="res://themes/normal.tres" id="1_41hpj"]
 [ext_resource type="Texture2D" uid="uid://dll44ysulo570" path="res://textures/Menus/Main menu/Buttons/Exit.png" id="2_krsf6"]
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="2_mtsju"]
 [ext_resource type="Texture2D" uid="uid://c8e1xxe112pqk" path="res://textures/Menus/Main menu/Buttons/Options.png" id="3_5notc"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://fpxedoirjdv6" path="res://sfx/Sound Effects/Menu/Menu Select Option _ Sound when selecting a option (mp3cut.net).wav" id="7_6p5m8"]
 [ext_resource type="Script" path="res://scripts/menus/main_menu/exit.gd" id="10_rlakn"]
 [ext_resource type="AudioStream" uid="uid://bhl024m5y5l04" path="res://sfx/Sound Effects/Menu/Menu-Pass-option-_-Sound-passing-the-option-to-another.wav" id="12_3mun4"]
+[ext_resource type="AudioStream" uid="uid://qqpub6sdlmwy" path="res://sfx/Musica/fondo.wav" id="13_44hct"]
 
 [sub_resource type="GDScript" id="GDScript_1abjt"]
 resource_name = "Curtain thingy"
@@ -274,6 +275,10 @@ script = ExtResource("10_rlakn")
 [node name="HitSound" type="AudioStreamPlayer2D" parent="Animation thingy/HBoxContainer/Exit"]
 position = Vector2(-50, -4)
 stream = ExtResource("12_3mun4")
+
+[node name="fondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_44hct")
+autoplay = true
 
 [connection signal="focus_entered" from="Animation thingy/HBoxContainer/Start" to="Animation thingy/HBoxContainer/Start" method="_on_focus_entered"]
 [connection signal="mouse_entered" from="Animation thingy/HBoxContainer/Start" to="Animation thingy/HBoxContainer/Start" method="_on_mouse_entered"]
