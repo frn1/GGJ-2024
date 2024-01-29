@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://fpxedoirjdv6" path="res://sounds/Sound Effects/Menu/Menu Select Option _ Sound when selecting a option (mp3cut.net).wav" id="7_6p5m8"]
 [ext_resource type="Script" path="res://scripts/menus/main_menu/exit.gd" id="10_rlakn"]
 [ext_resource type="AudioStream" uid="uid://bhl024m5y5l04" path="res://sounds/Sound Effects/Menu/Menu-Pass-option-_-Sound-passing-the-option-to-another.wav" id="12_3mun4"]
-[ext_resource type="AudioStream" uid="uid://qqpub6sdlmwy" path="res://sounds/Music/fondo.wav" id="13_44hct"]
+[ext_resource type="AudioStream" uid="uid://beqy5kbhn8gac" path="res://sounds/Music/Tema_Menu.wav" id="13_ui4vm"]
 
 [sub_resource type="GDScript" id="GDScript_1abjt"]
 resource_name = "Curtain thingy"
@@ -247,7 +247,7 @@ flat = true
 script = ExtResource("10_rlakn")
 
 [node name="fondo" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_44hct")
+stream = ExtResource("13_ui4vm")
 autoplay = true
 
 [connection signal="focus_entered" from="Animation thingy/HBoxContainer/Start" to="Animation thingy/HBoxContainer/Start" method="_on_focus_entered"]
