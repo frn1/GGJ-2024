@@ -18,4 +18,4 @@ func to_scene(scene: PackedScene):
 	)
 
 func _pressed():
-	to_scene(preload("res://scenes/menus/main_menu.tscn"))
+	to_scene(load("res://scenes/menus/main_menu.tscn"))

@@ -80,5 +80,4 @@ region_rect = Rect2(1059, 285, 792, 695)
 
 [node name="fondo main" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_su7m3")
-volume_db = -10.0
 autoplay = true
