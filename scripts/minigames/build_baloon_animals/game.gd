@@ -71,14 +71,13 @@ var minigame_ended = false
 var played_alarm = false
 func _process(_delta):
 	var remaining_time = maxf(minigame_duration - (Time.get_ticks_usec() / 1e+6 - start_time), 0.0)
-	if played_alarm == false && remaining_time <= 5:
+	if played_alarm == false && remaining_time <= 6:
 		$sec.play()
 		played_alarm = true
 	$Timer/Time.text = "%04.1fs" % remaining_time
 	if is_zero_approx(remaining_time):
 		if minigame_ended:
 			return
-		$timeup.play()
 		if scores[0] > scores[1]:
 			get_parent().end_minigame(Minigame.MinigameEndState.P1Won)
 		elif scores[1] > scores[0]:
@@ -86,6 +85,10 @@ func _process(_delta):
 		else:
 			get_parent().end_minigame(Minigame.MinigameEndState.Tie)
 		minigame_ended = true
+		var timeup = $timeup
+		timeup.play()
+		timeup.reparent(get_tree().root)
+		timeup.finished.connect(timeup.queue_free)
 		return
 	
 	for sprite in $"Steps P1".get_children():

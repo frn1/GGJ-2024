@@ -13,6 +13,7 @@ signal pressed_continue
 func write_message(name: String, text: String, time_per_char = 0.025):
 	matches = regex.search_all(text)
 	$maquinaescribir.play()
+	$Text.text = ""
 	start = Time.get_ticks_msec() / 1000.0
 	writing_message = true
 	message = text
@@ -105,9 +106,15 @@ func _process(delta):
 						$maquinaescribir.play()
 					"cambiar":
 						$Expression.texture = load("res://textures/Dialog/%s.png" % splits[1])
+					"sonido":
+						var player = AudioStreamPlayer.new()
+						player.stream = load("res://sounds/Sound Effects/Story Scene/%s" % splits[1])
+						if splits.size() >= 3:
+							if int(splits[2]) == 1:
+								await player.finished
 		for index in range(last_char, min(char, message.length() - offset_chars)):
 			$Text.text += message[min(index + offset_chars, message.length())]
-		if char + offset_chars > message.length() + 1:
+		if min(char, message.length() - offset_chars) == message.length() - offset_chars:
 			writing_message = false
 			message_finished.emit()
 			return

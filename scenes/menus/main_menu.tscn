@@ -40,6 +40,10 @@ func to_scene(scene: PackedScene):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if get_node_or_null(\"/root/BGM\") == null:
+		$BGM.reparent.call_deferred(get_tree().root)
+	else:
+		$BGM.queue_free()
 	if get_node_or_null(\"/root/Curtain\") != null:
 		$\"Animation thingy\".process_mode = Node.PROCESS_MODE_DISABLED
 		var viewport_rect = get_viewport_rect()
@@ -246,7 +250,7 @@ icon = ExtResource("2_krsf6")
 flat = true
 script = ExtResource("10_rlakn")
 
-[node name="fondo" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_44hct")
 volume_db = -10.0
 autoplay = true

@@ -17,9 +17,9 @@
 [ext_resource type="Texture2D" uid="uid://dxwosej8vw4kg" path="res://textures/Controller Icons/Keyboard/P1/action.png" id="13_arjxa"]
 [ext_resource type="Script" path="res://scripts/controller_prompts.gd" id="14_f2qsy"]
 [ext_resource type="Texture2D" uid="uid://cf26bgpe57gik" path="res://textures/Controller Icons/Keyboard/P2/action.png" id="15_v3p74"]
-[ext_resource type="AudioStream" uid="uid://tb6xdvnw7c52" path="res://sounds/Sound Effects/Story Scene/Bar of Laugh/Wining points Version 1.wav" id="19_1qb30"]
+[ext_resource type="AudioStream" uid="uid://tb6xdvnw7c52" path="res://sounds/Sound Effects/Story Scene/Laugh bar/Wining points Version 1.wav" id="19_0pmh8"]
 [ext_resource type="AudioStream" uid="uid://buiyffajjh0uo" path="res://sounds/Sound Effects/Story Scene/Rada/Typewriter _ when a pj speaks.mp3" id="19_5opb7"]
-[ext_resource type="AudioStream" uid="uid://btkb8jtpyikt1" path="res://sounds/Sound Effects/Story Scene/Bar of Laugh/barra-de-risa-reducir-puntos.wav" id="20_2r3bn"]
+[ext_resource type="AudioStream" uid="uid://btkb8jtpyikt1" path="res://sounds/Sound Effects/Story Scene/Laugh bar/barra-de-risa-reducir-puntos.wav" id="20_2aekn"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k7a66"]
 a = Vector2(-240, -6)
@@ -189,9 +189,9 @@ stream = ExtResource("19_5opb7")
 volume_db = -10.0
 
 [node name="subirbarra" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("19_1qb30")
+stream = ExtResource("19_0pmh8")
 volume_db = -10.0
 
 [node name="bajarbarra" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("20_2r3bn")
+stream = ExtResource("20_2aekn")
 volume_db = -10.0

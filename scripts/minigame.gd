@@ -79,6 +79,7 @@ func load_minigame(minigame: Minigame, difficulty: float = 0.0):
 	tween.finished.connect(func (): after_curtains_enter_load(minigame, difficulty))
 
 var tie_counter = 0
+var random_dialogs_remaining = range(1,6)
 
 func after_curtains_enter_unload():
 	print("Unloading current minigame")
@@ -109,8 +110,12 @@ func after_curtains_enter_unload():
 					p2_laugh_bar_node.update_bar()
 					
 					var pick_path = func () -> String:
-						if randf() < 0.75:
-							return "res://dialogs/random%d.csv" % randi_range(1, 5)
+						if randf() < 0.75 && random_dialogs_remaining.size() != 0:
+							seed(Time.get_ticks_usec() * 19)
+							var chosen_idx = randi_range(0, random_dialogs_remaining.size())
+							var chosen = random_dialogs_remaining[chosen_idx]
+							random_dialogs_remaining.remove_at(chosen_idx)
+							return "res://dialogs/random%d.csv" % chosen
 						else:
 							return "res://dialogs/%s.csv" % current_minigame.id
 					
