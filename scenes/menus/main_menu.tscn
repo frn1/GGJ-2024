@@ -53,15 +53,18 @@ func _ready():
 		$\"Animation thingy\".process_mode = Node.PROCESS_MODE_DISABLED
 		var viewport_rect = get_viewport_rect()
 		var curtain = get_node(\"/root/Curtain\")
-		if get_node_or_null(\"last_scene_was_node_2d\"):
+		if get_node_or_null(\"/root/last_scene_was_node_2d\"):
+			get_node(\"/root/BGM\").play()
 			curtain.position.x += viewport_rect.size.x / 2
 			curtain.position.y += viewport_rect.size.y / 2
-			get_node(\"last_scene_was_node_2d\").queue_free()
+			get_node(\"/root/last_scene_was_node_2d\").queue_free()
 		var tween = create_tween()
 		var new_pos = curtain.global_position
 		new_pos.y = -900
 		tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(curtain, \"global_position\", new_pos, 0.5)
+		tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+		tween.tween_property(get_node(\"/root/BGM\"), \"volume_db\", -10, 0.8)
 		tween.finished.connect(
 			func():
 				await get_tree().create_timer(0.1).timeout

@@ -36,6 +36,9 @@ func to_scene(scene: PackedScene):
 
 func _pressed():
 	to_scene(load(\"res://scenes/menus/main_menu.tscn\"))
+
+func _ready():
+	grab_focus()
 "
 
 [node name="Credits" type="Control"]

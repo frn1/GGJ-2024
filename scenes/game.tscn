@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfumfrwfsko6q"]
+[gd_scene load_steps=12 format=3 uid="uid://bfumfrwfsko6q"]
 
 [ext_resource type="PackedScene" uid="uid://b4vxdc4lt4026" path="res://scenes/in_between/in_between.tscn" id="1_bec7x"]
 [ext_resource type="Script" path="res://scripts/laugh_bar.gd" id="2_v2k6b"]
@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://iywdgxs0xxr5" path="res://textures/In-between/Laugh bar/P1/bar.png" id="4_qvsbg"]
 [ext_resource type="Texture2D" uid="uid://c30ydfkkana5v" path="res://textures/In-between/Laugh bar/P1/icon.png" id="5_4ddwa"]
 [ext_resource type="PackedScene" uid="uid://bnxdmngub2oru" path="res://scenes/common/minigame.tscn" id="6_gjwou"]
+[ext_resource type="Texture2D" uid="uid://n023m7kginrb" path="res://textures/winner.png" id="6_h8jjw"]
 [ext_resource type="Texture2D" uid="uid://csafx5owapna7" path="res://textures/In-between/Laugh bar/P2/fill.png" id="6_uycnv"]
 [ext_resource type="Texture2D" uid="uid://bhgplvq0tm8rr" path="res://textures/In-between/Laugh bar/P2/bar.png" id="7_m5x74"]
 [ext_resource type="Texture2D" uid="uid://bb1pjt4jxlkpb" path="res://textures/In-between/Laugh bar/P2/icon.png" id="8_v2njp"]
+[ext_resource type="AudioStream" uid="uid://kpfne258675o" path="res://sounds/Sound Effects/Win_Clean.wav" id="10_45qtp"]
 
 [node name="Game" type="Node2D"]
 
@@ -37,6 +39,14 @@ texture = ExtResource("4_qvsbg")
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_4ddwa")
 
+[node name="Win" type="Sprite2D" parent="Life bars/Laugh bar P1"]
+visible = false
+position = Vector2(-145, -245)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_h8jjw")
+region_enabled = true
+region_rect = Rect2(347, 128, 447, 222)
+
 [node name="Laugh bar P2" type="Node2D" parent="Life bars"]
 script = ExtResource("2_v2k6b")
 start_x = 1712.0
@@ -60,6 +70,18 @@ texture = ExtResource("7_m5x74")
 [node name="Icon" type="Sprite2D" parent="Life bars/Laugh bar P2"]
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("8_v2njp")
+
+[node name="Win" type="Sprite2D" parent="Life bars/Laugh bar P2"]
+visible = false
+position = Vector2(145, -245)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_h8jjw")
+region_enabled = true
+region_rect = Rect2(347, 128, 447, 222)
+
+[node name="Win" type="AudioStreamPlayer" parent="Life bars"]
+unique_name_in_owner = true
+stream = ExtResource("10_45qtp")
 
 [node name="Minigame" parent="." instance=ExtResource("6_gjwou")]
 unique_name_in_owner = true

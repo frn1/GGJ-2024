@@ -14,6 +14,11 @@ func update_bar():
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "shown_points", points, 0.45)
+	if points == 100:
+		$Win.modulate.a = 0
+		$Win.show()
+		%Win.play()
+		tween.tween_property($Win, "modulate", Color.WHITE, 0.55)
 	seed(round(Time.get_unix_time_from_system() * 10))
 	pass
 

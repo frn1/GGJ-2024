@@ -274,7 +274,7 @@ func _ready():
 	await get_tree().create_timer(2.0).timeout
 	
 	await %Dialog.appear().finished
-	await %Dialog.play(load("res://dialogs/test.csv"))
+	await %Dialog.play(load("res://dialogs/start.csv"))
 	await %Dialog.dissapear().finished
 	
 	slide_minigame_chooser_up()
@@ -287,6 +287,7 @@ func _process(_delta):
 
 func go_to_main_menu():
 	var last_scene_was_node_2d = Node.new()
+	last_scene_was_node_2d.name = "last_scene_was_node_2d"
 	get_tree().root.add_child(last_scene_was_node_2d)
 	var viewport_rect = get_viewport_rect()
 	var root_curtain = get_node("/root/Curtain")
