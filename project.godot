@@ -39,6 +39,10 @@ project/assembly_name="GGJ 2024"
 
 movie_writer/movie_file="C:/Users/torre/Documents/Godot Games/GGJ 2024/output/clip.avi"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/csv-data-importer/plugin.cfg")
+
 [gui]
 
 theme/custom="res://themes/normal.tres"

@@ -7,3 +7,6 @@ output/
 # Mono-specific ignores
 .mono/
 data_*/
+
+# CSV Libreoffice temp
+*.csv#
