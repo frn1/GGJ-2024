@@ -274,6 +274,8 @@ func _process(_delta):
 	p2_laugh_bar_node.points = p2_points
 
 func go_to_main_menu():
+	var last_scene_was_node_2d = Node.new()
+	get_tree().root.add_child(last_scene_was_node_2d)
 	var viewport_rect = get_viewport_rect()
 	var root_curtain = get_node("/root/Curtain")
 	root_curtain.show()
