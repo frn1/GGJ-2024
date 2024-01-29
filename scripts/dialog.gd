@@ -73,7 +73,7 @@ func _ready():
 		pressed_continue.emit()
 
 var character = 0
-
+var last_char = -1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if writing_message:
@@ -83,4 +83,7 @@ func _process(delta):
 			writing_message = false
 			message_finished.emit()
 		$Text.text = message.substr(0, length)
+		if character != last_char:
+			$maquinaescribir.play()
+			last_char = character
 		character += 1
