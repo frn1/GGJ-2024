@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://c8mq6bydhm3pg"]
 
 [ext_resource type="Texture2D" uid="uid://48bfic2666ci" path="res://textures/Menus/Main menu/Buttons/Credits.png" id="1_0tsmy"]
-[ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/normal.tres" id="1_41hpj"]
+[ext_resource type="Theme" path="res://themes/normal.tres" id="1_41hpj"]
 [ext_resource type="Texture2D" uid="uid://dll44ysulo570" path="res://textures/Menus/Main menu/Buttons/Exit.png" id="2_krsf6"]
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="2_mtsju"]
 [ext_resource type="Texture2D" uid="uid://c8e1xxe112pqk" path="res://textures/Menus/Main menu/Buttons/Options.png" id="3_5notc"]
