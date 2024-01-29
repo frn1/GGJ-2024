@@ -24,6 +24,8 @@ var old_camera
 
 @onready var initial_curtain_pos = $"Curtain".position
 
+signal transition_done
+
 enum MinigameEndState {
 	P1Won,
 	P2Won,
@@ -196,12 +198,17 @@ func _ready():
 	var curtain_tween = create_tween()
 	curtain_tween.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_CIRC)
 	curtain_tween.tween_property(root_curtain, "position", initial_curtain_pos, 0.8)
-	curtain_tween.finished.connect(root_curtain.hide)
+	curtain_tween.finished.connect(
+		func():
+			transition_done.emit()
+			root_curtain.hide()
+	)
 	end_minigame.connect(end_minigame_callback)
 	p1_laugh_bar_node.points = p1_points
 	p2_laugh_bar_node.points = p2_points
 	p1_laugh_bar_node.update_bar()
 	p2_laugh_bar_node.update_bar()
+	await %Dialog.play(preload("res://dialogs/start.csv"))
 	for folder in minigame_folders:
 		var info_path = folder.path_join("info.ini")
 		var info = ConfigFile.new()

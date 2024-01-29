@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnxdmngub2oru"]
+[gd_scene load_steps=20 format=3 uid="uid://bnxdmngub2oru"]
 
 [ext_resource type="Script" path="res://scripts/minigame.gd" id="1_2mr3c"]
 [ext_resource type="Script" path="res://scripts/minigame_content.gd" id="2_qbsoi"]
@@ -10,6 +10,11 @@
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="6_aky51"]
 [ext_resource type="Texture2D" uid="uid://cyqp325bs1gda" path="res://textures/In-between/Minigame chooser/button.png" id="6_kd1is"]
 [ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_okckx"]
+[ext_resource type="Script" path="res://scripts/dialog.gd" id="11_xvcsi"]
+[ext_resource type="Texture2D" uid="uid://5kjf6kjkbonr" path="res://textures/Dialog/happy2.png" id="12_nf3x1"]
+[ext_resource type="Texture2D" uid="uid://dxwosej8vw4kg" path="res://textures/Controller Icons/Keyboard/P1/action.png" id="13_arjxa"]
+[ext_resource type="Script" path="res://scripts/controller_prompts.gd" id="14_f2qsy"]
+[ext_resource type="Texture2D" uid="uid://cf26bgpe57gik" path="res://textures/Controller Icons/Keyboard/P2/action.png" id="15_v3p74"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6btci"]
 font_size = 64
@@ -22,6 +27,23 @@ shadow_offset = Vector2(3, 2)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k7a66"]
 a = Vector2(-240, -6)
 b = Vector2(240, -6)
+
+[sub_resource type="LabelSettings" id="LabelSettings_uksl3"]
+line_spacing = -10.0
+font_size = 28
+
+[sub_resource type="GDScript" id="GDScript_eek3h"]
+resource_name = "uuuuu wavy"
+script/source = "extends Node2D
+
+var original_pos = position
+
+func _ready():
+	hide()
+
+func _process(_delta):
+	position.y = original_pos.y + sin(Time.get_ticks_msec() / 500.0) * 5
+"
 
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_2mr3c")
@@ -112,3 +134,60 @@ scale = Vector2(1.01, 1)
 texture = ExtResource("6_aky51")
 flip_h = true
 flip_v = true
+
+[node name="Dialog" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_xvcsi")
+
+[node name="ColorRect" type="ColorRect" parent="Dialog"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.239216)
+
+[node name="ColorRect2" type="ColorRect" parent="Dialog"]
+offset_left = -556.0
+offset_right = 556.0
+offset_bottom = 312.0
+color = Color(0.407843, 0.337255, 0.133333, 0.8)
+
+[node name="Text" type="Label" parent="Dialog"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -536.0
+offset_top = 10.0
+offset_right = 313.0
+offset_bottom = 302.0
+grow_horizontal = 2
+text = "Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto texto texto Texto."
+label_settings = SubResource("LabelSettings_uksl3")
+autowrap_mode = 3
+
+[node name="Expression" type="Sprite2D" parent="Dialog"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("12_nf3x1")
+
+[node name="Continue Icons" type="Node2D" parent="Dialog"]
+position = Vector2(190, 270)
+script = SubResource("GDScript_eek3h")
+
+[node name="P1" type="Sprite2D" parent="Dialog/Continue Icons"]
+position = Vector2(-37, 0)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("13_arjxa")
+script = ExtResource("14_f2qsy")
+
+[node name="P2" type="Sprite2D" parent="Dialog/Continue Icons"]
+position = Vector2(37, 0)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("15_v3p74")
+script = ExtResource("14_f2qsy")
+player = 2
