@@ -110,7 +110,7 @@ func _process(delta):
 						var player = AudioStreamPlayer.new()
 						player.stream = load("res://sounds/Sound Effects/Story Scene/%s" % splits[1])
 						if splits.size() >= 3:
-							if int(splits[2]) == 1:
+							if int(splits[2]) != 1:
 								await player.finished
 		for index in range(last_char, min(char, message.length() - offset_chars)):
 			$Text.text += message[min(index + offset_chars, message.length())]
