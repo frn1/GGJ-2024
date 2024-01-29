@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://w875gneka3k1" path="res://textures/Minigames/pie_toss/P2/counter.png" id="6_ru06p"]
 [ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_bnepa"]
 [ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="8_hcyv0"]
+[ext_resource type="AudioStream" uid="uid://qkicit5vkn6f" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock_Sound.wav" id="10_xhfr5"]
 [ext_resource type="AudioStream" uid="uid://pbuw2tpar7rn" path="res://sounds/Music/Mini_juego_2.wav" id="12_477le"]
-[ext_resource type="AudioStream" uid="uid://bbp0nybordnr1" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock Sound (7 seconds).mp3" id="15_rrs6y"]
 [ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="16_xe4k5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rghqp"]
@@ -158,7 +158,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="sec" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("15_rrs6y")
+stream = ExtResource("10_xhfr5")
 
 [node name="timeup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_xe4k5")

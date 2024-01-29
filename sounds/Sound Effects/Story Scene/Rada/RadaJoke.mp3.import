@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ycpu6x6pf5qe"
+path="res://.godot/imported/RadaJoke.mp3-f8f41b58c9b69beedeea8e3c7b6ab111.mp3str"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/Story Scene/Rada/RadaJoke.mp3"
+dest_files=["res://.godot/imported/RadaJoke.mp3-f8f41b58c9b69beedeea8e3c7b6ab111.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xalnde2mlcga"
+path="res://.godot/imported/When_making_a_mistake_(mp3cut.net).wav-0df6f894264a0f87537e16dc2dac2ec2.sample"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/MiniGames Scene/Simon Dice/When_making_a_mistake_(mp3cut.net).wav"
+dest_files=["res://.godot/imported/When_making_a_mistake_(mp3cut.net).wav-0df6f894264a0f87537e16dc2dac2ec2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

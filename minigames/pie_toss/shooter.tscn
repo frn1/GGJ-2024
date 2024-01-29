@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dfau5lab531ul" path="res://minigames/pie_toss/p1_gun.tscn" id="8_4d67i"]
 [ext_resource type="Texture2D" uid="uid://8yo1a6t2w8be" path="res://textures/Minigames/pie_toss/body.png" id="9_hjn5l"]
 [ext_resource type="AudioStream" uid="uid://bs56kwo2bmbix" path="res://sounds/Sound Effects/MiniGames Scene/Tiro al Blanco/sonido de lanzamiento del proyectil.wav" id="10_yw5r6"]
+[ext_resource type="AudioStream" uid="uid://dn7njmgd2wo21" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Counter_up_Sound.wav" id="12_p4qas"]
 [ext_resource type="AudioStream" uid="uid://bxcu5hdxtpxpy" path="res://sounds/Sound Effects/MiniGames Scene/Tiro al Blanco/Fuego_apagandose_2.wav" id="12_x5gtc"]
-[ext_resource type="AudioStream" uid="uid://ucqe3u0f4ywf" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Counter up Sound.mp3" id="13_hyh1p"]
 
 [node name="Shooter" type="Node2D"]
 script = ExtResource("1_litlf")
@@ -72,6 +72,6 @@ stream = ExtResource("12_x5gtc")
 volume_db = -20.0
 
 [node name="contador" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_hyh1p")
+stream = ExtResource("12_p4qas")
 volume_db = -18.0
 max_polyphony = 2

@@ -1,3 +1,11 @@
 Acción,Argumento 1,Argumento 2,Argumento 3,Argumento 4
-,,,,
-mensaje,Radamantis,"Vaya la diversión de esta noche será eterna como este nivel infinito, el tiempo aquí es más elástico que las mecánicas de un juego de mundo abierto. ¿Eternidad? Sólo un término, como 'lag', que todos odiamos pero debemos aceptar.",,
+cambiar,happy,,,
+mensaje,Radamantis,"Vaya la diversión de esta noche será eterna como este nivel infinito, el tiempo aquí es más elástico que las mecánicas de un juego de mundo abierto.",,
+cambiar,intrigued2,,,
+mensaje,Radamantis,¿Eternidad?,,
+cambiar,happy3,,,
+mensaje,Radamantis,"Sólo un término,",,
+cambiar,angered,,,
+mensaje,Radamantis,"como 'lag',",,
+cambiar,happy3,,,
+mensaje,Radamantis,que todos odiamos pero debemos aceptar.,,
