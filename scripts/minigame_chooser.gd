@@ -149,7 +149,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _input(event):
-	if Input.is_action_pressed(Controller.format_action_id("action", 1)) || Input.is_action_pressed(Controller.format_action_id("action", 2)):
+	if Input.is_anything_pressed():
 		$Button.texture = button_pressed_texture
 		if enabled == true:
 			$boton.play()
