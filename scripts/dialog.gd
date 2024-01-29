@@ -22,6 +22,8 @@ func change_expression(expression: String):
 func appear(duration: float = 0.5) -> Tween:
 	var new_modulate = modulate
 	new_modulate.a = 1
+	modulate.a = 0
+	show()
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(self, "modulate", new_modulate, duration)
@@ -52,6 +54,13 @@ func play(data):
 	show()
 	$Text.text = ""
 	await get_tree().create_timer(0.2).timeout
+	modulate.a = 0
+	await appear().finished
+	for record in data.records:
+		await run_line(record)
+	#await dissapear().finished
+
+func _ready():
 	message_finished.connect(
 		func():
 			$"Continue Icons".show()
@@ -59,13 +68,9 @@ func play(data):
 			var tween = create_tween()
 			tween.tween_property($"Continue Icons", "modulate", Color.WHITE, 0.25)
 	)
-	modulate.a = 0
-	await appear().finished
-	for record in data.records:
-		await run_line(record)
-	await dissapear().finished
-
-
+	
+	if Input.is_anything_pressed():
+		pressed_continue.emit()
 
 var character = 0
 

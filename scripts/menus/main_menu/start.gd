@@ -2,17 +2,13 @@ extends Button
 
 func _ready():
 	grab_focus()
+	focus_entered.connect(%"Tick sound".play)
 
 var game = preload("res://scenes/game.tscn")
 
-
-func _on_mouse_entered():
-	$HitSound.play()
-func _on_focus_entered():
-	$HitSound.play()
-
 func _pressed():
-	$AudioStreamPlayer2D.play()
-	await $AudioStreamPlayer2D.finished
+	$"Start sound".play()
+	$"Start sound".finished.connect(queue_free)
+	$"Start sound".reparent(get_tree().root)
 	get_node("/root/Main menu").to_scene(game)
 
