@@ -11,6 +11,7 @@ signal message_finished
 signal pressed_continue
 
 func write_message(name: String, text: String, time_per_char = 0.025):
+	matches = regex.search_all(text)
 	$maquinaescribir.play()
 	start = Time.get_ticks_msec() / 1000.0
 	writing_message = true
@@ -39,6 +40,9 @@ func dissapear(duration: float = 0.5) -> Tween:
 	tween.tween_property(self, "modulate", new_modulate, duration)
 	return tween
 
+var matches: Array[RegExMatch]
+var regex = RegEx.new()
+
 func run_line(record: Array):
 	var command: String = record[0].to_lower().strip_edges()
 	match command:
@@ -62,6 +66,7 @@ func play(data):
 	#await dissapear().finished
 
 func _ready():
+	regex.compile(r"\*(.*?)\*")
 	message_finished.connect(
 		func():
 			$"Continue Icons".show()
@@ -76,17 +81,34 @@ func _input(event: InputEvent):
 		var tween = create_tween()
 		tween.tween_property($"Continue Icons", "modulate", Color.TRANSPARENT, 0.25)
 
-var character = 0
-#var last_char = -1
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+var last_char = 0
+var offset_chars = 0
+
+var wait_until = 0
+
 func _process(delta):
 	if writing_message:
 		var time = Time.get_ticks_msec() / 1000.0 - start
-		var length = min(time / time_per_character, message.length())
-		if length == message.length():
+		if wait_until > Time.get_ticks_msec() / 1000.0:
+			return
+		var char = min(time / time_per_character, message.length())
+		for reg_match in matches:
+			if char + offset_chars > reg_match.get_start() && char + offset_chars < reg_match.get_end():
+				offset_chars += reg_match.get_end() - reg_match.get_start() + 1
+				var splits = reg_match.strings[1].split(" ")
+				match splits[0]:
+					"esperar":
+						$maquinaescribir.stop()
+						wait_until = Time.get_ticks_msec() / 1000.0 + float(splits[1])
+						await get_tree().create_timer(float(splits[1])).timeout
+						start += float(splits[1]) 
+						$maquinaescribir.play()
+					"cambiar":
+						$Expression.texture = load("res://textures/Dialog/%s.png" % splits[1])
+		for index in range(last_char, min(char, message.length() - offset_chars)):
+			$Text.text += message[min(index + offset_chars, message.length())]
+		if char + offset_chars > message.length() + 1:
 			writing_message = false
 			message_finished.emit()
-		$Text.text = message.substr(0, length)
-		#if character != last_char:
-			#last_char = character
-		character += 1
+			return
+		last_char = char

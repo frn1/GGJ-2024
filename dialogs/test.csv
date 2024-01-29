@@ -1,17 +1,2 @@
 Acción,Argumento 1,Argumento 2,Argumento 3,Argumento 4
-cambiar,happy,,,
-mensaje,Radamantis,feliz
-cambiar,happy2,,,
-mensaje,Radamantis,feliz 2
-cambiar,sad,,,
-mensaje,Radamantis,triste :(
-cambiar,sadfake,,,
-mensaje,Radamantis,triste falso
-cambiar,pokerface,,,
-mensaje,Radamantis,cara de poker
-cambiar,angered,,,
-mensaje,Radamantis,enojado
-cambiar,confused,,,
-mensaje,Radamantis,confundido?
-cambiar,demonic,,,
-mensaje,Radamantis,demoniaco >:)
+mensaje,Radamantis,"Hola, estoy feliz *esperar 1* *cambiar angered* ahora enojado *esperar 1* *cambiar sad* ahora triste *esperar 1* *cambiar demonic* ahora demoniaco",,
