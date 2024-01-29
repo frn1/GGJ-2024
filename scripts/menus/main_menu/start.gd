@@ -1,5 +1,7 @@
 extends Button
 
+var changing = false
+
 func _ready():
 	grab_focus()
 	focus_entered.connect(%"Tick sound".play)
@@ -7,6 +9,9 @@ func _ready():
 var game = load("res://scenes/game.tscn")
 
 func _pressed():
+	if changing == false:
+		return
+	changing = true
 	var tween = create_tween()
 	tween.tween_property(get_node("/root/BGM"), "volume_db", -80, 3)
 	tween.finished.connect(get_node("/root/BGM").queue_free)
