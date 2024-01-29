@@ -112,7 +112,7 @@ func after_curtains_enter_unload():
 					var pick_path = func () -> String:
 						if randf() < 0.75 && random_dialogs_remaining.size() != 0:
 							seed(Time.get_ticks_usec() * 19)
-							var chosen_idx = randi_range(0, random_dialogs_remaining.size())
+							var chosen_idx = randi_range(0, random_dialogs_remaining.size()-1)
 							var chosen = random_dialogs_remaining[chosen_idx]
 							random_dialogs_remaining.remove_at(chosen_idx)
 							return "res://dialogs/random%d.csv" % chosen

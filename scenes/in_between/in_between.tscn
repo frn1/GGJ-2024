@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4vxdc4lt4026"]
+[gd_scene load_steps=12 format=3 uid="uid://b4vxdc4lt4026"]
 
 [ext_resource type="Texture2D" uid="uid://blra2frh4k3k5" path="res://textures/In-between/BG/Stage.png" id="1_qt3qy"]
 [ext_resource type="Texture2D" uid="uid://d03ibmhjk862q" path="res://textures/In-between/BG/Background curtains.png" id="2_5rira"]
@@ -80,4 +80,5 @@ region_rect = Rect2(1059, 285, 792, 695)
 
 [node name="fondo main" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_su7m3")
+volume_db = -10.0
 autoplay = true

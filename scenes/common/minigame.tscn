@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dssqd6g3le27i" path="res://textures/In-between/Curtains.png" id="6_aky51"]
 [ext_resource type="Texture2D" uid="uid://cyqp325bs1gda" path="res://textures/In-between/Minigame chooser/button.png" id="6_kd1is"]
 [ext_resource type="Texture2D" uid="uid://d4i3y1j6roq1b" path="res://textures/Controller Icons/Luna/action.png" id="6_r4ial"]
-[ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_okckx"]
+[ext_resource type="Theme" path="res://themes/pixel.tres" id="7_okckx"]
 [ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="7_qol6i"]
 [ext_resource type="Texture2D" uid="uid://ct06qlh2uejmw" path="res://textures/Controller Icons/Ouya/action.png" id="8_es6hf"]
 [ext_resource type="AudioStream" uid="uid://bepuamns7ea3a" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Slot Machine Spinning.mp3" id="8_urolh"]
