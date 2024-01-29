@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c8mq6bydhm3pg"]
+[gd_scene load_steps=17 format=3 uid="uid://c8mq6bydhm3pg"]
 
 [ext_resource type="Texture2D" uid="uid://48bfic2666ci" path="res://textures/Menus/Main menu/Buttons/Credits.png" id="1_0tsmy"]
 [ext_resource type="Theme" uid="uid://wwo304pa8hp2" path="res://themes/normal.tres" id="1_41hpj"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://c8ru00b7eeov5" path="res://textures/Menus/Main menu/BG.PNG" id="6_ddcc2"]
 [ext_resource type="AudioStream" uid="uid://fpxedoirjdv6" path="res://sounds/Sound Effects/Menu/Menu Select Option _ Sound when selecting a option (mp3cut.net).wav" id="7_6p5m8"]
 [ext_resource type="Script" path="res://scripts/menus/main_menu/exit.gd" id="10_rlakn"]
-[ext_resource type="PackedScene" uid="uid://qkrbwugwurq8" path="res://scenes/menus/credits.tscn" id="11_56u2s"]
 [ext_resource type="AudioStream" uid="uid://bhl024m5y5l04" path="res://sounds/Sound Effects/Menu/Menu-Pass-option-_-Sound-passing-the-option-to-another.wav" id="12_3mun4"]
 [ext_resource type="AudioStream" uid="uid://qqpub6sdlmwy" path="res://sounds/Music/fondo.wav" id="13_44hct"]
 
@@ -226,7 +225,6 @@ focus_previous = NodePath("../Exit")
 icon = ExtResource("1_0tsmy")
 flat = true
 script = SubResource("GDScript_cgv56")
-scene = ExtResource("11_56u2s")
 
 [node name="Exit" type="Button" parent="Animation thingy/HBoxContainer"]
 layout_mode = 2
