@@ -39,7 +39,6 @@ signal end_minigame(end_state: MinigameEndState)
 func after_curtains_enter_load(minigame: Minigame, difficulty: float):
 	print("Loading minigame " + minigame.id)
 	
-	$Announcements.hide()
 	p1_laugh_bar_node.hide()
 	p2_laugh_bar_node.hide()
 	$"Minigame chooser".hide()
@@ -79,12 +78,14 @@ func load_minigame(minigame: Minigame, difficulty: float = 0.0):
 	tween.tween_property($"Curtain", "position", Vector2(0, -210), 0.5)
 	tween.finished.connect(func (): after_curtains_enter_load(minigame, difficulty))
 
+var tie_counter = 0
+var random_dialogs_remaining = range(1,6)
+
 func after_curtains_enter_unload():
 	print("Unloading current minigame")
 	
 	$"Minigame chooser".generate_nodes()
 	
-	$Announcements.show()
 	p1_laugh_bar_node.show()
 	p2_laugh_bar_node.show()
 	$"Minigame chooser".enabled = false
@@ -94,8 +95,6 @@ func after_curtains_enter_unload():
 	
 	for child in $TV/Contents/Viewport.get_children():
 		child.free()
-	
-	current_minigame = null
 	
 	$TV.hide()
 	
@@ -109,17 +108,48 @@ func after_curtains_enter_unload():
 				get_tree().create_timer(0.15).timeout.connect(func():
 					p1_laugh_bar_node.update_bar()
 					p2_laugh_bar_node.update_bar()
+					
+					var pick_path = func () -> String:
+						if randf() < 0.75 && random_dialogs_remaining.size() != 0:
+							seed(Time.get_ticks_usec() * 19)
+							var chosen_idx = randi_range(0, random_dialogs_remaining.size())
+							var chosen = random_dialogs_remaining[chosen_idx]
+							random_dialogs_remaining.remove_at(chosen_idx)
+							return "res://dialogs/random%d.csv" % chosen
+						else:
+							return "res://dialogs/%s.csv" % current_minigame.id
+					
+					var path: String
+					match minigame_end_state:
+						MinigameEndState.Tie:
+							tie_counter += 1
+							path = "res://dialogs/tie%d.csv" % tie_counter
+							if ResourceLoader.exists(path) == false:
+								path = pick_path.call()
+						_:
+							path = pick_path.call()
+							
+					var finished_game = false
+					if p1_points == 100 || p2_points == 100:
+						path = "res://dialogs/winner.csv"
+						finished_game = true
+					elif p1_points == 0 || p2_points == 0:
+						path = "res://dialogs/lossers.csv"
+						finished_game = true
+					if ResourceLoader.exists(path):
+						await %Dialog.appear().finished
+						await %Dialog.play(load(path))
+						if p1_points == 100 || p2_points == 100 || (p1_points == 0 && p2_points == 0):
+							await %Dialog.play(preload("res://dialogs/game_end.csv"))
+						await %Dialog.dissapear().finished
+						if finished_game:
+							await get_tree().create_timer(1.0).timeout
+							go_to_main_menu()
+						else:
+							get_tree().create_timer(1.0).timeout.connect(slide_minigame_chooser_up)
+					
+					current_minigame = null
 				)
-				get_tree().create_timer(5.0).timeout.connect(
-					func():
-						$Announcements.hide()
-						$Announcements.text = ""
-				)
-				if p1_laugh_bar_node.points == 100 || p2_laugh_bar_node.points == 100:
-					await get_tree().create_timer(3.0).timeout
-					go_to_main_menu()
-				else:
-					get_tree().create_timer(3.0).timeout.connect(slide_minigame_chooser_up)
 				#p1_node.process_mode = PROCESS_MODE_INHERIT
 				#p2_node.process_mode = PROCESS_MODE_INHERIT
 			)
@@ -157,37 +187,29 @@ class Minigame:
 		"lose": 0
 	}
 
+var minigame_end_state: MinigameEndState
+
 func end_minigame_callback(end_state: MinigameEndState):
+	minigame_end_state = end_state
 	match end_state:
 		MinigameEndState.P1Won:
-			$Announcements.text = "¡Jugador 1 ganó el minijuego!"
 			p1_points += current_minigame.points.get("win")
 			p2_points += current_minigame.points.get("lose")
 		MinigameEndState.P2Won:
-			$Announcements.text = "¡Jugador 2 ganó el minijuego!"
 			p1_points += current_minigame.points.get("lose")
 			p2_points += current_minigame.points.get("win")
 		MinigameEndState.Tie:
-			$Announcements.text = "Bue un empate :P"
 			p1_points += current_minigame.points.get("tie")
 			p2_points += current_minigame.points.get("tie")
 			pass
 		MinigameEndState.BothWon:
-			$Announcements.text = "Los dos ganaron???? >:("
 			p1_points += current_minigame.points.get("both_win", current_minigame.points.get("win"))
 			p2_points += current_minigame.points.get("both_win", current_minigame.points.get("win"))
 		MinigameEndState.BothLost:
-			$Announcements.text = "Todos perdieron >:)"
 			p1_points += current_minigame.points.get("both_lose", current_minigame.points.get("lose"))
 			p2_points += current_minigame.points.get("both_lose", current_minigame.points.get("lose"))
 	p1_points = clamp(p1_points, 0, 100)
 	p2_points = clamp(p2_points, 0, 100)
-	if p1_points == 100 && p2_points == 100:
-		$Announcements.text = "???? Los dos jugadores ganaron la partida ?????\n(Insertar chistes o algo no se)"
-	elif p1_points == 100:
-		$Announcements.text = "¡Jugador 1 ganó la partida!"
-	elif p2_points == 100:
-		$Announcements.text = "¡Jugador 2 ganó la partida!"
 	p1_laugh_bar_node.points = p1_points
 	p2_laugh_bar_node.points = p2_points
 
@@ -239,7 +261,9 @@ func _ready():
 	$"Minigame chooser".hide()
 	await get_tree().create_timer(2.0).timeout
 	
+	await %Dialog.appear().finished
 	await %Dialog.play(preload("res://dialogs/start.csv"))
+	await %Dialog.dissapear().finished
 	
 	slide_minigame_chooser_up()
 	
@@ -250,6 +274,8 @@ func _process(_delta):
 	p2_laugh_bar_node.points = p2_points
 
 func go_to_main_menu():
+	var last_scene_was_node_2d = Node.new()
+	get_tree().root.add_child(last_scene_was_node_2d)
 	var viewport_rect = get_viewport_rect()
 	var root_curtain = get_node("/root/Curtain")
 	root_curtain.show()

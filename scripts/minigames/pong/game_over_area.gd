@@ -7,6 +7,7 @@ const Minigame = preload("res://scripts/minigame.gd")
 func on_body_entered(body: Node2D):
 	await get_tree().create_timer(0.5).timeout
 	if body is CharacterBody2D:
+		$win.play()
 		match player_that_loses:
 			1:
 				get_parent().get_parent().end_minigame(Minigame.MinigameEndState.P2Won)

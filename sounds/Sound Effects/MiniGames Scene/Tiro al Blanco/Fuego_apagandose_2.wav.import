@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bxcu5hdxtpxpy"
+path="res://.godot/imported/Fuego_apagandose_2.wav-eb3388a48c91e409d9eff54a881a6ed9.sample"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/MiniGames Scene/Tiro al Blanco/Fuego_apagandose_2.wav"
+dest_files=["res://.godot/imported/Fuego_apagandose_2.wav-eb3388a48c91e409d9eff54a881a6ed9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

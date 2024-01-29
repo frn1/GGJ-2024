@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bdd57rstm6oa7"
+path="res://.godot/imported/Button Click _ Plantarse.mp3-b3748ccdeba3cef54e649a2171ab7f71.mp3str"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3"
+dest_files=["res://.godot/imported/Button Click _ Plantarse.mp3-b3748ccdeba3cef54e649a2171ab7f71.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

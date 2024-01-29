@@ -19,6 +19,7 @@ func timer_timeout():
 	else:
 		randomize()
 		times_not_spawned = 0
+	$fuegoN.play()
 	var target_node = target.instantiate()
 	target_node.direction = direction
 	target_node.global_position = global_position

@@ -1,0 +1,7 @@
+Acción,Argumento 1,Argumento 2,Argumento 3,Argumento 4
+cambiar,happy2,,,
+mensaje,Radamantis,"Oigan, son buenos para seguir órdenes, déjenme adivinar, ¿trabajaron en algún momento en atención al cliente? Si algo se especializa en ese oficio es en reducirte ante otros. A pesar de que a veces están completamente equivocados y te gritan por ello. Pero bueno, a servir a sus amos.",,
+mensaje,Radamantis,"Mmm, renunciar y ser libre. Bueno, siempre habrá una nueva jaula o cadena que te ate. Por lo menos aquí ya reciben la verdadera libertad. No importa si los trajo el lobo o la cordera.",,
+esperar,0.5,,,
+cambiar,happy,,,
+mensaje,Radamantis,"¿A qué me refiero con eso? Te lo explicaría, pero no lo entenderías ahora. Mejor no me hagas gastar mis palabras por nada, idiota. Continuemos.",,

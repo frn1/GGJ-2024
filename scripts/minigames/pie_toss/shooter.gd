@@ -41,11 +41,14 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed(Controller.format_action_id("action", player)):
 		if timeout_timer.time_left == 0:
+			$lanzamiento.play()
 			var projectile_node = projectile.instantiate()
 			get_parent().add_child(projectile_node)
 			projectile_node.global_position = $Gun.global_position
 			projectile_node.global_rotation = $Gun.global_rotation
 			projectile_node.add_score = func():
+				$fuegoA.play()
+				$contador.play()
 				score += 1
 				get_node(score_label).text = str(score)
 			projectile_node.speed = projectile_speed

@@ -27,6 +27,7 @@ func _physics_process(delta):
 	var collision = move_and_collide(motion)
 	if collision:
 		var collider = collision.get_collider()
+		$golpe.play()
 		if collider is Node2D:
 			if collider.has_meta("is_player") && collider.get_meta("is_player"):
 				bounces += 1

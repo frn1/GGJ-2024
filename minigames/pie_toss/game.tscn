@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d25ymr0c5hp8s"]
+[gd_scene load_steps=16 format=3 uid="uid://d25ymr0c5hp8s"]
 
 [ext_resource type="Script" path="res://scripts/minigames/pie_toss/game.gd" id="1_84ow2"]
 [ext_resource type="PackedScene" uid="uid://drvumps04cxms" path="res://minigames/pie_toss/shooter.tscn" id="2_iu7kf"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://w875gneka3k1" path="res://textures/Minigames/pie_toss/P2/counter.png" id="6_ru06p"]
 [ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_bnepa"]
 [ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="8_hcyv0"]
+[ext_resource type="AudioStream" uid="uid://pbuw2tpar7rn" path="res://sounds/Music/Mini_juego_2.wav" id="12_477le"]
+[ext_resource type="AudioStream" uid="uid://bbp0nybordnr1" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock Sound (7 seconds).mp3" id="15_rrs6y"]
+[ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="16_xe4k5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rghqp"]
 size = Vector2(100, 100)
@@ -153,3 +156,14 @@ text = "0"
 label_settings = SubResource("LabelSettings_u02ho")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="sec" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_rrs6y")
+
+[node name="timeup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_xe4k5")
+
+[node name="fondo" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_477le")
+volume_db = -10.0
+autoplay = true

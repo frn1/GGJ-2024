@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c8ru00b7eeov5" path="res://textures/Menus/Main menu/BG.PNG" id="6_ddcc2"]
 [ext_resource type="AudioStream" uid="uid://fpxedoirjdv6" path="res://sounds/Sound Effects/Menu/Menu Select Option _ Sound when selecting a option (mp3cut.net).wav" id="7_6p5m8"]
 [ext_resource type="Script" path="res://scripts/menus/main_menu/exit.gd" id="10_rlakn"]
-[ext_resource type="PackedScene" uid="uid://dfnxobmn3v5l1" path="res://scenes/menus/credits.tscn" id="11_56u2s"]
+[ext_resource type="PackedScene" uid="uid://qkrbwugwurq8" path="res://scenes/menus/credits.tscn" id="11_56u2s"]
 [ext_resource type="AudioStream" uid="uid://bhl024m5y5l04" path="res://sounds/Sound Effects/Menu/Menu-Pass-option-_-Sound-passing-the-option-to-another.wav" id="12_3mun4"]
 [ext_resource type="AudioStream" uid="uid://qqpub6sdlmwy" path="res://sounds/Music/fondo.wav" id="13_44hct"]
 
@@ -19,8 +19,12 @@
 resource_name = "Curtain thingy"
 script/source = "extends Control
 
+var switching = false
 
 func to_scene(scene: PackedScene):
+	if switching == true:
+		return
+	switching = true
 	var viewport_rect = get_viewport_rect()
 	var curtain = %Curtain
 	if get_node_or_null(\"/root/Curtain\") == null:
@@ -41,12 +45,18 @@ func to_scene(scene: PackedScene):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if get_node_or_null(\"/root/BGM\") == null:
+		$BGM.reparent.call_deferred(get_tree().root)
+	else:
+		$BGM.queue_free()
 	if get_node_or_null(\"/root/Curtain\") != null:
 		$\"Animation thingy\".process_mode = Node.PROCESS_MODE_DISABLED
 		var viewport_rect = get_viewport_rect()
 		var curtain = get_node(\"/root/Curtain\")
-		curtain.position.x += viewport_rect.size.x / 2
-		curtain.position.y += viewport_rect.size.y / 2
+		if get_node_or_null(\"last_scene_was_node_2d\"):
+			curtain.position.x += viewport_rect.size.x / 2
+			curtain.position.y += viewport_rect.size.y / 2
+			get_node(\"last_scene_was_node_2d\").queue_free()
 		var tween = create_tween()
 		var new_pos = curtain.global_position
 		new_pos.y = -900
@@ -102,34 +112,13 @@ func _process(delta):
 resource_name = "Options button"
 script/source = "extends Button
 
-var scene = load(\"res://scenes/menus/options.tscn\")
+@export var scene = preload(\"res://scenes/menus/options.tscn\")
 
 func _on_focus_entered():
 	%\"Tick sound\".play()
 
 func _pressed():
-	$AudioStreamPlayer2D.play()
-	await $AudioStreamPlayer2D.finished
 	get_node(\"/root/Main menu\").to_scene(scene)
-
-
-
-
-"
-
-[sub_resource type="GDScript" id="GDScript_c4xc0"]
-script/source = "extends Button
-
-func _on_focus_entered():
-	%\"Tick sound\".play()
-
-func _pressed():
-	$AudioStreamPlayer2D.play()
-	await $AudioStreamPlayer2D.finished
-
-
-
-
 "
 
 [node name="Main menu" type="Control"]
@@ -216,6 +205,7 @@ script = ExtResource("5_i0smd")
 stream = ExtResource("7_6p5m8")
 
 [node name="Options" type="Button" parent="Animation thingy/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
@@ -235,7 +225,8 @@ focus_neighbor_right = NodePath("../Exit")
 focus_previous = NodePath("../Exit")
 icon = ExtResource("1_0tsmy")
 flat = true
-script = SubResource("GDScript_c4xc0")
+script = SubResource("GDScript_cgv56")
+scene = ExtResource("11_56u2s")
 
 [node name="Exit" type="Button" parent="Animation thingy/HBoxContainer"]
 layout_mode = 2
@@ -247,8 +238,9 @@ icon = ExtResource("2_krsf6")
 flat = true
 script = ExtResource("10_rlakn")
 
-[node name="fondo" type="AudioStreamPlayer" parent="."]
+[node name="BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_44hct")
+volume_db = -10.0
 autoplay = true
 
 [connection signal="focus_entered" from="Animation thingy/HBoxContainer/Start" to="Animation thingy/HBoxContainer/Start" method="_on_focus_entered"]
