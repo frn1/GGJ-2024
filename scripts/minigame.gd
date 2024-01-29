@@ -192,6 +192,11 @@ func end_minigame_callback(end_state: MinigameEndState):
 	p2_laugh_bar_node.points = p2_points
 
 func _ready():
+	show()
+	
+	%Dialog.hide()
+	$"Minigame chooser".hide()
+	
 	var viewport_rect = get_viewport_rect()
 	var root_curtain = get_node("/root/Curtain")
 	root_curtain.position -= viewport_rect.size / 2 
@@ -208,7 +213,7 @@ func _ready():
 	p2_laugh_bar_node.points = p2_points
 	p1_laugh_bar_node.update_bar()
 	p2_laugh_bar_node.update_bar()
-	await %Dialog.play(preload("res://dialogs/start.csv"))
+	
 	for folder in minigame_folders:
 		var info_path = folder.path_join("info.ini")
 		var info = ConfigFile.new()
@@ -233,6 +238,9 @@ func _ready():
 	$"Minigame chooser".generate_nodes()
 	$"Minigame chooser".hide()
 	await get_tree().create_timer(2.0).timeout
+	
+	await %Dialog.play(preload("res://dialogs/start.csv"))
+	
 	slide_minigame_chooser_up()
 	
 	seed(round(Time.get_unix_time_from_system() * 169))
