@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfnxobmn3v5l1"]
+
+[ext_resource type="Texture2D" uid="uid://dxrwd2gnvmu0y" path="res://textures/Menus/Credits/credits.png" id="1_al1f2"]
+[ext_resource type="Texture2D" uid="uid://ybhsdruglurc" path="res://textures/Menus/Credits/go back.png" id="2_ucyv3"]
+
+[sub_resource type="GDScript" id="GDScript_onyyq"]
+script/source = "extends Button
+
+func to_scene(scene: PackedScene):
+	var viewport_rect = get_viewport_rect()
+	var curtain = get_node(\"/root/Curtain\")
+	var new_pos = curtain.global_position
+	new_pos.y = 100
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CIRC)
+	tween.tween_property(curtain, \"position\", new_pos, 0.8)
+	tween.finished.connect(
+		func():
+			await get_tree().create_timer(0.1).timeout
+			get_tree().change_scene_to_packed(scene)
+	)
+
+func _pressed():
+	to_scene(preload(\"res://scenes/menus/main_menu.tscn\"))
+"
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Credits" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_al1f2")
+
+[node name="GoBack" type="Button" parent="."]
+layout_mode = 0
+offset_right = 1928.0
+offset_bottom = 1088.0
+scale = Vector2(0.598, 0.598)
+icon = ExtResource("2_ucyv3")
+flat = true
+script = SubResource("GDScript_onyyq")
