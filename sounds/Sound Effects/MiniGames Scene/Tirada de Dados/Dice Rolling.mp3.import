@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://brtvm7myspsg2"
+path="res://.godot/imported/Dice Rolling.mp3-456c955c86d6ccf9677b0b2900a261e0.mp3str"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/MiniGames Scene/Tirada de Dados/Dice Rolling.mp3"
+dest_files=["res://.godot/imported/Dice Rolling.mp3-456c955c86d6ccf9677b0b2900a261e0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

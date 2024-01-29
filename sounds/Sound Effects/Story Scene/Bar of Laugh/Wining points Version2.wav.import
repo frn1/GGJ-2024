@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://lbsd5gq3oha8"
+path="res://.godot/imported/Wining points Version2.wav-60d665d398fd110a98880192e7cbda83.sample"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/Story Scene/Bar of Laugh/Wining points Version2.wav"
+dest_files=["res://.godot/imported/Wining points Version2.wav-60d665d398fd110a98880192e7cbda83.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

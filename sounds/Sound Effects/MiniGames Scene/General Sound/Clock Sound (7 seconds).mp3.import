@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bbp0nybordnr1"
+path="res://.godot/imported/Clock Sound (7 seconds).mp3-787e2975237ea4bcd80a283d62fb5137.mp3str"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock Sound (7 seconds).mp3"
+dest_files=["res://.godot/imported/Clock Sound (7 seconds).mp3-787e2975237ea4bcd80a283d62fb5137.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
