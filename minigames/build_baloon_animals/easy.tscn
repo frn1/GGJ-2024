@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://coafie6eub0mb" path="res://textures/Minigames/build_baloon_animals/left.png" id="3_145cb"]
 [ext_resource type="Texture2D" uid="uid://b1s6r5uhlvlov" path="res://textures/Minigames/build_baloon_animals/right.png" id="4_kqti5"]
 [ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="7_4lrbi"]
-[ext_resource type="AudioStream" uid="uid://dejamcfc3syn3" path="res://sounds/Sound Effects/MiniGames Scene/Simon Dice/When completing a combination.mp3" id="8_nrhy6"]
-[ext_resource type="AudioStream" uid="uid://xalnde2mlcga" path="res://sounds/Sound Effects/MiniGames Scene/Simon Dice/When making a mistake (mp3cut.net).wav" id="9_b8ogj"]
-[ext_resource type="AudioStream" uid="uid://bbp0nybordnr1" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock Sound (7 seconds).mp3" id="10_ngwf2"]
+[ext_resource type="AudioStream" uid="uid://flqolwyrvaeh" path="res://sounds/Sound Effects/MiniGames Scene/Simon Dice/When_completing_a_combination.wav" id="8_3267n"]
+[ext_resource type="AudioStream" uid="uid://xalnde2mlcga" path="res://sounds/Sound Effects/MiniGames Scene/Simon Dice/When_making_a_mistake_(mp3cut.net).wav" id="9_b8ogj"]
+[ext_resource type="AudioStream" uid="uid://qkicit5vkn6f" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock_Sound.wav" id="10_ugmvy"]
 [ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="11_gm3ka"]
 [ext_resource type="AudioStream" uid="uid://caqjioto5adj" path="res://sounds/Music/mini_juego_rapido.wav" id="12_o35ax"]
 
@@ -161,6 +161,7 @@ vertical_alignment = 1
 
 [node name="correcto" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_nrhy6")
+volume_db = -6.0
 max_polyphony = 2
 
 [node name="incorrecto" type="AudioStreamPlayer" parent="."]
@@ -168,7 +169,7 @@ stream = ExtResource("9_b8ogj")
 max_polyphony = 2
 
 [node name="sec" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_ngwf2")
+stream = ExtResource("10_ugmvy")
 
 [node name="timeup" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_gm3ka")

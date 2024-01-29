@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bhfrk0wh8axk4"
+path="res://.godot/imported/laughing.wav-af3cc8b5261f8fc42b1dd55567dedad9.sample"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/Story Scene/Slot Machine/laughing.wav"
+dest_files=["res://.godot/imported/laughing.wav-af3cc8b5261f8fc42b1dd55567dedad9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

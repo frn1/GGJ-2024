@@ -1,3 +1,5 @@
 Acción,Argumento 1,Argumento 2,Argumento 3,Argumento 4
-,,,,
-mensaje,Radamantis,"El éxito es tuyo, pero recuerda que la victoria es efímera como en este show. ¿Podrás superar las pruebas venideras y mantener tu racha triunfal? ",,
+cambiar,happy3,,,
+mensaje,Radamantis,"El éxito es tuyo, pero recuerda que la victoria es efímera como en este show.",,
+cambiar,intrigued,,,
+mensaje,Radamantis,¿Podrás superar las pruebas venideras y mantener tu racha triunfal?,,

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://qkicit5vkn6f"
+path="res://.godot/imported/Clock_Sound.wav-40185c5cd5c50c940fa8f4ed97688171.sample"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock_Sound.wav"
+dest_files=["res://.godot/imported/Clock_Sound.wav-40185c5cd5c50c940fa8f4ed97688171.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
