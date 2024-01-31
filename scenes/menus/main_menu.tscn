@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scripts/menus/main_menu/exit.gd" id="10_rlakn"]
 [ext_resource type="PackedScene" uid="uid://qkrbwugwurq8" path="res://scenes/menus/credits.tscn" id="11_56u2s"]
 [ext_resource type="AudioStream" uid="uid://bhl024m5y5l04" path="res://sounds/Sound Effects/Menu/Menu-Pass-option-_-Sound-passing-the-option-to-another.wav" id="12_3mun4"]
-[ext_resource type="AudioStream" uid="uid://qqpub6sdlmwy" path="res://sounds/Music/fondo.wav" id="13_44hct"]
+[ext_resource type="AudioStream" uid="uid://qqpub6sdlmwy" path="res://sounds/Music/Menu.wav" id="13_44hct"]
 
 [sub_resource type="GDScript" id="GDScript_1abjt"]
 resource_name = "Curtain thingy"

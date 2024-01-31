@@ -20,7 +20,7 @@
 [ext_resource type="Script" path="res://scripts/controller_prompts.gd" id="14_f2qsy"]
 [ext_resource type="Texture2D" uid="uid://cf26bgpe57gik" path="res://textures/Controller Icons/Keyboard/P2/action.png" id="15_v3p74"]
 [ext_resource type="AudioStream" uid="uid://btkb8jtpyikt1" path="res://sounds/Sound Effects/Story Scene/Laugh bar/barra-de-risa-reducir-puntos.wav" id="20_2aekn"]
-[ext_resource type="AudioStream" uid="uid://bekuxaph07djq" path="res://sounds/Music/In_Game.wav" id="23_p3nwk"]
+[ext_resource type="AudioStream" uid="uid://bekuxaph07djq" path="res://sounds/Music/Juego.wav" id="23_p3nwk"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_k7a66"]
 a = Vector2(-240, -6)

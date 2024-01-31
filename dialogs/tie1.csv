@@ -1,7 +1,7 @@
 Acción,Argumento 1,Argumento 2,Argumento 3,Argumento 4
 cambiar,confused,,,
-mensaje,Radamantis,¿Un empate? ,,
-cambiar,sad,,,
-mensaje,Radamantis,Eso no es para nada divertido.,,
+mensaje,Radamantis,¿Un empate? *esperar 0.4**cambiar sad*Eso no es para nada divertido.,,
+,,,,
+,,,,
 cambiar,angered,,,
 mensaje,Radamantis,"Vamos, ¿no pueden hacer algo mejor que eso? Solo les advierto, si persisten en empatar, les restará puntos a ambos. Y que quede claro, el precio por perder de esa manera es muy elevado.",,

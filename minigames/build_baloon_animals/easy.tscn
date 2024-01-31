@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://xalnde2mlcga" path="res://sounds/Sound Effects/MiniGames Scene/Simon Dice/When_making_a_mistake_(mp3cut.net).wav" id="9_b8ogj"]
 [ext_resource type="AudioStream" uid="uid://qkicit5vkn6f" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock_Sound.wav" id="10_ugmvy"]
 [ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="11_gm3ka"]
-[ext_resource type="AudioStream" uid="uid://caqjioto5adj" path="res://sounds/Music/mini_juego_rapido.wav" id="12_o35ax"]
+[ext_resource type="AudioStream" uid="uid://caqjioto5adj" path="res://sounds/Music/Mini Juego 2.wav" id="12_o35ax"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e1de0"]
 font_size = 100
