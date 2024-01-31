@@ -2,4 +2,4 @@ Acción,Argumento 1,Argumento 2,Argumento 3,Argumento 4
 cambiar,happy,,,
 mensaje,Radamantis,"Vaya la diversión de esta noche será eterna como este nivel infinito, el tiempo aquí es más elástico que las mecánicas de un juego de mundo abierto.",,
 cambiar,intrigued2,,,
-mensaje,Radamantis,"¿Eternidad? *esperar 0.5**cambiar happy3*Sólo un término, *esperar 0.2**cambiar angered* como ‘lag’, *esperar 0.1**cambiar happy3* que todos odiamos pero debemos aceptar.",,
+mensaje,Radamantis,"¿Eternidad? *esperar 0.5* *cambiar happy3* Sólo un término, *esperar 0.2* *cambiar angered* como ‘lag’, *esperar 0.1* *cambiar happy3* que todos odiamos pero debemos aceptar.",,

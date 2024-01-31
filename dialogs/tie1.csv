@@ -1,6 +1,6 @@
 Acción,Argumento 1,Argumento 2,Argumento 3,Argumento 4
 cambiar,confused,,,
-mensaje,Radamantis,¿Un empate? *esperar 0.4**cambiar sad*Eso no es para nada divertido.,,
+mensaje,Radamantis,¿Un empate?*esperar 0.4* *cambiar sad*Eso no es para nada divertido.,,
 ,,,,
 ,,,,
 cambiar,angered,,,

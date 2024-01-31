@@ -14,5 +14,5 @@ dest_files=["res://.godot/imported/pong.csv-034da60ad7ff15678d01d260b004d87f.res
 
 delimiter=0
 headers=false
-detect_numbers=true
+detect_numbers=false
 force_float=true
