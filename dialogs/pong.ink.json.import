@@ -1,0 +1,15 @@
+[remap]
+
+importer="inkgd.ink.json"
+type="Resource"
+uid="uid://dxiga03dkileb"
+path="res://.godot/imported/pong.ink.json-6126280777bcac62df2f76c92ec94d46.res"
+
+[deps]
+
+source_file="res://dialogs/pong.ink.json"
+dest_files=["res://.godot/imported/pong.ink.json-6126280777bcac62df2f76c92ec94d46.res"]
+
+[params]
+
+compress=true

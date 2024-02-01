@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxsawjtnfcoel"
+path="res://.godot/imported/puf.wav-d28472b50a74f1c1de317c0dd606e0d3.sample"
+
+[deps]
+
+source_file="res://sounds/Sound Effects/Story Scene/puf.wav"
+dest_files=["res://.godot/imported/puf.wav-d28472b50a74f1c1de317c0dd606e0d3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

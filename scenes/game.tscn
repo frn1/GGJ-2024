@@ -82,6 +82,7 @@ region_rect = Rect2(347, 128, 447, 222)
 [node name="Win" type="AudioStreamPlayer" parent="Life bars"]
 unique_name_in_owner = true
 stream = ExtResource("10_45qtp")
+volume_db = -12.0
 
 [node name="Minigame" parent="." instance=ExtResource("6_gjwou")]
 unique_name_in_owner = true

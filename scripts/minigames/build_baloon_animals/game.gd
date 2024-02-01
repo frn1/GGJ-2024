@@ -87,8 +87,8 @@ func _process(_delta):
 		minigame_ended = true
 		var timeup = $timeup
 		timeup.play()
-		timeup.reparent(get_tree().root)
 		timeup.finished.connect(timeup.queue_free)
+		timeup.reparent(get_tree().root)
 		return
 	
 	for sprite in $"Steps P1".get_children():

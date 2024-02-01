@@ -1,0 +1,14 @@
+[remap]
+
+importer="inkgd.ink"
+type="Resource"
+uid="uid://7eodht8lx2ob"
+path="res://.godot/imported/start.ink-d0116e2396e30aa774b154bec3359b31.res"
+
+[deps]
+
+source_file="res://dialogs/source/start.ink"
+dest_files=["res://.godot/imported/start.ink-d0116e2396e30aa774b154bec3359b31.res"]
+
+[params]
+

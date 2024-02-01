@@ -10,5 +10,5 @@ target = ExtResource("2_vci08")
 
 [node name="fuegoN" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ut007")
-volume_db = -15.0
+volume_db = -21.0
 max_polyphony = 2

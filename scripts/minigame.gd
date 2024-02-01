@@ -37,7 +37,7 @@ enum MinigameEndState {
 signal end_minigame(end_state: MinigameEndState)
 
 func after_curtains_enter_load(minigame: Minigame, difficulty: float):
-	print("Loading minigame " + minigame.id)
+	print_rich("Loading minigame " + minigame.id)
 	
 	p1_laugh_bar_node.hide()
 	p2_laugh_bar_node.hide()
@@ -86,7 +86,7 @@ var tie_counter = 0
 var random_dialogs_remaining = range(1,6)
 
 func after_curtains_enter_unload():
-	print("Unloading current minigame")
+	print_rich("Unloading current minigame")
 	
 	$"Minigame chooser".generate_nodes()
 	
@@ -115,7 +115,6 @@ func after_curtains_enter_unload():
 					p1_laugh_bar_node.update_bar()
 					p2_laugh_bar_node.update_bar()
 					
-					
 					match minigame_end_state:
 						MinigameEndState.P1Won, MinigameEndState.P2Won: 
 							$subirbarra.play()
@@ -123,20 +122,17 @@ func after_curtains_enter_unload():
 							$bajarbarra.play()
 					
 					var pick_path = func () -> String:
-						if randf() < 0.75 && random_dialogs_remaining.size() != 0:
+						if randf() < 0.4 && random_dialogs_remaining.size() != 0:
 							seed(Time.get_ticks_usec() * 19)
-							var chosen_idx = randi_range(0, random_dialogs_remaining.size()-1)
-							var chosen = random_dialogs_remaining[chosen_idx]
-							random_dialogs_remaining.remove_at(chosen_idx)
-							return "res://dialogs/random%d.csv" % chosen
+							return "res://dialogs/random.ink.json"
 						else:
-							return "res://dialogs/%s.csv" % current_minigame.id
+							return "res://dialogs/%s.ink.json" % current_minigame.id
 					
 					var path: String
 					match minigame_end_state:
 						MinigameEndState.Tie:
 							tie_counter += 1
-							path = "res://dialogs/tie%d.csv" % tie_counter
+							path = "res://dialogs/tie%d.ink.json" % tie_counter
 							if ResourceLoader.exists(path) == false:
 								path = pick_path.call()
 						_:
@@ -144,16 +140,16 @@ func after_curtains_enter_unload():
 							
 					var finished_game = false
 					if p1_points == 100 || p2_points == 100:
-						path = "res://dialogs/winner.csv"
+						path = "res://dialogs/one_winner.ink.json"
 						finished_game = true
 					elif p1_points == 0 || p2_points == 0:
-						path = "res://dialogs/lossers.csv"
+						path = "res://dialogs/both_lost.ink.json"
 						finished_game = true
 					if ResourceLoader.exists(path):
 						await %Dialog.appear().finished
 						await %Dialog.play(load(path))
 						if p1_points == 100 || p2_points == 100 || (p1_points == 0 && p2_points == 0):
-							await %Dialog.play(load("res://dialogs/game_end.csv"))
+							await %Dialog.play(load("res://dialogs/end.ink.json"))
 						await %Dialog.dissapear().finished
 						if finished_game:
 							await get_tree().create_timer(1.0).timeout
@@ -274,7 +270,7 @@ func _ready():
 	await get_tree().create_timer(2.0).timeout
 	
 	await %Dialog.appear().finished
-	await %Dialog.play(load("res://dialogs/start.csv"))
+	await %Dialog.play(load("res://dialogs/start.ink.json"))
 	await %Dialog.dissapear().finished
 	
 	slide_minigame_chooser_up()

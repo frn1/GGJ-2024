@@ -37,7 +37,7 @@ func generate_nodes():
 		func(area: Area2D):
 			if area.has_meta("id"):
 				selected_id = area.get_meta("id")
-				print(selected_id)
+				print_rich(selected_id)
 	)
 	$Button.texture = button_texture
 	for child in $Screen.get_children(true):
@@ -134,7 +134,7 @@ func start_spin():
 							var minigame = minigames[chosen_index]
 							get_parent().load_minigame(minigame)
 							minigames.remove_at(chosen_index)
-							if minigames.size() < (get_parent().minigames.size() - 1) * 2:
+							if minigames.size() < 3:
 								load_minigames(get_parent().minigames)
 					)
 			)

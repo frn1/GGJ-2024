@@ -10,7 +10,7 @@
 [ext_resource type="Theme" uid="uid://crhg6pew8ege3" path="res://themes/pixel.tres" id="7_bnepa"]
 [ext_resource type="Texture2D" uid="uid://bjvkcgpnb5aca" path="res://textures/Minigames/pie_toss/timer.png" id="8_hcyv0"]
 [ext_resource type="AudioStream" uid="uid://qkicit5vkn6f" path="res://sounds/Sound Effects/MiniGames Scene/General Sound/Clock_Sound.wav" id="10_xhfr5"]
-[ext_resource type="AudioStream" uid="uid://pbuw2tpar7rn" path="res://sounds/Music/Mini_juego_2.wav" id="12_477le"]
+[ext_resource type="AudioStream" uid="uid://caqjioto5adj" path="res://sounds/Music/Mini Juego 2.wav" id="12_23d7q"]
 [ext_resource type="AudioStream" uid="uid://bdd57rstm6oa7" path="res://sounds/Sound Effects/Story Scene/Slot Machine/Button Click _ Plantarse.mp3" id="16_xe4k5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rghqp"]
@@ -93,6 +93,9 @@ chance = 4.0
 [node name="Camera2D" type="Camera2D" parent="."]
 ignore_rotation = false
 
+[node name="AudioListener2D" type="AudioListener2D" parent="Camera2D"]
+current = true
+
 [node name="P1 Counter" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-515, 210)
@@ -164,6 +167,6 @@ stream = ExtResource("10_xhfr5")
 stream = ExtResource("16_xe4k5")
 
 [node name="fondo" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_477le")
+stream = ExtResource("12_23d7q")
 volume_db = -10.0
 autoplay = true

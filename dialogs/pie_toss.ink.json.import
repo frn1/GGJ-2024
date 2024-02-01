@@ -1,0 +1,15 @@
+[remap]
+
+importer="inkgd.ink.json"
+type="Resource"
+uid="uid://b56mlyrsni6s3"
+path="res://.godot/imported/pie_toss.ink.json-6abbfebee334878d7380646f20d855e9.res"
+
+[deps]
+
+source_file="res://dialogs/pie_toss.ink.json"
+dest_files=["res://.godot/imported/pie_toss.ink.json-6abbfebee334878d7380646f20d855e9.res"]
+
+[params]
+
+compress=true

@@ -1,0 +1,15 @@
+[remap]
+
+importer="inkgd.ink.json"
+type="Resource"
+uid="uid://bemcgqbblq3h4"
+path="res://.godot/imported/build_baloon_animals.ink.json-8cc105d51ac3575f2e6583a1c0d06cce.res"
+
+[deps]
+
+source_file="res://dialogs/build_baloon_animals.ink.json"
+dest_files=["res://.godot/imported/build_baloon_animals.ink.json-8cc105d51ac3575f2e6583a1c0d06cce.res"]
+
+[params]
+
+compress=true

@@ -1,27 +1,29 @@
 extends Node2D
 
-@export var time_per_character: float
+@export var original_time_per_character: float = 0.0225
+var time_per_character: float = original_time_per_character
 
-var message = "Hola como estas"
+var message = ""
 
+var waiting = false
 var writing_message: bool = false
-var start: float
+var start: float = 0.0
+
+func write(text: String):
+	time_per_character = original_time_per_character
+	start = Time.get_ticks_msec() / 1000.0
+	message = text.strip_edges()
+	writing_message = true
+	
+func write_append(text: String):
+	message += " " + text.strip_edges()
+	writing_message = true
+
+var ink_player: InkPlayer = InkPlayerFactory.create()
 
 signal message_finished
 signal pressed_continue
-
-func write_message(name: String, text: String, time_per_char = 0.025):
-	matches = regex.search_all(text)
-	$maquinaescribir.play()
-	$Text.text = ""
-	offset_chars = 0
-	start = Time.get_ticks_msec() / 1000.0
-	writing_message = true
-	message = text
-	time_per_character = time_per_char
-
-func change_expression(expression: String):
-	$Expression.texture = load("res://textures/Dialog/%s.png" % expression)
+signal can_continue
 
 func appear(duration: float = 0.5) -> Tween:
 	$Text.text = ""
@@ -42,114 +44,92 @@ func dissapear(duration: float = 0.5) -> Tween:
 	tween.tween_property(self, "modulate", new_modulate, duration)
 	return tween
 
-var matches: Array[RegExMatch]
-var regex = RegEx.new()
+func change_expression(expression: String):
+	var path = "res://textures/Dialog/%s.png" % expression
+	if ResourceLoader.exists(path):
+		$Expression.texture = load(path)
+	else:
+		$Expression.texture = null
 
-func run_line(record: Array):
-	var command: String = record[0].to_lower().strip_edges()
-	match command:
-		"mensaje":
-			write_message(record[1].strip_edges(), record[2].strip_edges())
-			await message_finished
-			$maquinaescribir.stop()
-			if record.has(3) == false || record[3] == null || int(record[3]) == 0:
-				await pressed_continue
-		"esperar":
-			await get_tree().create_timer(float(record[1])).timeout
-		"cambiar":
-			$Expression.texture = load("res://textures/Dialog/%s.png" % record[1])
-		"musica":
-			%BGM.stream = load(record[1])
-			%BGM.play()
-		"sonido":
-			var player = AudioStreamPlayer.new()
-			get_tree().root.add_child(player)
-			player.stream = load("res://sounds/Sound Effects/Story Scene/%s" % record[1])
-			player.volume_db = -15
-			player.play()
-			player.finished.connect(player.queue_free)
-			if record.size() >= 3:
-				if int(record[2]) != 1:
-					await player.finished
-			else:
-				await player.finished
-	
+var should_continue_story = true
+
+func wait(seconds: float):
+	waiting = true
+	should_continue_story = false
+	get_tree().create_timer(seconds).timeout.connect(
+		func():
+			start += seconds
+			waiting = false
+			should_continue_story = true
+			can_continue.emit()
+	)
+
+func play_sound(name: String, wait: bool = true):
+	if wait:
+		waiting = true
+		should_continue_story = false
+	var player = AudioStreamPlayer.new()
+	player.volume_db = -15
+	player.stream = load("res://sounds/Sound Effects/Story Scene/".path_join(name))
+	player.finished.connect(
+		func():
+			if wait:
+				start += player.stream.get_length()
+				waiting = false
+				should_continue_story = true
+				can_continue.emit()
+			player.queue_free()
+	)
+	add_child(player)
+	player.play()
+
+func show_icons(): 
+	$"Continue Icons".show()
+	$"Continue Icons".modulate.a = 0
+	var tween = create_tween()
+	tween.tween_property($"Continue Icons", "modulate", Color.WHITE, 0.25)
+
 # Called when the node enters the scene tree for the first time.
-func play(data):
+func play(data: InkResource):
 	show()
-	$Text.text = ""
-	for record in data.records:
-		await run_line(record)
-	#await dissapear().finished
+	ink_player.ink_file = data
+	ink_player.stop_execution_on_error = false
+	ink_player.create_story()
+	await ink_player.loaded
+	ink_player.bind_external_function("cambiar_expresion", self, "change_expression", false)
+	ink_player.bind_external_function("esperar", self, "wait", false)
+	ink_player.bind_external_function("reproducir_sonido", self, "play_sound", false)
+	while ink_player.can_continue && should_continue_story:
+		write(ink_player.continue_story())
+		while ink_player.current_tags.has("continue"):
+			await message_finished
+			if waiting:
+				await can_continue
+			write_append(ink_player.continue_story())
+		await message_finished
+		show_icons()
+		await pressed_continue
+	ink_player.unbind_external_function("cambiar_expresion")
+	ink_player.unbind_external_function("esperar")
+	ink_player.unbind_external_function("reproducir_sonido")
 
 func _ready():
-	regex.compile(r"\*(.*?)\*")
-	message_finished.connect(
-		func():
-			$"Continue Icons".show()
-			$"Continue Icons".modulate.a = 0
-			var tween = create_tween()
-			tween.tween_property($"Continue Icons", "modulate", Color.WHITE, 0.25)
-	)
+	ink_player.loads_in_background = true
+	add_child(ink_player)
 
 func _input(event: InputEvent):
 	if Input.is_anything_pressed():
+		if writing_message:
+			time_per_character /= 2
 		pressed_continue.emit()
 		var tween = create_tween()
 		tween.tween_property($"Continue Icons", "modulate", Color.TRANSPARENT, 0.25)
 
-var last_char = 0
-var offset_chars = 0
-
-var wait_until = 0
-
 func _process(delta):
-	if writing_message:
+	if writing_message && !waiting:
 		var time = Time.get_ticks_msec() / 1000.0 - start
-		if wait_until > Time.get_ticks_msec() / 1000.0:
-			return
-		var char = floor(min(time / time_per_character, message.length()))
-		for reg_match in matches:
-			if char + offset_chars > reg_match.get_start() && char + offset_chars < reg_match.get_end():
-				offset_chars += reg_match.get_end() - reg_match.get_start()
-				var splits = reg_match.strings[1].split(" ")
-				match splits[0]:
-					"esperar":
-						$maquinaescribir.stop()
-						wait_until = Time.get_ticks_msec() / 1000.0 + float(splits[1])
-						await get_tree().create_timer(float(splits[1])).timeout
-						start += float(splits[1]) 
-						$maquinaescribir.play()
-					"cambiar":
-						$Expression.texture = load("res://textures/Dialog/%s.png" % splits[1])
-					"sonido":
-						var player = AudioStreamPlayer.new()
-						get_tree().root.add_child(player)
-						player.stream = load("res://sounds/Sound Effects/Story Scene/%s" % splits[1])
-						player.finished.connect(player.queue_free)
-						player.volume_db = -15
-						player.play()
-						if splits.size() >= 3:
-							if int(splits[2]) != 1:
-								$maquinaescribir.stop()
-								var play_start = Time.get_ticks_msec() / 1000.0
-								wait_until = INF
-								await player.finished
-								wait_until = Time.get_ticks_msec() / 1000.0
-								start += wait_until - play_start
-								$maquinaescribir.play()
-						else:
-							$maquinaescribir.stop()
-							var play_start = Time.get_ticks_msec() / 1000.0
-							wait_until = INF
-							await player.finished
-							wait_until = Time.get_ticks_msec() / 1000.0
-							start += wait_until - play_start
-							$maquinaescribir.play()
-		for index in range(last_char, min(char, message.length() - offset_chars)):
-			$Text.text += message[min(index + offset_chars, message.length())]
-		if min(char, message.length() - offset_chars) == message.length() - offset_chars:
+		var length = time / time_per_character
+		$Text.text = message.substr(0, length)
+		if length >= message.length():
 			writing_message = false
 			message_finished.emit()
-			return
-		last_char = char

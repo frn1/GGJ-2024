@@ -1,0 +1,14 @@
+[remap]
+
+importer="inkgd.ink"
+type="Resource"
+uid="uid://d025td5xab2cc"
+path="res://.godot/imported/pong.ink-047ea155ec9d658173953a30d5f78df4.res"
+
+[deps]
+
+source_file="res://dialogs/source/pong.ink"
+dest_files=["res://.godot/imported/pong.ink-047ea155ec9d658173953a30d5f78df4.res"]
+
+[params]
+

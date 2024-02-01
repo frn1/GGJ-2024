@@ -12,11 +12,17 @@ func _pressed():
 	if changing == true:
 		return
 	changing = true
-	var tween = create_tween()
+	var sound = $"Start sound"
+	var tween = get_tree().root.create_tween()
 	tween.tween_property(get_node("/root/BGM"), "volume_db", -80, 3)
-	tween.finished.connect(get_node("/root/BGM").queue_free)
-	$"Start sound".play()
-	$"Start sound".finished.connect(queue_free)
-	$"Start sound".reparent(get_tree().root)
+	tween.tween_property(sound, "volume_db", -90, 1.5)
+	tween.finished.connect(
+		func():
+			get_node("/root/BGM").stop()
+			get_node("/root/BGM").queue_free()
+	)
+	sound.play()
+	sound.reparent(get_tree().root)
+	sound.finished.connect(queue_free)
 	get_node("/root/Main menu").to_scene(game)
 
