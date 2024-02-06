@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="GGJ 2024"
+config/name="Make Me Laugh!!!"
 run/main_scene="res://scenes/menus/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/flush_stdout_on_print=true

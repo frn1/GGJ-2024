@@ -119,8 +119,8 @@ func _ready():
 
 func _input(event: InputEvent):
 	if Input.is_anything_pressed():
-		if writing_message:
-			time_per_character /= 2
+		if writing_message && !waiting:
+			time_per_character = 0.001
 		pressed_continue.emit()
 		var tween = create_tween()
 		tween.tween_property($"Continue Icons", "modulate", Color.TRANSPARENT, 0.25)
